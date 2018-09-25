@@ -3,3 +3,6 @@ CREATE TABLE t(x INTEGER PRIMARY KEY ASC, y, z);
 
 das hier funktioniert auch:
 CREATE TABLE kunden(id INTEGER PRIMARY KEY ASC, vorname varchar(20), name varchar(20));
+
+Doku für auto_increment
+https://www.sqlite.org/lang_createtable.html#rowid
