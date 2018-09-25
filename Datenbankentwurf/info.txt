@@ -1,0 +1,5 @@
+folgende SQL-Zeile erstellt laut Doku eine Tabelle mit einer Auto_increment-Spalte.
+CREATE TABLE t(x INTEGER PRIMARY KEY ASC, y, z);
+
+das hier funktioniert auch:
+CREATE TABLE kunden(id INTEGER PRIMARY KEY ASC, vorname varchar(20), name varchar(20));
