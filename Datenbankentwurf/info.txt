@@ -6,3 +6,6 @@ CREATE TABLE kunden(id INTEGER PRIMARY KEY ASC, vorname varchar(20), name varcha
 
 Doku für auto_increment
 https://www.sqlite.org/lang_createtable.html#rowid
+
+Foreign Key Constraints und ON DELETE and ON UPDATE Actions mit SQLite
+https://www.sqlite.org/foreignkeys.html
