@@ -1,0 +1,6 @@
+Kunden (Kunden-Nr, Firma, Vorname, Nachname, Straße, haus-Nr, PLZ / Postfach, Ort, Land, Telefon, Fax, eMail, Status-Nr, Bemerkungs-Nr, Datum)
+Rechnung (Rechnungs-Nr, kunden-Nr, Firma, Vorname, Nachname, Straße, Haus-Nr, PLZ / Postfach, Ort, Land, Telefon, Fax, eMail, Sendedatum, Bemerkungs-Nr)
+rechnungsposten (rechnungsposten-Nr, kunden-Nr, Rechnungs-Nr, Anzahl, auflage_nr, Summe, Konto-Nr, BLZ, Kredit-institut, Konto-Inhaber, Bestellungsdatum, Bemerkungs-Nr)
+auflage (auflage_nr, auflage-von, auflage-bis, stückpreis, datum, Bemerkungs-Nr)
+Status (Status-Nr, Status (Eintritt / Austritt), gekündigt-flag, Datum, Bemerkungs-Nr)
+Bemerkung (Bemerkungs-Nr, Notiz, Datum)
