@@ -1,0 +1,17 @@
+c:\users\homepc\source\repos\DBTest\DBTest\bin\Debug\DBTest.exe
+c:\users\homepc\source\repos\DBTest\DBTest\bin\Debug\DBTest.pdb
+c:\users\homepc\source\repos\DBTest\DBTest\obj\Debug\DBTest.csprojAssemblyReference.cache
+c:\users\homepc\source\repos\DBTest\DBTest\obj\Debug\DBTest.csproj.CoreCompileInputs.cache
+c:\users\homepc\source\repos\DBTest\DBTest\obj\Debug\DBTest.exe
+c:\users\homepc\source\repos\DBTest\DBTest\obj\Debug\DBTest.pdb
+c:\users\homepc\source\repos\DBTest\DBTest\bin\Debug\System.Data.SQLite.dll
+c:\users\homepc\source\repos\DBTest\DBTest\bin\Debug\System.Data.SQLite.xml
+c:\users\homepc\source\repos\DBTest\DBTest\obj\Debug\DBTest.csproj.CopyComplete
+c:\users\homepc\source\repos\DBTest\DBTest\bin\Debug\DBTest.exe.config
+c:\users\homepc\source\repos\DBTest\DBTest\bin\Debug\EntityFramework.dll
+c:\users\homepc\source\repos\DBTest\DBTest\bin\Debug\EntityFramework.SqlServer.dll
+c:\users\homepc\source\repos\DBTest\DBTest\bin\Debug\System.Data.SQLite.EF6.dll
+c:\users\homepc\source\repos\DBTest\DBTest\bin\Debug\System.Data.SQLite.Linq.dll
+c:\users\homepc\source\repos\DBTest\DBTest\bin\Debug\EntityFramework.xml
+c:\users\homepc\source\repos\DBTest\DBTest\bin\Debug\EntityFramework.SqlServer.xml
+c:\users\homepc\source\repos\DBTest\DBTest\bin\Debug\System.Data.SQLite.dll.config
