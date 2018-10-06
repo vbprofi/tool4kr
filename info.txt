@@ -1,0 +1,2 @@
+wie die datenbank objekte in c# miteinander per primary key und foreign key eingebunden bzw. angesprochen werden können:
+https://stackoverflow.com/questions/47598127/entityframeworkcore-and-code-first-with-sqlite-including-multiple-navigation
