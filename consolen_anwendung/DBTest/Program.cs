@@ -13,16 +13,14 @@ namespace DBTest
 {
         class Program
     {
-        public static String assemblyDirectory = Environment.CurrentDirectory.ToString();
-
+        public static String assemblyDirectory = Environment.CurrentDirectory.ToString(); //ermittelt den aktuellen pfad der Anwendung
 
         static void Main(string[] args)
         {
             //Titel der Console
                         getAssembly("title");
             //Signale ausgeben beim Starten
-            Console.Beep(900, 100);
-                                    Console.Beep(500, 100);
+            Console.Beep(900, 100); Console.Beep(500, 100);
             
             //Inhalt der Console mit Infos füllen
             getAssembly();
@@ -32,23 +30,23 @@ namespace DBTest
             //Datenbankobjekt erzeugen
             DatabaseContext context = new DatabaseContext();
 
-kunden kunde = setKunden("Firma", "Vorname", "Nachname", "Straße", "HausNR", 12345, "Ort", "Postfach", "Land", "Telefon", "Fax", "EMail");
-            context.kunden.Add(kunde);
-            Ausgabe ag = setAusgabe(199, Convert.ToDecimal("3,00"));
-            context.Ausgabe.Add(ag);
-            Rechnung rn = setRechnung("Firma", "Vorname", "Nachname", "Straße", "HausNR", 12345, "Ort", "Postfach", "Land", "Telefon", "Fax", "EMail", 0, 0);
-            context.Rechnung.Add(rn);
-            Abo ab = setAbo(0, 0, 0, 0, 0, 0);
-            //context.Abo.Add(ab);
-            Rechnungsposten rp = setRechnungsposten(0, 0, 2, 0, 0, 0, "IBAN", "Institut", "KontoInhaber", 0);
-            //context.Rechnungsposten.Add(rp);
-            Status state = setStatus(0, 0, 0, 0);
-            //context.Status.Add(state);
-            Bemerkung bm = setBemerkung("Txt", 0, 0);
-            //context.Bemerkung.Add(bm);
+kunden kunde = setKunden("Firma", "Vorname", "Nachname", "Straße", "HausNR", 12345, "Ort", "Postfach", "Land", "Telefon", "Fax", "EMail"); //Tabelle Kunden füllen
+            context.kunden.Add(kunde); //Inhalte zur Tabelle hinzufügen
+            Ausgabe ag = setAusgabe(199, Convert.ToDecimal("3,00")); //Tabelle ausgabe füllen
+            context.Ausgabe.Add(ag); //Inhalte zur Tabelle hinzufügen
+            Rechnung rn = setRechnung("Firma", "Vorname", "Nachname", "Straße", "HausNR", 12345, "Ort", "Postfach", "Land", "Telefon", "Fax", "EMail", 0, 0); //Tabelle rechnung füllen
+            context.Rechnung.Add(rn); //Inhalte zur Tabelle hinzufügen
+            Abo ab = setAbo(0, 0, 0, 0, 0, 0); //Tabelle abo füllen
+            //context.Abo.Add(ab); //{mit foreign key} Inhalte zur Tabelle hinzufügen
+            Rechnungsposten rp = setRechnungsposten(0, 0, 2, 0, 0, 0, "IBAN", "Institut", "KontoInhaber", 0); //Tabelle rechnungsposten füllen
+            //context.Rechnungsposten.Add(rp); //{mit foreign key} Inhalte zur Tabelle hinzufügen
+            Status state = setStatus(0, 0, 0, 0); //Tabelle status füllen
+            //context.Status.Add(state); //{mit foreign key} Inhalte zur Tabelle hinzufügen
+            Bemerkung bm = setBemerkung("Txt", 0, 0); //Tabelle bemerkung füllen
+                                                      //context.Bemerkung.Add(bm); //{mit foreign key} Inhalte zur Tabelle hinzufügen
 
             //SQLite-db füllen
-                                    context.SaveChanges();
+            context.SaveChanges(); //alle Änderungen in der DB-Datei speichern
 
 
 
@@ -56,19 +54,24 @@ kunden kunde = setKunden("Firma", "Vorname", "Nachname", "Straße", "HausNR", 12
              * Ausgabe der DB-Inhalte in der console
              */
 
-            Console.WriteLine("=< kunden >============================");
-                        getKunden(context.kunden.ToList());
-
-            Console.WriteLine("=< Rechnung >============================");
-            getRechnung(context.Rechnung.ToList());
+            Console.WriteLine("=< kunden >============================"); //Überschrift
+                        getKunden(context.kunden.ToList()); //Tabelle ausgeben
+                        Console.WriteLine("=< Rechnung >============================"); //Überschrift
+            getRechnung(context.Rechnung.ToList()); //Tabelle ausgeben
 
 
             //Beenden
             Console.Write("\nBitte return drücken, um die Anwendung zu beenden."); Console.ReadLine();
             //Signale ausgeben beim beenden
-            Console.Beep(500, 200);
-            Console.Beep(900, 200);
+            Console.Beep(500, 200); Console.Beep(900, 200);
         }//end main function
+
+
+
+        /*******
+         * 
+         * 
+         * ********/
 
         private static void getAssembly(String info="")
         {
@@ -252,7 +255,7 @@ kunden kunde = setKunden("Firma", "Vorname", "Nachname", "Straße", "HausNR", 12
         {
             foreach (var item in data)
             {
-                                Console.Write(item.id + " " + item.vorname + " " + item.nachname + " " + item.straße + " " + item.hausnr + " " + item.plz + " " + item.postfach + " " + item.land + " " + item.telefon + " " + item.fax + " " + item.email + " " + TimeStampToDateTime(item.erstellt_am));
+                                Console.Write(item.id + " " + item.firma + " " + item.vorname + " " + item.nachname + " " + item.straße + " " + item.hausnr + " " + item.plz + " " + item.postfach + " " + item.land + " " + item.telefon + " " + item.fax + " " + item.email + " " + TimeStampToDateTime(item.erstellt_am));
                 Console.WriteLine();
             }
         }
