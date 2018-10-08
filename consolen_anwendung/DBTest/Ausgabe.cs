@@ -17,7 +17,7 @@ namespace DBTest
     [Table(Name = "ausgabe")]
     public class Ausgabe
     {
-                [Column(Name = "id", IsDbGenerated = true, IsPrimaryKey = true, DbType = "INTEGER")]
+        [Column(Name = "id", IsDbGenerated = true, IsPrimaryKey = true, DbType = "INTEGER")]
         [Key]
         public int id { get; set; }
 

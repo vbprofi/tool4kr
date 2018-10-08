@@ -66,7 +66,7 @@ namespace DBTest
 
 
         [Column(Name = "erstellt_am", DbType = "integer")]
-                public int erstellt_am { get; set; }
+        public int erstellt_am { get; set; }
 
         [Column(Name = "geändert_am", DbType = "integer")]
         public int geändert_am { get; set; }
@@ -75,4 +75,4 @@ namespace DBTest
         public int status_id { get; set; }
 
     }//end class
-    } // end namespace
+} // end namespace

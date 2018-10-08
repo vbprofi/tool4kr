@@ -14,10 +14,10 @@ namespace DBTest
     {
         private static String dateiname = Program.assemblyDirectory + @"\test.db";
 
-                        public DatabaseContext() : base(new SQLiteConnection()
-    {
-                                    ConnectionString = new SQLiteConnectionStringBuilder() { DataSource = dateiname, ForeignKeys = true }.ConnectionString
-    }, true)
+        public DatabaseContext() : base(new SQLiteConnection()
+        {
+            ConnectionString = new SQLiteConnectionStringBuilder() { DataSource = dateiname, ForeignKeys = true }.ConnectionString
+        }, true)
         {
         }
 
@@ -25,14 +25,24 @@ namespace DBTest
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
             base.OnModelCreating(modelBuilder);
+
+            /*
+            modelBuilder.Entity<Status>()
+            .HasKey(kunden => kunden.kunden_id);
+            modelBuilder.Entity<Bemerkung>()
+            .HasKey(kunden => kunden.kunden_id)
+            .HasRequired<kunden>(Bemerkung => Bemerkung.kunden_id);
+            */
+
+
         }
 
         public DbSet<kunden> kunden { get; set; }
         public DbSet<Bemerkung> Bemerkung { get; set; }
         public DbSet<Status> Status { get; set; }
-        public DbSet <Ausgabe> Ausgabe { get; set; }
-        public DbSet <Rechnung> Rechnung { get; set; }
-        public DbSet <Rechnungsposten> Rechnungsposten { get; set; }
-        public DbSet <Abo> Abo { get; set; }
+        public DbSet<Ausgabe> Ausgabe { get; set; }
+        public DbSet<Rechnung> Rechnung { get; set; }
+        public DbSet<Rechnungsposten> Rechnungsposten { get; set; }
+        public DbSet<Abo> Abo { get; set; }
     }//end class
 }//end namespace
