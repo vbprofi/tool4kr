@@ -9,8 +9,6 @@ CREATE TABLE "abo" (
   "bezahlt_von" integer NOT NULL,
   "bezahlt_bis" integer NOT NULL,
   "bemerkung_id" integer NOT NULL,
-  FOREIGN KEY ("ausgabe_von") REFERENCES "ausgabe" ("id") ON DELETE NO ACTION ON UPDATE NO ACTION,
-  FOREIGN KEY ("ausgabe_bis") REFERENCES "ausgabe" ("id") ON DELETE NO ACTION ON UPDATE NO ACTION,
   FOREIGN KEY ("bemerkung_id") REFERENCES "bemerkung" ("id") ON DELETE NO ACTION ON UPDATE NO ACTION
 );
 
@@ -97,18 +95,6 @@ CREATE TABLE "rechnungsposten" (
   FOREIGN KEY ("rechnung_id") REFERENCES "rechnung" ("id") ON DELETE CASCADE ON UPDATE NO ACTION,
   FOREIGN KEY ("kunden_id") REFERENCES "kunden" ("id") ON DELETE CASCADE ON UPDATE NO ACTION
 );
-
-
-DROP TABLE IF EXISTS "sqlite_sequence";
-CREATE TABLE sqlite_sequence(name,seq);
-
-INSERT INTO "sqlite_sequence" ("name", "seq") VALUES (ausgabe,	0);
-INSERT INTO "sqlite_sequence" ("name", "seq") VALUES (bemerkung,	0);
-INSERT INTO "sqlite_sequence" ("name", "seq") VALUES (kunden,	0);
-INSERT INTO "sqlite_sequence" ("name", "seq") VALUES (status,	0);
-INSERT INTO "sqlite_sequence" ("name", "seq") VALUES (rechnungsposten,	0);
-INSERT INTO "sqlite_sequence" ("name", "seq") VALUES (abo,	0);
-INSERT INTO "sqlite_sequence" ("name", "seq") VALUES (rechnung,	0);
 
 DROP TABLE IF EXISTS "status";
 CREATE TABLE "status" (

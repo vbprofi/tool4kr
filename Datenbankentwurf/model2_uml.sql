@@ -14,8 +14,6 @@ CREATE TABLE abo (
   bezahlt_von integer NOT NULL,
   bezahlt_bis integer NOT NULL,
   bemerkung_id integer NOT NULL,
-  FOREIGN KEY (ausgabe_von) REFERENCES ausgabe (id) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  FOREIGN KEY (ausgabe_bis) REFERENCES ausgabe (id) ON DELETE NO ACTION ON UPDATE NO ACTION,
   FOREIGN KEY (bemerkung_id) REFERENCES bemerkung (id) ON DELETE NO ACTION ON UPDATE NO ACTION
 );
 
