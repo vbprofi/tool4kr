@@ -19,7 +19,7 @@ namespace DBTest
             ConnectionString = new SQLiteConnectionStringBuilder() { DataSource = dateiname, ForeignKeys = true }.ConnectionString
         }, true)
         {
-        }
+                   }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -65,5 +65,5 @@ modelBuilder.Entity<kunden>()
         public DbSet<Rechnung> Rechnung { get; set; }
         public DbSet<Rechnungsposten> Rechnungsposten { get; set; }
         public DbSet<Abo> Abo { get; set; }
-    }//end class
+            }//end class
 }//end namespace

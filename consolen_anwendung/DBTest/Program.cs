@@ -26,14 +26,15 @@ namespace DBTest
             getAssembly();
             //dateien info
             getBINinfo(assemblyDirectory + @"\System.Data.SQLite.dll");
-
-            //Datenbankobjekt erzeugen
+                        //Datenbankobjekt erzeugen
             DatabaseContext context = new DatabaseContext();
+            Console.Write("Datenbankversion: " + context.Database.Connection.ServerVersion);
+            
 
-            kunden kunde = setKunden("Firma", "Vorname", "Nachname", "Straße", "HausNR", 12345, "Ort", "Postfach", "Land", "Telefon", "Fax", "EMail"); //Tabelle Kunden füllen
+                        kunden kunde = setKunden("Firma", "Vorname", "Nachname", "Straße", "HausNR", 12345, "Ort", "Postfach", "Land", "Telefon", "Fax", "EMail"); //Tabelle Kunden füllen
             //context.kunden.Include("b.bemerkung_id"); //Foreign-Key hinzufügen
             context.kunden.Add(kunde); //Inhalte zur Tabelle hinzufügen
-            Ausgabe ag = setAusgabe(199, Convert.ToDecimal("3,00")); //Tabelle ausgabe füllen
+                        Ausgabe ag = setAusgabe(199, Convert.ToDecimal("3,00")); //Tabelle ausgabe füllen
             context.Ausgabe.Add(ag); //Inhalte zur Tabelle hinzufügen
             Rechnung rn = setRechnung("Firma", "Vorname", "Nachname", "Straße", "HausNR", 12345, "Ort", "Postfach", "Land", "Telefon", "Fax", "EMail", 0, 0); //Tabelle rechnung füllen
             context.Rechnung.Add(rn); //Inhalte zur Tabelle hinzufügen
@@ -113,8 +114,7 @@ namespace DBTest
                 Console.WriteLine($"Productname: {versionInfo.ProductName}");
                 Console.WriteLine($"ProductVersion: {versionInfo.ProductVersion}");
                 Console.WriteLine($"FileVersion: {versionInfo.FileVersion}");
-                Console.WriteLine("\n");
-            }
+                            }
             catch { }
         }
 
