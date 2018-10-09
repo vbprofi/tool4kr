@@ -1,0 +1,28 @@
+﻿todo liste - Phase 1
+
+In Phase 1 werden das Datenbankmodell entworfen und Klassenobjekte für insert into, update und delete from erstellt und in der Consolen Anwendung anhand von Geschäftsabläufen mit fiktiven Datensätzen getestet.
+
+1. Datenbankmodell entwerfen
+- Vorschlag Model2 (liegt vor)
+- 
+
+2. Datenbank füllen und bestimmte Datensätze zeigen
+- Die Consolen Anwendung soll folgendes können: Der User soll
+a)	Neue Ausgabe der Zeitschrift eintragen
+b)	Abonnements mit Stammdaten und Aboinformationen (welche Art von Abo? z.B. halbjährlich) aufnehmen
+c)	Zeigen lassen wer alles die neue Ausgabe erhalten soll
+d)	Zeigen lassen, wer die neue Ausgabe schon hat
+e)	Funktion für: Die alten Ausgaben sollten wie in b und c auf Wunsch angezeigt werden.
+f)	Abonnements kündigen soll möglich sein
+g)	Gekündigte Abonnements sollten in allen Fällen der Anzeige von Datensätzen berücksichtigt werden.
+h)	Erfolgte Zahlung eintragen
+i)	Abonnementen, die offene Rechnungen haben, sollten angezeigt werden
+j)	Abonnementen zeigen, deren Zahlung erfolgt ist
+
+3. Daten aus (2.) bearbeiten und zeigen
+- Die Consolen Anwendung soll folgendes können: Der User soll
+a)	Abonnementen mit Stammdaten bearbeiten / aktuallisieren
+b)	Wenn Abonnementen das Abo verlängern, es aufnehmen / ändern können
+c)	beendete/gekündigte/gesperrten Abonnementen wieder zulassen
+d)	Statistik pro Zeitschriftsausgabe zeigen
+
