@@ -26,15 +26,36 @@ namespace DBTest
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
             base.OnModelCreating(modelBuilder);
 
-            /*
+            /*** Relation ***/
+            modelBuilder.Entity<Rechnungsposten>()
+.HasRequired(rp => rp.kunden)
+.WithOptional();
+            modelBuilder.Entity<Rechnungsposten>()
+.HasRequired(rp => rp.rechnung)
+.WithOptional();
+            modelBuilder.Entity<Rechnungsposten>()
+.HasRequired(rp => rp.abo)
+.WithOptional();
+            modelBuilder.Entity<Rechnungsposten>()
+.HasRequired(rp => rp.bemerkung)
+.WithOptional();
+
+            modelBuilder.Entity<Abo>()
+.HasRequired(ab => ab.bemerkung)
+                        .WithOptional();
             modelBuilder.Entity<Status>()
-            .HasKey(kunden => kunden.kunden_id);
+.HasRequired(s => s.kunden)
+.WithOptional();
             modelBuilder.Entity<Bemerkung>()
-            .HasKey(kunden => kunden.kunden_id)
-            .HasRequired<kunden>(Bemerkung => Bemerkung.kunden_id);
-            */
+                               .HasRequired(b => b.kunden)
+                .WithOptional();
 
-
+            /****
+             * wird nicht benötigt
+modelBuilder.Entity<kunden>()
+.HasRequired(k => k.bemerkung)
+.WithOptional();
+***********/
         }
 
         public DbSet<kunden> kunden { get; set; }

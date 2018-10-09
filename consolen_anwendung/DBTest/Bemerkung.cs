@@ -27,8 +27,9 @@ namespace DBTest
 
         [Column(Name = "datum", DbType = "integer")]
         public int datum { get; set; }
-
-        [Column(Name = "kunden_id", DbType = "integer")]
-        public int kunden_id { get; set; }
+               
+                [Column(Name = "kunden_id", DbType = "integer")]
+                        public int kunden_id { get; set; }
+        public kunden kunden { get; set; }
     }//end class
 } // end namespace

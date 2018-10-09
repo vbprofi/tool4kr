@@ -31,19 +31,22 @@ namespace DBTest
             DatabaseContext context = new DatabaseContext();
 
             kunden kunde = setKunden("Firma", "Vorname", "Nachname", "Straße", "HausNR", 12345, "Ort", "Postfach", "Land", "Telefon", "Fax", "EMail"); //Tabelle Kunden füllen
+            //context.kunden.Include("b.bemerkung_id"); //Foreign-Key hinzufügen
             context.kunden.Add(kunde); //Inhalte zur Tabelle hinzufügen
             Ausgabe ag = setAusgabe(199, Convert.ToDecimal("3,00")); //Tabelle ausgabe füllen
             context.Ausgabe.Add(ag); //Inhalte zur Tabelle hinzufügen
             Rechnung rn = setRechnung("Firma", "Vorname", "Nachname", "Straße", "HausNR", 12345, "Ort", "Postfach", "Land", "Telefon", "Fax", "EMail", 0, 0); //Tabelle rechnung füllen
             context.Rechnung.Add(rn); //Inhalte zur Tabelle hinzufügen
-            Abo ab = setAbo(0, 0, 0, 0, 0, 0); //Tabelle abo füllen
-                                               //context.Abo.Add(ab); //{mit foreign key} Inhalte zur Tabelle hinzufügen
-            Rechnungsposten rp = setRechnungsposten(0, 0, 2, 0, 0, 0, "IBAN", "Institut", "KontoInhaber", 0); //Tabelle rechnungsposten füllen
-                                                                                                              //context.Rechnungsposten.Add(rp); //{mit foreign key} Inhalte zur Tabelle hinzufügen
-            Status state = setStatus(0, 0, 0, 0); //Tabelle status füllen
-                                                  //context.Status.Add(state); //{mit foreign key} Inhalte zur Tabelle hinzufügen
-            Bemerkung bm = setBemerkung("Txt", 0, 0); //Tabelle bemerkung füllen
-                                                      //context.Bemerkung.Add(bm); //{mit foreign key} Inhalte zur Tabelle hinzufügen
+            Abo ab = setAbo(1, 1, 1, 1, 1, 1); //Tabelle abo füllen
+            context.Abo.Add(ab); //{mit foreign key} Inhalte zur Tabelle hinzufügen
+            Bemerkung bm = setBemerkung("Txt", 1); //Tabelle bemerkung füllen
+                                                   //context.Bemerkung.Include("kunden_id"); //Foreign-Key hinzufügen
+            context.Bemerkung.Add(bm); //{mit foreign key} Inhalte zur Tabelle hinzufügen
+            Rechnungsposten rp = setRechnungsposten(1, 1, 6, 1, 555555, 888888, "IBAN", "Institut", "KontoInhaber", 1); //Tabelle rechnungsposten füllen
+            context.Rechnungsposten.Add(rp); //{mit foreign key} Inhalte zur Tabelle hinzufügen
+            Status state = setStatus(1, 1, 1, 1); //Tabelle status füllen
+            context.Status.Add(state); //{mit foreign key} Inhalte zur Tabelle hinzufügen
+
 
             //SQLite-db füllen
             context.SaveChanges(); //alle Änderungen in der DB-Datei speichern
@@ -58,7 +61,16 @@ namespace DBTest
             getKunden(context.kunden.ToList()); //Tabelle ausgeben
             Console.WriteLine("=< Rechnung >============================"); //Überschrift
             getRechnung(context.Rechnung.ToList()); //Tabelle ausgeben
-
+            Console.WriteLine("=< Bemerkung >============================"); //Überschrift
+            getBemerkung(context.Bemerkung.ToList()); //Tabelle ausgeben
+            Console.WriteLine("=< Status >============================"); //Überschrift
+            getStatus(context.Status.ToList()); //Tabelle ausgeben
+            Console.WriteLine("=< Ausgabe >============================"); //Überschrift
+            getAusgabe(context.Ausgabe.ToList()); //Tabelle ausgeben
+            Console.WriteLine("=< Abo >============================"); //Überschrift
+            getAbo(context.Abo.ToList()); //Tabelle ausgeben
+            Console.WriteLine("=< Rechnungsposten >============================"); //Überschrift
+            getRechnungsposten(context.Rechnungsposten.ToList()); //Tabelle ausgeben
 
             //Beenden
             Console.Write("\nBitte return drücken, um die Anwendung zu beenden."); Console.ReadLine();
@@ -169,12 +181,12 @@ namespace DBTest
             return state;
         }
 
-        private static Bemerkung setBemerkung(String Txt, int Datum, int KundenID)
+        private static Bemerkung setBemerkung(String Txt, int KundenID)
         {
             Bemerkung bm = new Bemerkung()
             {
                 text = Txt,
-                datum = Datum,
+                datum = current_timestamp(),
                 kunden_id = KundenID,
             };
             return bm;
@@ -256,7 +268,7 @@ namespace DBTest
         {
             foreach (var item in data)
             {
-                Console.Write(item.id + " " + item.firma + " " + item.vorname + " " + item.nachname + " " + item.straße + " " + item.hausnr + " " + item.plz + " " + item.postfach + " " + item.land + " " + item.telefon + " " + item.fax + " " + item.email + " " + TimeStampToDateTime(item.erstellt_am));
+                Console.Write(item.id + " " + item.firma + " " + item.vorname + " " + item.nachname + " " + item.straße + " " + item.hausnr + " " + item.plz + " " + item.postfach + " " + item.land + " " + item.telefon + " " + item.fax + " " + item.email + " " + item.bemerkung_id + " " + " " + TimeStampToDateTime(item.erstellt_am));
                 Console.WriteLine();
             }
         }
@@ -270,7 +282,50 @@ namespace DBTest
             }
         }
 
+        private static void getBemerkung(List<DBTest.Bemerkung> data)
+        {
+            foreach (var item in data)
+            {
+                Console.Write(item.id + " " + item.kunden_id + "#" + " " + item.text + " " + TimeStampToDateTime(item.datum));
+                Console.WriteLine();
+            }
+        }
 
+        private static void getStatus(List<DBTest.Status> data)
+        {
+            foreach (var item in data)
+            {
+                Console.Write(item.id + " " + item.kunden_id + "#" + item.kunden.status_id + " " + item.flag + " " + TimeStampToDateTime(item.eintritt_am) + " " + TimeStampToDateTime(item.austritt_am));
+                Console.WriteLine();
+            }
+        }
+
+        private static void getAusgabe(List<DBTest.Ausgabe> data)
+        {
+            foreach (var item in data)
+            {
+                Console.Write(item.id + " " + item.ausgabe + " " + item.preis + "EURO " + TimeStampToDateTime(item.datum));
+                Console.WriteLine();
+            }
+        }
+
+        private static void getAbo(List<DBTest.Abo> data)
+        {
+            foreach (var item in data)
+            {
+                Console.Write(item.id + " " + item.ausgabe_bis + " " + item.ausgabe_von + " " + TimeStampToDateTime(item.bezahlt_am) + " " + item.bemerkung_id);
+                Console.WriteLine();
+            }
+        }
+
+        private static void getRechnungsposten(List<DBTest.Rechnungsposten> data)
+        {
+            foreach (var item in data)
+            {
+                Console.Write(item.id + " " + item.abo_id + " " + item.anzahl + " " + TimeStampToDateTime(item.erstellt_am) + " " + item.bemerkung_id + " " + item.kunden_id + " " + item.kontoinhaber + " " + item.institut + " " + item.kontonr);
+                Console.WriteLine();
+            }
+        }
 
     }//end class
 } //end namespace

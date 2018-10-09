@@ -24,7 +24,7 @@ using System.Data.SQLite;
 
 namespace DBTest
 {
-public     class old_database_test
+    public class old_database_test
     {
 
         //datei der datenbank
@@ -37,7 +37,7 @@ public     class old_database_test
         {
             Console.Write("Keine Datenbank ausgewählt.");
         }
-public         old_database_test(String dbname)
+        public old_database_test(String dbname)
         {
             //dateiname der Datenbank setzen
             dateiname = dbname;
@@ -54,17 +54,17 @@ public         old_database_test(String dbname)
                 return "";
             }
             else
-            return dateiname;
+                return dateiname;
         }
 
         //funktion zum herrstellen der verbindung
-private static SQLiteConnection CreateConnection()
+        private static SQLiteConnection CreateConnection()
         {
-                        SQLiteConnection sqlite_conn;
+            SQLiteConnection sqlite_conn;
             // Create a new database connection:
-            sqlite_conn = new SQLiteConnection("Data Source="+ dateiname +"; Version = 3; New = false; Compress = True; ");
-           // Open the connection:
-         try
+            sqlite_conn = new SQLiteConnection("Data Source=" + dateiname + "; Version = 3; New = false; Compress = True; ");
+            // Open the connection:
+            try
             {
                 sqlite_conn.Open();
             }
@@ -81,11 +81,11 @@ private static SQLiteConnection CreateConnection()
             SQLiteCommand sqlite_cmd;
             sqlite_cmd = conn.CreateCommand();
             sqlite_cmd.CommandText = query;
-                        sqlite_cmd.ExecuteNonQuery();
+            sqlite_cmd.ExecuteNonQuery();
         }
 
         //funktion zum ausgeben
-      public static void ReadData(String query, SQLiteConnection conn)
+        public static void ReadData(String query, SQLiteConnection conn)
         {
             SQLiteDataReader sqlite_datareader;
             SQLiteCommand sqlite_cmd;
@@ -101,16 +101,16 @@ private static SQLiteConnection CreateConnection()
             conn.Close();
         }
 
-/*
- * Funktionen zur Datenbanktabellen füllen
- * 
- */
- public void setTBKunde()
+        /*
+         * Funktionen zur Datenbanktabellen füllen
+         * 
+         */
+        public void setTBKunde()
         {
             //InsertData("insert into kunden (vorname, nachname) values(\"hans\", \"peter\")", sqlite_conn);
             Console.WriteLine("Kunde geschrieben.");
         }
- 
+
         /*
          * Inhalte der Datenbanktabellen auslesen
          * 

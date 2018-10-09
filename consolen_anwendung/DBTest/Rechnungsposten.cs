@@ -23,15 +23,18 @@ namespace DBTest
 
         [Column(Name = "kunden_id", DbType = "integer")]
         public int kunden_id { get; set; }
+        public kunden kunden { get; set; }
 
         [Column(Name = "rechnung_id", DbType = "integer")]
         public int rechnung_id { get; set; }
+        public Rechnung rechnung { get; set; }
 
         [Column(Name = "anzahl", DbType = "integer")]
         public int anzahl { get; set; }
 
         [Column(Name = "abo_id", DbType = "integer")]
         public int abo_id { get; set; }
+        public Abo abo { get; set; }
 
         [Column(Name = "kontonr", DbType = "integer")]
         public int kontonr { get; set; }
@@ -47,12 +50,11 @@ namespace DBTest
 
         [Column(Name = "kontoinhaber", DbType = "text")]
         public string kontoinhaber { get; set; }
-
         [Column(Name = "erstellt_am", DbType = "integer")]
         public int erstellt_am { get; set; }
 
-
         [Column(Name = "bemerkung_id", DbType = "integer")]
         public int bemerkung_id { get; set; }
+        public Bemerkung bemerkung { get; set; }
     }//end class
 } // end namespace

@@ -67,7 +67,6 @@ namespace DBTest
         [Column(Name = "erstellt_am", DbType = "integer")]
         public int erstellt_am { get; set; }
 
-
         [Column(Name = "gesendet_am", DbType = "integer")]
         public int gesendet_am { get; set; }
     }//end class

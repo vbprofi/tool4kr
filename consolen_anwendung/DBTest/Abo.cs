@@ -23,10 +23,10 @@ namespace DBTest
 
         [Column(Name = "ausgabe_von", DbType = "integer")]
         public int ausgabe_von { get; set; }
-
+        
         [Column(Name = "ausgabe_bis", DbType = "integer")]
         public int ausgabe_bis { get; set; }
-
+        
         [Column(Name = "bezahlt_am", DbType = "integer")]
         public int bezahlt_am { get; set; }
 
@@ -38,5 +38,6 @@ namespace DBTest
 
         [Column(Name = "bemerkung_id", DbType = "integer")]
         public int bemerkung_id { get; set; }
+        public Bemerkung bemerkung { get; set; }
     }//end class
 } // end namespace
