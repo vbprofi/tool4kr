@@ -111,9 +111,9 @@ namespace DBTest
                 var versionInfo = FileVersionInfo.GetVersionInfo(AppDirectory);
 
                 Console.WriteLine("DLL-Geladen");
-                Console.WriteLine($"Productname: {versionInfo.ProductName}");
-                Console.WriteLine($"ProductVersion: {versionInfo.ProductVersion}");
-                Console.WriteLine($"FileVersion: {versionInfo.FileVersion}");
+                Console.WriteLine("Productname: {versionInfo.ProductName}");
+                Console.WriteLine("ProductVersion: {versionInfo.ProductVersion}");
+                Console.WriteLine("FileVersion: {versionInfo.FileVersion}");
                             }
             catch { }
         }
