@@ -23,7 +23,7 @@ namespace DBTest
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            //Voreinstellung
+                        //Voreinstellung
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
             base.OnModelCreating(modelBuilder);
 

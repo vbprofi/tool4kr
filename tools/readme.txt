@@ -1,4 +1,4 @@
-SQLite DatabaseBrowser 3.10.1 Portable ist eine grafische Datenbankanwendung für SQLite3. Sie gehört aber nicht zu den hauseigenen Werkzeugen.
+SQLite DatabaseBrowser 3.10.1 Portable, DatabaseNet4, DatabaseNet5Pro und sqliteadmin   sind grafische Datenbankanwendung für SQLite3. Sie gehört aber nicht zu den hauseigenen Werkzeugen.
 
 Hauseigene Werkzeuge: sqlite-tools-win32-x86-3250100
 - Die SQLite Console wird mit sqlite3.exe aufgerufen.
