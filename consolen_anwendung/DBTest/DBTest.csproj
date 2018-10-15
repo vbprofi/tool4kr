@@ -80,7 +80,7 @@
     <Compile Include="Rechnungsposten.cs" />
     <Compile Include="Rechnung.cs" />
     <Compile Include="DatabaseContext.cs" />
-    <Compile Include="kunden.cs" />
+    <Compile Include="Kunden.cs" />
     <Compile Include="SQLiteConfiguration.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

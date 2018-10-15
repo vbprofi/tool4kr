@@ -23,7 +23,7 @@ namespace DBTest
 
         [Column(Name = "kunden_id", DbType = "integer")]
         public int kunden_id { get; set; }
-        public kunden kunden { get; set; }
+        public Kunden kunden { get; set; }
 
         [Column(Name = "rechnung_id", DbType = "integer")]
         public int rechnung_id { get; set; }

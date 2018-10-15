@@ -59,7 +59,7 @@ modelBuilder.Entity<kunden>()
 ***********/
         }
 
-        public DbSet<kunden> kunden { get; set; }
+        public DbSet<Kunden> kunden { get; set; }
         public DbSet<Bemerkung> Bemerkung { get; set; }
         public DbSet<Status> Status { get; set; }
         public DbSet<Ausgabe> Ausgabe { get; set; }

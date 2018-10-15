@@ -28,17 +28,17 @@ namespace DBTest
             getBINinfo(assemblyDirectory + @"\System.Data.SQLite.dll");
                         //Datenbankobjekt erzeugen
             DatabaseContext context = new DatabaseContext();
-            Console.Write("Datenbankversion: " + context.Database.Connection.ServerVersion);
+            Console.WriteLine("Datenbankversion: " + context.Database.Connection.ServerVersion);
             
             //Stopuhr zur Zeit Messung erzeugen
             Stopwatch watch = new Stopwatch();
             watch.Reset(); //zurücksetzen auf 0
             watch.Start(); //Stopuhr starten
 
-                        kunden kunde = setKunden("Firma", "Vorname", "Nachname", "Straße", "HausNR", 12345, "Ort", "Postfach", "Land", "Telefon", "Fax", "EMail"); //Tabelle Kunden füllen
+            Kunden kunde = setKunden("Firma", "Vorname", "Nachname", "Straße", "HausNR", 12345, "Ort", "Postfach", "Land", "Telefon", "Fax", "EMail"); //Tabelle Kunden füllen
             //context.kunden.Include("b.bemerkung_id"); //Foreign-Key hinzufügen
             context.kunden.Add(kunde); //Inhalte zur Tabelle hinzufügen
-                        Ausgabe ag = setAusgabe(199, Convert.ToDecimal("3,00")); //Tabelle ausgabe füllen
+            Ausgabe ag = setAusgabe(199, Convert.ToDecimal("3,00")); //Tabelle ausgabe füllen
             context.Ausgabe.Add(ag); //Inhalte zur Tabelle hinzufügen
             Rechnung rn = setRechnung("Firma", "Vorname", "Nachname", "Straße", "HausNR", 12345, "Ort", "Postfach", "Land", "Telefon", "Fax", "EMail", 0, 0); //Tabelle rechnung füllen
             context.Rechnung.Add(rn); //Inhalte zur Tabelle hinzufügen
@@ -51,7 +51,6 @@ namespace DBTest
             context.Rechnungsposten.Add(rp); //{mit foreign key} Inhalte zur Tabelle hinzufügen
             Status state = setStatus(1, 1, 1, 1); //Tabelle status füllen
             context.Status.Add(state); //{mit foreign key} Inhalte zur Tabelle hinzufügen
-
 
             //SQLite-db füllen
             context.SaveChanges(); //alle Änderungen in der DB-Datei speichern
@@ -66,7 +65,7 @@ namespace DBTest
             * Ausgabe der DB-Inhalte in der console
             */
 
-            Console.WriteLine("\n=< kunden >============================"); //Überschrift
+            Console.WriteLine("\n=< Kunden >============================"); //Überschrift
             getKunden(context.kunden.ToList()); //Tabelle ausgeben
             Console.WriteLine("=< Rechnung >============================"); //Überschrift
             getRechnung(context.Rechnung.ToList()); //Tabelle ausgeben
@@ -82,7 +81,7 @@ namespace DBTest
             getRechnungsposten(context.Rechnungsposten.ToList()); //Tabelle ausgeben
 
             watch.Stop(); //Zeit anhalten
-                        Console.WriteLine("\nLesezeit: " + watch.ElapsedMilliseconds.ToString() + " (ms)"); //Ausgeben wie lange das Lesen aus der DB gedauert hat
+            Console.WriteLine("\nLesezeit: " + watch.ElapsedMilliseconds.ToString() + " (ms)"); //Ausgeben wie lange das Lesen aus der DB gedauert hat
 
             //Beenden
             Console.Write("\nBitte return drücken, um die Anwendung zu beenden."); Console.ReadLine();
@@ -155,9 +154,9 @@ namespace DBTest
         *
         * ***************/
 
-        private static kunden setKunden(String Firma = "", String Vorname = "", String Nachname = "", String Straße = "", string HausNR = "", int PLZ = 0, String Ort = "", String Postfach = "", String Land = "", String Telefon = "", String Fax = "", String EMail = "")
+        private static Kunden setKunden(String Firma = "", String Vorname = "", String Nachname = "", String Straße = "", string HausNR = "", int PLZ = 0, String Ort = "", String Postfach = "", String Land = "", String Telefon = "", String Fax = "", String EMail = "")
         {
-            kunden kunde = new kunden()
+            Kunden kunde = new Kunden()
             {
                 firma = Firma,
                 vorname = Vorname,
@@ -275,7 +274,7 @@ namespace DBTest
         /********
         * Funktion zur Ausgabe
         */
-        private static void getKunden(List<DBTest.kunden> data)
+        private static void getKunden(List<DBTest.Kunden> data)
         {
             foreach (var item in data)
             {
