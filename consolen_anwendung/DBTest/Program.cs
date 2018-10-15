@@ -58,7 +58,7 @@ namespace DBTest
             * Ausgabe der DB-Inhalte in der console
             */
 
-            Console.WriteLine("=< kunden >============================"); //Überschrift
+            Console.WriteLine("\n=< kunden >============================"); //Überschrift
             getKunden(context.kunden.ToList()); //Tabelle ausgeben
             Console.WriteLine("=< Rechnung >============================"); //Überschrift
             getRechnung(context.Rechnung.ToList()); //Tabelle ausgeben
@@ -111,13 +111,13 @@ namespace DBTest
                 var versionInfo = FileVersionInfo.GetVersionInfo(AppDirectory);
 
                 Console.WriteLine("DLL-Geladen");
-                Console.WriteLine("Productname: {versionInfo.ProductName}");
-                Console.WriteLine("ProductVersion: {versionInfo.ProductVersion}");
-                Console.WriteLine("FileVersion: {versionInfo.FileVersion}");
+                Console.WriteLine("Productname: " + versionInfo.ProductName);
+                Console.WriteLine("ProductVersion: " + versionInfo.ProductVersion);
+                Console.WriteLine("FileVersion: " + versionInfo.FileVersion);
                             }
             catch { }
         }
-
+            
         //aktuelle Zeit als Integer berechnen
         private static int current_timestamp()
         {
