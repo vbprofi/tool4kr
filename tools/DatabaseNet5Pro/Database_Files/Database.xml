@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DatabaseNET>
+  <License LicenseCode3="" />
+  <Settings ResultsFont="Segoe UI" ResultsFontSize="8.25" DefaultFont="Segoe UI" DefaultFontSize="8.25" fishDatabase3="" Language="german.xml" CheckDate3="15" CodeDir="C:\Users\homepc\source\DatabaseNet5Pro\Database_Files" ExecCount3="0" LastAccessed3="15" Maximize="False" Left="128" Top="0" Width="1024" Height="689" pnlControlLeftWidth="280" ToolStrip1Left="3" ToolStrip1Top="0" ToolStrip2Left="289" ToolStrip2Top="0" ToolStrip3Left="792" ToolStrip3Top="0" ToolStrip4Left="940" ToolStrip4Top="0">
+    <Additional2FB DatabaseEngine="Default">
+    </Additional2FB>
+    <Additional2OLEDB>
+    </Additional2OLEDB>
+    <Additional2SQLCE>
+    </Additional2SQLCE>
+    <Additional2SQLITE>
+    </Additional2SQLITE>
+    <Additional2VISTADB>
+    </Additional2VISTADB>
+  </Settings>
+</DatabaseNET>

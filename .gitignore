@@ -1,2 +1,3 @@
-consolen_anwendung/DBTest/bin/
-consolen_anwendung/DBTest/obj/
+consolen_anwendung/DBTest/bin/*
+consolen_anwendung/DBTest/obj/*
+consolen_anwendung/.vs/**/*
