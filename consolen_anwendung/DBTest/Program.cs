@@ -30,6 +30,10 @@ namespace DBTest
             DatabaseContext context = new DatabaseContext();
             Console.Write("Datenbankversion: " + context.Database.Connection.ServerVersion);
             
+            //Stopuhr zur Zeit Messung erzeugen
+            Stopwatch watch = new Stopwatch();
+            watch.Reset(); //zurücksetzen auf 0
+            watch.Start(); //Stopuhr starten
 
                         kunden kunde = setKunden("Firma", "Vorname", "Nachname", "Straße", "HausNR", 12345, "Ort", "Postfach", "Land", "Telefon", "Fax", "EMail"); //Tabelle Kunden füllen
             //context.kunden.Include("b.bemerkung_id"); //Foreign-Key hinzufügen
@@ -52,6 +56,10 @@ namespace DBTest
             //SQLite-db füllen
             context.SaveChanges(); //alle Änderungen in der DB-Datei speichern
 
+                        watch.Stop(); //Zeit anhalten
+                        Console.WriteLine("\nSchreibzeit: " + watch.ElapsedMilliseconds.ToString() + " (ms)"); //Ausgeben wielange das Schreiben in die DB gedauert hat
+            watch.Reset(); //Zeit zurücksetzen auf 0
+            watch.Start(); //Zeit erneut laufen lassen
 
 
             /*
@@ -72,6 +80,9 @@ namespace DBTest
             getAbo(context.Abo.ToList()); //Tabelle ausgeben
             Console.WriteLine("=< Rechnungsposten >============================"); //Überschrift
             getRechnungsposten(context.Rechnungsposten.ToList()); //Tabelle ausgeben
+
+            watch.Stop(); //Zeit anhalten
+                        Console.WriteLine("\nLesezeit: " + watch.ElapsedMilliseconds.ToString() + " (ms)"); //Ausgeben wie lange das Lesen aus der DB gedauert hat
 
             //Beenden
             Console.Write("\nBitte return drücken, um die Anwendung zu beenden."); Console.ReadLine();
