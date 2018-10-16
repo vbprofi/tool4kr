@@ -11,6 +11,7 @@ using System.Threading;
 using System.Data.SQLite;
 using System.Data.Entity;
 using DBTest.util;
+using System.Transactions;
 
 namespace DBTest
 {
@@ -37,9 +38,8 @@ namespace DBTest
             Console.WriteLine("Datenbankversion: " + context.Database.Connection.ServerVersion);
             
             createSampleDataAllTables(context);
-            createSampleDataAllTables(context); // die zweite transaktion geht wesentlich
-                                                // schneller! hilft diese erkenntnis?
-                                              //Yep, da müssen Transactions noch eingebaut werden. Beim ersten Erzeugen gibts noch keine, deshalb braucht der so lange. Beim zweiten Mal nutzt er die Transactions.
+            createSampleDataAllTables(context);
+                                                                                              //merke mit eingebautem Transactions keinen unterschied beim ersten Füllen. Beim zweiten gibts einen kleinen unterschied. kA, woran das liegt. (siehe funktion)
                                                 
             printTableData(context);
 
@@ -54,6 +54,8 @@ namespace DBTest
          */
         private static void createSampleDataAllTables(DatabaseContext context)
         {
+            using (var dbContextTransaction = context.Database.BeginTransaction())
+                {
             //Stopuhr zur Zeit Messung erzeugen
             CounterStopWatch watch = new CounterStopWatch();
             watch.ResetAndStart(); //Stopuhr zurücksetzen auf 0 und starten
@@ -61,28 +63,28 @@ namespace DBTest
             Kunden kunde = setKunden("Firma", "Vorname", "Nachname", "Straße", "HausNR", 12345, "Ort", "Postfach", "Land", "Telefon", "Fax", "EMail"); //Tabelle Kunden füllen
             //context.kunden.Include("b.bemerkung_id"); //Foreign-Key hinzufügen
             context.kunden.Add(kunde); //Inhalte zur Tabelle hinzufügen
-            watch++;
+                            watch++;
 
             Ausgabe ag = setAusgabe(199, Convert.ToDecimal("3,00")); //Tabelle ausgabe füllen
             context.Ausgabe.Add(ag); //Inhalte zur Tabelle hinzufügen
-            watch++;
+                            watch++;
             
             Rechnung rn = setRechnung("Firma", "Vorname", "Nachname", "Straße", "HausNR", 12345, "Ort", "Postfach", "Land", "Telefon", "Fax", "EMail", 0, 0); //Tabelle rechnung füllen
             context.Rechnung.Add(rn); //Inhalte zur Tabelle hinzufügen
-            watch++;
+                            watch++;
             
             Abo ab = setAbo(1, 1, 1, 1, 1, 1); //Tabelle abo füllen
             context.Abo.Add(ab); //{mit foreign key} Inhalte zur Tabelle hinzufügen
-            watch++;
+                            watch++;
             
             Bemerkung bm = setBemerkung("Txt", 1); //Tabelle bemerkung füllen
                                                    //context.Bemerkung.Include("kunden_id"); //Foreign-Key hinzufügen
             context.Bemerkung.Add(bm); //{mit foreign key} Inhalte zur Tabelle hinzufügen
-            watch++;
+                            watch++;
             
             Rechnungsposten rp = setRechnungsposten(1, 1, 6, 1, 555555, 888888, "IBAN", "Institut", "KontoInhaber", 1); //Tabelle rechnungsposten füllen
             context.Rechnungsposten.Add(rp); //{mit foreign key} Inhalte zur Tabelle hinzufügen
-            watch++;
+                            watch++;
             
             Status state = setStatus(1, 1, 1, 1); //Tabelle status füllen
             context.Status.Add(state); //{mit foreign key} Inhalte zur Tabelle hinzufügen
@@ -93,6 +95,8 @@ namespace DBTest
 
             watch.Stop(); //Zeit anhalten
 	        Console.WriteLine("Schreibzeit: " + watch); //Ausgeben wie lange das Schreiben in die DB gedauert hat        	
+                dbContextTransaction.Commit();
+                            }
         }
         
         /**
@@ -100,6 +104,8 @@ namespace DBTest
          */
         private static void printTableData(DatabaseContext context)
         {
+            using (var dbContextTransaction = context.Database.BeginTransaction())
+                {
             //Stopuhr zur Zeit Messung erzeugen
             CounterStopWatch watch = new CounterStopWatch();
             watch.ResetAndStart(); //Stopuhr zurücksetzen auf 0 und starten
@@ -137,6 +143,8 @@ namespace DBTest
 
             watch.Stop(); //Zeit anhalten
             Console.WriteLine("\nLesezeit: " + watch); //Ausgeben wie lange das Lesen aus der DB gedauert hat
+                dbContextTransaction.Commit();
+                            }
         }
         
         private static void getAssembly(String info = "")
