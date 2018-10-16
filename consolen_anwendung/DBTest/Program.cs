@@ -34,16 +34,23 @@ namespace DBTest
             Database.SetInitializer(new DBContextInitializer());
                         //Datenbankobjekt erzeugen
             DatabaseContext context = new DatabaseContext();
-            context.SaveChanges();
-            Console.WriteLine("Datenbankversion: " + context.Database.Connection.ServerVersion);
+            context.Configuration.AutoDetectChangesEnabled = false;
+            context.Configuration.LazyLoadingEnabled = false;
+            context.Configuration.ValidateOnSaveEnabled = false;
+            context.Configuration.UseDatabaseNullSemantics = false;
+            context.Configuration.ProxyCreationEnabled = false;
+            context.Configuration.EnsureTransactionsForFunctionsAndCommands = false;
+                        context.SaveChanges();
+                                    Console.WriteLine("Datenbankversion: " + context.Database.Connection.ServerVersion);
             
-            createSampleDataAllTables(context);
-            createSampleDataAllTables(context);
+            createSampleDataAllTables(context); //keine Änderung
+            createSampleDataAllTables(context); //schneller geworden.
                                                                                               //merke mit eingebautem Transactions keinen unterschied beim ersten Füllen. Beim zweiten gibts einen kleinen unterschied. kA, woran das liegt. (siehe funktion)
+                                                                                              //performance: https://codingsight.com/entity-framework-improving-performance-when-saving-data-to-database/
                                                 
             printTableData(context);
 
-            //Beenden
+                        //Beenden
             Console.Write("\nBitte return drücken, um die Anwendung zu beenden."); Console.ReadLine();
             //Signale ausgeben beim beenden
             Console.Beep(500, 200); Console.Beep(900, 200);
@@ -89,10 +96,11 @@ namespace DBTest
             Status state = setStatus(1, 1, 1, 1); //Tabelle status füllen
             context.Status.Add(state); //{mit foreign key} Inhalte zur Tabelle hinzufügen
             watch++;
-            
-            //SQLite-db füllen
-                context.SaveChanges(); //alle Änderungen in der DB-Datei speichern
 
+                        //SQLite-db füllen
+                //context.SaveChanges(); //alle Änderungen in der DB-Datei speichern
+                //context.ChangeTracker.DetectChanges(); //Änderungen speichern
+                context.SaveChanges();
             watch.Stop(); //Zeit anhalten
 	        Console.WriteLine("Schreibzeit: " + watch); //Ausgeben wie lange das Schreiben in die DB gedauert hat        	
                 dbContextTransaction.Commit();
