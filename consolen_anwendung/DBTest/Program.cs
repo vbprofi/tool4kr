@@ -9,7 +9,7 @@ using System.Reflection;
 using System.Diagnostics;
 using System.Threading;
 using System.Data.SQLite;
-
+using System.Data.Entity;
 using DBTest.util;
 
 namespace DBTest
@@ -29,6 +29,8 @@ namespace DBTest
             getAssembly();
             //dateien info
             getBINinfo(assemblyDirectory + @"\System.Data.SQLite.dll");
+            //Datenbank erzeugen, falls nicht vorhanden
+            Database.SetInitializer(new DBContextInitializer());
                         //Datenbankobjekt erzeugen
             DatabaseContext context = new DatabaseContext();
             context.SaveChanges();
@@ -37,6 +39,8 @@ namespace DBTest
             createSampleDataAllTables(context);
             createSampleDataAllTables(context); // die zweite transaktion geht wesentlich
                                                 // schneller! hilft diese erkenntnis?
+                                              //Yep, da müssen Transactions noch eingebaut werden. Beim ersten Erzeugen gibts noch keine, deshalb braucht der so lange. Beim zweiten Mal nutzt er die Transactions.
+                                                
             printTableData(context);
 
             //Beenden
@@ -85,7 +89,7 @@ namespace DBTest
             watch++;
             
             //SQLite-db füllen
-            context.SaveChanges(); //alle Änderungen in der DB-Datei speichern
+                context.SaveChanges(); //alle Änderungen in der DB-Datei speichern
 
             watch.Stop(); //Zeit anhalten
 	        Console.WriteLine("Schreibzeit: " + watch); //Ausgeben wie lange das Schreiben in die DB gedauert hat        	
