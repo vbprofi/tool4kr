@@ -75,19 +75,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Bemerkung.cs" />
-    <Compile Include="Ausgabe.cs" />
-    <Compile Include="Abo.cs" />
-    <Compile Include="DBContextInitializer.cs" />
-    <Compile Include="Rechnungsposten.cs" />
-    <Compile Include="Rechnung.cs" />
-    <Compile Include="DatabaseContext.cs" />
-    <Compile Include="Kunden.cs" />
-    <Compile Include="SQLiteConfiguration.cs" />
+    <Compile Include="DBTables\Abo.cs" />
+    <Compile Include="DBTables\Ausgabe.cs" />
+    <Compile Include="DBTables\Bemerkung.cs" />
+    <Compile Include="DBTables\kunden.cs" />
+    <Compile Include="DBTables\Rechnung.cs" />
+    <Compile Include="DBTables\Rechnungsposten.cs" />
+    <Compile Include="DBTables\Status.cs" />
+    <Compile Include="modules\DatabaseContext.cs" />
+    <Compile Include="modules\DBContextInitializer.cs" />
+    <Compile Include="modules\SQLiteConfiguration.cs" />
+    <Compile Include="oldfiles\old_database_test.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="old_database_test.cs" />
-    <Compile Include="Status.cs" />
     <Compile Include="util\CounterStopWatch.cs" />
   </ItemGroup>
   <ItemGroup>
