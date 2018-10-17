@@ -1,0 +1,597 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="testModel.Store" Alias="Self" Provider="System.Data.SQLite" ProviderManifestToken="ISO8601" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2006/04/edm/ssdl">
+        <EntityContainer Name="testModelStoreContainer">
+          <EntitySet Name="abo" EntityType="testModel.Store.abo" store:Type="Tables" />
+          <EntitySet Name="ausgabe" EntityType="testModel.Store.ausgabe" store:Type="Tables" />
+          <EntitySet Name="bemerkung" EntityType="testModel.Store.bemerkung" store:Type="Tables" />
+          <EntitySet Name="kunden" EntityType="testModel.Store.kunden" store:Type="Tables" />
+          <EntitySet Name="rechnung" EntityType="testModel.Store.rechnung" store:Type="Tables" />
+          <EntitySet Name="rechnungsposten" EntityType="testModel.Store.rechnungsposten" store:Type="Tables" />
+          <EntitySet Name="status" EntityType="testModel.Store.status" store:Type="Tables" />
+          <AssociationSet Name="FK_abo_0" Association="testModel.Store.FK_abo_0">
+            <End Role="bemerkung" EntitySet="bemerkung" />
+            <End Role="abo" EntitySet="abo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_bemerkung_0" Association="testModel.Store.FK_bemerkung_0">
+            <End Role="kunden" EntitySet="kunden" />
+            <End Role="bemerkung" EntitySet="bemerkung" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rechnungsposten_0" Association="testModel.Store.FK_rechnungsposten_0">
+            <End Role="kunden" EntitySet="kunden" />
+            <End Role="rechnungsposten" EntitySet="rechnungsposten" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rechnungsposten_1" Association="testModel.Store.FK_rechnungsposten_1">
+            <End Role="rechnung" EntitySet="rechnung" />
+            <End Role="rechnungsposten" EntitySet="rechnungsposten" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rechnungsposten_2" Association="testModel.Store.FK_rechnungsposten_2">
+            <End Role="abo" EntitySet="abo" />
+            <End Role="rechnungsposten" EntitySet="rechnungsposten" />
+          </AssociationSet>
+          <AssociationSet Name="FK_status_0" Association="testModel.Store.FK_status_0">
+            <End Role="kunden" EntitySet="kunden" />
+            <End Role="status" EntitySet="status" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="abo">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="integer" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ausgabe_von" Type="integer" Nullable="false" />
+          <Property Name="ausgabe_bis" Type="integer" Nullable="false" />
+          <Property Name="bezahlt_am" Type="integer" Nullable="false" />
+          <Property Name="bezahlt_von" Type="integer" Nullable="false" />
+          <Property Name="bezahlt_bis" Type="integer" Nullable="false" />
+          <Property Name="bemerkung_id" Type="integer" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ausgabe">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="integer" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ausgabe" Type="integer" Nullable="false" />
+          <Property Name="preis" Type="decimal" Nullable="false" Precision="53" />
+          <Property Name="datum" Type="integer" Nullable="false" />
+        </EntityType>
+        <EntityType Name="bemerkung">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="integer" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="text" Type="nvarchar" Nullable="false" />
+          <Property Name="datum" Type="integer" Nullable="false" />
+          <Property Name="kunden_id" Type="integer" Nullable="false" />
+        </EntityType>
+        <EntityType Name="kunden">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="integer" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="firma" Type="nvarchar" Nullable="false" />
+          <Property Name="vorname" Type="nvarchar" Nullable="false" />
+          <Property Name="nachname" Type="nvarchar" Nullable="false" />
+          <Property Name="straße" Type="nvarchar" Nullable="false" />
+          <Property Name="hausnr" Type="nvarchar" Nullable="false" />
+          <Property Name="plz" Type="integer" Nullable="false" />
+          <Property Name="postfach" Type="nvarchar" Nullable="false" />
+          <Property Name="ort" Type="nvarchar" Nullable="false" />
+          <Property Name="land" Type="nvarchar" Nullable="false" />
+          <Property Name="telefon" Type="nvarchar" Nullable="false" />
+          <Property Name="fax" Type="nvarchar" Nullable="false" />
+          <Property Name="email" Type="nvarchar" Nullable="false" />
+          <Property Name="active" Type="integer" Nullable="false" />
+          <Property Name="bemerkung_id" Type="integer" Nullable="false" />
+          <Property Name="erstellt_am" Type="integer" Nullable="false" />
+          <Property Name="geändert_am" Type="integer" Nullable="false" />
+          <Property Name="status_id" Type="integer" Nullable="false" />
+        </EntityType>
+        <EntityType Name="rechnung">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="integer" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="kunden_id" Type="integer" Nullable="false" />
+          <Property Name="firma" Type="nvarchar" Nullable="false" />
+          <Property Name="vorname" Type="nvarchar" Nullable="false" />
+          <Property Name="nachname" Type="nvarchar" Nullable="false" />
+          <Property Name="straße" Type="nvarchar" Nullable="false" />
+          <Property Name="hausnr" Type="nvarchar" Nullable="false" />
+          <Property Name="plz" Type="integer" Nullable="false" />
+          <Property Name="postfach" Type="nvarchar" Nullable="false" />
+          <Property Name="ort" Type="nvarchar" Nullable="false" />
+          <Property Name="land" Type="nvarchar" Nullable="false" />
+          <Property Name="telefon" Type="nvarchar" Nullable="false" />
+          <Property Name="fax" Type="nvarchar" Nullable="false" />
+          <Property Name="email" Type="nvarchar" Nullable="false" />
+          <Property Name="bemerkung_id" Type="integer" Nullable="false" />
+          <Property Name="erstellt_am" Type="integer" Nullable="false" />
+          <Property Name="gesendet_am" Type="integer" Nullable="false" />
+        </EntityType>
+        <EntityType Name="rechnungsposten">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="integer" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="kunden_id" Type="integer" Nullable="false" />
+          <Property Name="rechnung_id" Type="integer" Nullable="false" />
+          <Property Name="anzahl" Type="integer" Nullable="false" />
+          <Property Name="abo_id" Type="integer" Nullable="false" />
+          <Property Name="kontonr" Type="integer" Nullable="false" />
+          <Property Name="blz" Type="integer" Nullable="false" />
+          <Property Name="iban" Type="nvarchar" Nullable="false" />
+          <Property Name="institut" Type="nvarchar" Nullable="false" />
+          <Property Name="kontoinhaber" Type="nvarchar" Nullable="false" />
+          <Property Name="erstellt_am" Type="integer" Nullable="false" />
+          <Property Name="bemerkung_id" Type="integer" Nullable="false" />
+        </EntityType>
+        <EntityType Name="status">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="integer" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="eintritt_am" Type="integer" Nullable="false" />
+          <Property Name="austritt_am" Type="integer" Nullable="false" />
+          <Property Name="flag" Type="integer" Nullable="false" />
+          <Property Name="kunden_id" Type="integer" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_abo_0">
+          <End Role="bemerkung" Type="testModel.Store.bemerkung" Multiplicity="1" />
+          <End Role="abo" Type="testModel.Store.abo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="bemerkung">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="abo">
+              <PropertyRef Name="bemerkung_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_bemerkung_0">
+          <End Role="kunden" Type="testModel.Store.kunden" Multiplicity="1" />
+          <End Role="bemerkung" Type="testModel.Store.bemerkung" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="kunden">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="bemerkung">
+              <PropertyRef Name="kunden_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rechnungsposten_0">
+          <End Role="kunden" Type="testModel.Store.kunden" Multiplicity="1" />
+          <End Role="rechnungsposten" Type="testModel.Store.rechnungsposten" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="kunden">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="rechnungsposten">
+              <PropertyRef Name="kunden_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rechnungsposten_1">
+          <End Role="rechnung" Type="testModel.Store.rechnung" Multiplicity="1" />
+          <End Role="rechnungsposten" Type="testModel.Store.rechnungsposten" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="rechnung">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="rechnungsposten">
+              <PropertyRef Name="rechnung_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_rechnungsposten_2">
+          <End Role="abo" Type="testModel.Store.abo" Multiplicity="1" />
+          <End Role="rechnungsposten" Type="testModel.Store.rechnungsposten" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="abo">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="rechnungsposten">
+              <PropertyRef Name="abo_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_status_0">
+          <End Role="kunden" Type="testModel.Store.kunden" Multiplicity="1" />
+          <End Role="status" Type="testModel.Store.status" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="kunden">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="status">
+              <PropertyRef Name="kunden_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="testModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2006/04/edm">
+        <EntityContainer Name="DBVerbindung">
+          <EntitySet Name="abo" EntityType="testModel.abo" />
+          <EntitySet Name="ausgabe" EntityType="testModel.ausgabe" />
+          <EntitySet Name="bemerkung" EntityType="testModel.bemerkung" />
+          <EntitySet Name="kunden" EntityType="testModel.kunden" />
+          <EntitySet Name="rechnung" EntityType="testModel.rechnung" />
+          <EntitySet Name="rechnungsposten" EntityType="testModel.rechnungsposten" />
+          <EntitySet Name="status" EntityType="testModel.status" />
+          <AssociationSet Name="FK_abo_0" Association="testModel.FK_abo_0">
+            <End Role="bemerkung" EntitySet="bemerkung" />
+            <End Role="abo" EntitySet="abo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rechnungsposten_2" Association="testModel.FK_rechnungsposten_2">
+            <End Role="abo" EntitySet="abo" />
+            <End Role="rechnungsposten" EntitySet="rechnungsposten" />
+          </AssociationSet>
+          <AssociationSet Name="FK_bemerkung_0" Association="testModel.FK_bemerkung_0">
+            <End Role="kunden" EntitySet="kunden" />
+            <End Role="bemerkung" EntitySet="bemerkung" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rechnungsposten_0" Association="testModel.FK_rechnungsposten_0">
+            <End Role="kunden" EntitySet="kunden" />
+            <End Role="rechnungsposten" EntitySet="rechnungsposten" />
+          </AssociationSet>
+          <AssociationSet Name="FK_status_0" Association="testModel.FK_status_0">
+            <End Role="kunden" EntitySet="kunden" />
+            <End Role="status" EntitySet="status" />
+          </AssociationSet>
+          <AssociationSet Name="FK_rechnungsposten_1" Association="testModel.FK_rechnungsposten_1">
+            <End Role="rechnung" EntitySet="rechnung" />
+            <End Role="rechnungsposten" EntitySet="rechnungsposten" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="abo">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ausgabe_von" Type="Int64" Nullable="false" />
+          <Property Name="ausgabe_bis" Type="Int64" Nullable="false" />
+          <Property Name="bezahlt_am" Type="Int64" Nullable="false" />
+          <Property Name="bezahlt_von" Type="Int64" Nullable="false" />
+          <Property Name="bezahlt_bis" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="bemerkung" Relationship="testModel.FK_abo_0" FromRole="abo" ToRole="bemerkung" />
+          <NavigationProperty Name="rechnungsposten" Relationship="testModel.FK_rechnungsposten_2" FromRole="abo" ToRole="rechnungsposten" />
+        </EntityType>
+        <EntityType Name="ausgabe">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ausgabe1" Type="Int64" Nullable="false" />
+          <Property Name="preis" Type="Decimal" Nullable="false" Precision="53" Scale="0" />
+          <Property Name="datum" Type="Int64" Nullable="false" />
+        </EntityType>
+        <EntityType Name="bemerkung">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="text" Type="String" Nullable="false" MaxLength="2147483647" Unicode="true" FixedLength="false" />
+          <Property Name="datum" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="abo" Relationship="testModel.FK_abo_0" FromRole="bemerkung" ToRole="abo" />
+          <NavigationProperty Name="kunden" Relationship="testModel.FK_bemerkung_0" FromRole="bemerkung" ToRole="kunden" />
+        </EntityType>
+        <EntityType Name="kunden">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="firma" Type="String" Nullable="false" MaxLength="2147483647" Unicode="true" FixedLength="false" />
+          <Property Name="vorname" Type="String" Nullable="false" MaxLength="2147483647" Unicode="true" FixedLength="false" />
+          <Property Name="nachname" Type="String" Nullable="false" MaxLength="2147483647" Unicode="true" FixedLength="false" />
+          <Property Name="straße" Type="String" Nullable="false" MaxLength="2147483647" Unicode="true" FixedLength="false" />
+          <Property Name="hausnr" Type="String" Nullable="false" MaxLength="2147483647" Unicode="true" FixedLength="false" />
+          <Property Name="plz" Type="Int64" Nullable="false" />
+          <Property Name="postfach" Type="String" Nullable="false" MaxLength="2147483647" Unicode="true" FixedLength="false" />
+          <Property Name="ort" Type="String" Nullable="false" MaxLength="2147483647" Unicode="true" FixedLength="false" />
+          <Property Name="land" Type="String" Nullable="false" MaxLength="2147483647" Unicode="true" FixedLength="false" />
+          <Property Name="telefon" Type="String" Nullable="false" MaxLength="2147483647" Unicode="true" FixedLength="false" />
+          <Property Name="fax" Type="String" Nullable="false" MaxLength="2147483647" Unicode="true" FixedLength="false" />
+          <Property Name="email" Type="String" Nullable="false" MaxLength="2147483647" Unicode="true" FixedLength="false" />
+          <Property Name="active" Type="Int64" Nullable="false" />
+          <Property Name="bemerkung_id" Type="Int64" Nullable="false" />
+          <Property Name="erstellt_am" Type="Int64" Nullable="false" />
+          <Property Name="geändert_am" Type="Int64" Nullable="false" />
+          <Property Name="status_id" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="bemerkung" Relationship="testModel.FK_bemerkung_0" FromRole="kunden" ToRole="bemerkung" />
+          <NavigationProperty Name="rechnungsposten" Relationship="testModel.FK_rechnungsposten_0" FromRole="kunden" ToRole="rechnungsposten" />
+          <NavigationProperty Name="status" Relationship="testModel.FK_status_0" FromRole="kunden" ToRole="status" />
+        </EntityType>
+        <EntityType Name="rechnung">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="kunden_id" Type="Int64" Nullable="false" />
+          <Property Name="firma" Type="String" Nullable="false" MaxLength="2147483647" Unicode="true" FixedLength="false" />
+          <Property Name="vorname" Type="String" Nullable="false" MaxLength="2147483647" Unicode="true" FixedLength="false" />
+          <Property Name="nachname" Type="String" Nullable="false" MaxLength="2147483647" Unicode="true" FixedLength="false" />
+          <Property Name="straße" Type="String" Nullable="false" MaxLength="2147483647" Unicode="true" FixedLength="false" />
+          <Property Name="hausnr" Type="String" Nullable="false" MaxLength="2147483647" Unicode="true" FixedLength="false" />
+          <Property Name="plz" Type="Int64" Nullable="false" />
+          <Property Name="postfach" Type="String" Nullable="false" MaxLength="2147483647" Unicode="true" FixedLength="false" />
+          <Property Name="ort" Type="String" Nullable="false" MaxLength="2147483647" Unicode="true" FixedLength="false" />
+          <Property Name="land" Type="String" Nullable="false" MaxLength="2147483647" Unicode="true" FixedLength="false" />
+          <Property Name="telefon" Type="String" Nullable="false" MaxLength="2147483647" Unicode="true" FixedLength="false" />
+          <Property Name="fax" Type="String" Nullable="false" MaxLength="2147483647" Unicode="true" FixedLength="false" />
+          <Property Name="email" Type="String" Nullable="false" MaxLength="2147483647" Unicode="true" FixedLength="false" />
+          <Property Name="bemerkung_id" Type="Int64" Nullable="false" />
+          <Property Name="erstellt_am" Type="Int64" Nullable="false" />
+          <Property Name="gesendet_am" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="rechnungsposten" Relationship="testModel.FK_rechnungsposten_1" FromRole="rechnung" ToRole="rechnungsposten" />
+        </EntityType>
+        <EntityType Name="rechnungsposten">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="anzahl" Type="Int64" Nullable="false" />
+          <Property Name="kontonr" Type="Int64" Nullable="false" />
+          <Property Name="blz" Type="Int64" Nullable="false" />
+          <Property Name="iban" Type="String" Nullable="false" MaxLength="2147483647" Unicode="true" FixedLength="false" />
+          <Property Name="institut" Type="String" Nullable="false" MaxLength="2147483647" Unicode="true" FixedLength="false" />
+          <Property Name="kontoinhaber" Type="String" Nullable="false" MaxLength="2147483647" Unicode="true" FixedLength="false" />
+          <Property Name="erstellt_am" Type="Int64" Nullable="false" />
+          <Property Name="bemerkung_id" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="abo" Relationship="testModel.FK_rechnungsposten_2" FromRole="rechnungsposten" ToRole="abo" />
+          <NavigationProperty Name="kunden" Relationship="testModel.FK_rechnungsposten_0" FromRole="rechnungsposten" ToRole="kunden" />
+          <NavigationProperty Name="rechnung" Relationship="testModel.FK_rechnungsposten_1" FromRole="rechnungsposten" ToRole="rechnung" />
+        </EntityType>
+        <EntityType Name="status">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="eintritt_am" Type="Int64" Nullable="false" />
+          <Property Name="austritt_am" Type="Int64" Nullable="false" />
+          <Property Name="flag" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="kunden" Relationship="testModel.FK_status_0" FromRole="status" ToRole="kunden" />
+        </EntityType>
+        <Association Name="FK_abo_0">
+          <End Role="bemerkung" Type="testModel.bemerkung" Multiplicity="1" />
+          <End Role="abo" Type="testModel.abo" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_rechnungsposten_2">
+          <End Role="abo" Type="testModel.abo" Multiplicity="1" />
+          <End Role="rechnungsposten" Type="testModel.rechnungsposten" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_bemerkung_0">
+          <End Role="kunden" Type="testModel.kunden" Multiplicity="1" />
+          <End Role="bemerkung" Type="testModel.bemerkung" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_rechnungsposten_0">
+          <End Role="kunden" Type="testModel.kunden" Multiplicity="1" />
+          <End Role="rechnungsposten" Type="testModel.rechnungsposten" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_status_0">
+          <End Role="kunden" Type="testModel.kunden" Multiplicity="1" />
+          <End Role="status" Type="testModel.status" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_rechnungsposten_1">
+          <End Role="rechnung" Type="testModel.rechnung" Multiplicity="1" />
+          <End Role="rechnungsposten" Type="testModel.rechnungsposten" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="urn:schemas-microsoft-com:windows:storage:mapping:CS">
+        <EntityContainerMapping StorageEntityContainer="testModelStoreContainer" CdmEntityContainer="DBVerbindung">
+          <EntitySetMapping Name="abo">
+            <EntityTypeMapping TypeName="testModel.abo">
+              <MappingFragment StoreEntitySet="abo">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="ausgabe_von" ColumnName="ausgabe_von" />
+                <ScalarProperty Name="ausgabe_bis" ColumnName="ausgabe_bis" />
+                <ScalarProperty Name="bezahlt_am" ColumnName="bezahlt_am" />
+                <ScalarProperty Name="bezahlt_von" ColumnName="bezahlt_von" />
+                <ScalarProperty Name="bezahlt_bis" ColumnName="bezahlt_bis" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ausgabe">
+            <EntityTypeMapping TypeName="testModel.ausgabe">
+              <MappingFragment StoreEntitySet="ausgabe">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="ausgabe1" ColumnName="ausgabe" />
+                <ScalarProperty Name="preis" ColumnName="preis" />
+                <ScalarProperty Name="datum" ColumnName="datum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="bemerkung">
+            <EntityTypeMapping TypeName="testModel.bemerkung">
+              <MappingFragment StoreEntitySet="bemerkung">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="text" ColumnName="text" />
+                <ScalarProperty Name="datum" ColumnName="datum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="kunden">
+            <EntityTypeMapping TypeName="testModel.kunden">
+              <MappingFragment StoreEntitySet="kunden">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="firma" ColumnName="firma" />
+                <ScalarProperty Name="vorname" ColumnName="vorname" />
+                <ScalarProperty Name="nachname" ColumnName="nachname" />
+                <ScalarProperty Name="straße" ColumnName="straße" />
+                <ScalarProperty Name="hausnr" ColumnName="hausnr" />
+                <ScalarProperty Name="plz" ColumnName="plz" />
+                <ScalarProperty Name="postfach" ColumnName="postfach" />
+                <ScalarProperty Name="ort" ColumnName="ort" />
+                <ScalarProperty Name="land" ColumnName="land" />
+                <ScalarProperty Name="telefon" ColumnName="telefon" />
+                <ScalarProperty Name="fax" ColumnName="fax" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="active" ColumnName="active" />
+                <ScalarProperty Name="bemerkung_id" ColumnName="bemerkung_id" />
+                <ScalarProperty Name="erstellt_am" ColumnName="erstellt_am" />
+                <ScalarProperty Name="geändert_am" ColumnName="geändert_am" />
+                <ScalarProperty Name="status_id" ColumnName="status_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="rechnung">
+            <EntityTypeMapping TypeName="testModel.rechnung">
+              <MappingFragment StoreEntitySet="rechnung">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="kunden_id" ColumnName="kunden_id" />
+                <ScalarProperty Name="firma" ColumnName="firma" />
+                <ScalarProperty Name="vorname" ColumnName="vorname" />
+                <ScalarProperty Name="nachname" ColumnName="nachname" />
+                <ScalarProperty Name="straße" ColumnName="straße" />
+                <ScalarProperty Name="hausnr" ColumnName="hausnr" />
+                <ScalarProperty Name="plz" ColumnName="plz" />
+                <ScalarProperty Name="postfach" ColumnName="postfach" />
+                <ScalarProperty Name="ort" ColumnName="ort" />
+                <ScalarProperty Name="land" ColumnName="land" />
+                <ScalarProperty Name="telefon" ColumnName="telefon" />
+                <ScalarProperty Name="fax" ColumnName="fax" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="bemerkung_id" ColumnName="bemerkung_id" />
+                <ScalarProperty Name="erstellt_am" ColumnName="erstellt_am" />
+                <ScalarProperty Name="gesendet_am" ColumnName="gesendet_am" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="rechnungsposten">
+            <EntityTypeMapping TypeName="testModel.rechnungsposten">
+              <MappingFragment StoreEntitySet="rechnungsposten">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="anzahl" ColumnName="anzahl" />
+                <ScalarProperty Name="kontonr" ColumnName="kontonr" />
+                <ScalarProperty Name="blz" ColumnName="blz" />
+                <ScalarProperty Name="iban" ColumnName="iban" />
+                <ScalarProperty Name="institut" ColumnName="institut" />
+                <ScalarProperty Name="kontoinhaber" ColumnName="kontoinhaber" />
+                <ScalarProperty Name="erstellt_am" ColumnName="erstellt_am" />
+                <ScalarProperty Name="bemerkung_id" ColumnName="bemerkung_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="status">
+            <EntityTypeMapping TypeName="testModel.status">
+              <MappingFragment StoreEntitySet="status">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="eintritt_am" ColumnName="eintritt_am" />
+                <ScalarProperty Name="austritt_am" ColumnName="austritt_am" />
+                <ScalarProperty Name="flag" ColumnName="flag" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="FK_abo_0" TypeName="testModel.FK_abo_0" StoreEntitySet="abo">
+            <EndProperty Name="bemerkung">
+              <ScalarProperty Name="id" ColumnName="bemerkung_id" />
+            </EndProperty>
+            <EndProperty Name="abo">
+              <ScalarProperty Name="id" ColumnName="id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_rechnungsposten_2" TypeName="testModel.FK_rechnungsposten_2" StoreEntitySet="rechnungsposten">
+            <EndProperty Name="abo">
+              <ScalarProperty Name="id" ColumnName="abo_id" />
+            </EndProperty>
+            <EndProperty Name="rechnungsposten">
+              <ScalarProperty Name="id" ColumnName="id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_bemerkung_0" TypeName="testModel.FK_bemerkung_0" StoreEntitySet="bemerkung">
+            <EndProperty Name="kunden">
+              <ScalarProperty Name="id" ColumnName="kunden_id" />
+            </EndProperty>
+            <EndProperty Name="bemerkung">
+              <ScalarProperty Name="id" ColumnName="id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_rechnungsposten_0" TypeName="testModel.FK_rechnungsposten_0" StoreEntitySet="rechnungsposten">
+            <EndProperty Name="kunden">
+              <ScalarProperty Name="id" ColumnName="kunden_id" />
+            </EndProperty>
+            <EndProperty Name="rechnungsposten">
+              <ScalarProperty Name="id" ColumnName="id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_status_0" TypeName="testModel.FK_status_0" StoreEntitySet="status">
+            <EndProperty Name="kunden">
+              <ScalarProperty Name="id" ColumnName="kunden_id" />
+            </EndProperty>
+            <EndProperty Name="status">
+              <ScalarProperty Name="id" ColumnName="id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_rechnungsposten_1" TypeName="testModel.FK_rechnungsposten_1" StoreEntitySet="rechnungsposten">
+            <EndProperty Name="rechnung">
+              <ScalarProperty Name="id" ColumnName="rechnung_id" />
+            </EndProperty>
+            <EndProperty Name="rechnungsposten">
+              <ScalarProperty Name="id" ColumnName="id" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2007/06/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="False" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="Model" ZoomLevel="62">
+        <EntityTypeShape EntityType="testModel.abo" Width="1.5" PointX="5.25" PointY="1.5" Height="2.5571907552083335" IsExpanded="true" />
+        <EntityTypeShape EntityType="testModel.ausgabe" Width="1.5" PointX="0.75" PointY="7.75" Height="1.7879850260416674" IsExpanded="true" />
+        <EntityTypeShape EntityType="testModel.bemerkung" Width="1.5" PointX="3" PointY="1.75" Height="1.9802864583333326" IsExpanded="true" />
+        <EntityTypeShape EntityType="testModel.kunden" Width="1.5" PointX="1.25" PointY="1.375" Height="5.057109375" IsExpanded="true" />
+        <EntityTypeShape EntityType="testModel.rechnung" Width="1.5" PointX="5.25" PointY="4.875" Height="4.4802050781250031" IsExpanded="true" />
+        <EntityTypeShape EntityType="testModel.rechnungsposten" Width="1.5" PointX="7.5" PointY="2.375" Height="3.3263964843749996" IsExpanded="true" />
+        <EntityTypeShape EntityType="testModel.status" Width="1.5" PointX="3" PointY="4.875" Height="1.9802864583333317" IsExpanded="true" />
+        <AssociationConnector Association="testModel.FK_abo_0" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.5" PointY="2.7401432291666663" />
+          <ConnectorPoint PointX="5.25" PointY="2.7401432291666663" />
+        </AssociationConnector>
+        <AssociationConnector Association="testModel.FK_rechnungsposten_2" ManuallyRouted="false">
+          <ConnectorPoint PointX="6.75" PointY="3.2160953776041667" />
+          <ConnectorPoint PointX="7.5" PointY="3.2160953776041667" />
+        </AssociationConnector>
+        <AssociationConnector Association="testModel.FK_bemerkung_0" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.75" PointY="2.7401432291666663" />
+          <ConnectorPoint PointX="3" PointY="2.7401432291666663" />
+        </AssociationConnector>
+        <AssociationConnector Association="testModel.FK_rechnungsposten_0" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.75" PointY="4.4660953776041667" />
+          <ConnectorPoint PointX="7.5" PointY="4.4660953776041667" />
+        </AssociationConnector>
+        <AssociationConnector Association="testModel.FK_status_0" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.75" PointY="5.6535546875" />
+          <ConnectorPoint PointX="3" PointY="5.6535546875" />
+        </AssociationConnector>
+        <AssociationConnector Association="testModel.FK_rechnungsposten_1" ManuallyRouted="false">
+          <ConnectorPoint PointX="6.75" PointY="5.2881982421875" />
+          <ConnectorPoint PointX="7.5" PointY="5.2881982421875" />
+        </AssociationConnector>
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>
