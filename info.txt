@@ -19,3 +19,7 @@ http://pinvoke.net/default.aspx/wintrust/WinVerifyTrust.html
 SignatureCheck
 https://raw.githubusercontent.com/kg/shootblues/master/SignatureCheck.cs
 https://stackoverflow.com/questions/6596327/how-to-check-if-a-file-is-signed-in-c/6597017#6597017
+
+--------
+tutorial für autoupdater
+https://www.codeproject.com/Articles/731954/Simple-Auto-Update-Let-your-application-update-i
