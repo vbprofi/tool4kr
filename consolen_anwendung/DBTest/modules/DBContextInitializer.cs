@@ -18,149 +18,182 @@ using System.ComponentModel.DataAnnotations;
 
 namespace DBTest
 {
-    class DBContextInitializer :        CreateDatabaseIfNotExists<DatabaseContext>
+    class DBContextInitializer : CreateDatabaseIfNotExists<DatabaseContext>
     {
 
         public DBContextInitializer()
         {
-            DatabaseContext context = new DatabaseContext();
-            /***
+
+            createTBKunde();
+            createTBAusgabe();
+            createTBRechnung();
+            createTBBemerkung();
+            createTBAbo();
+            createTBStatus();
+            createTBRechnungsposten();
+        }
+
+        protected override void Seed(DatabaseContext context)
+        {
+            context.SaveChanges();
+        }
+
+        /***
              * Tabelle Kunden
              ****/
-            context.Database.ExecuteSqlCommand("CREATE TABLE IF NOT EXISTS kunden("+
-                   "id integer NOT NULL PRIMARY KEY AUTOINCREMENT,"+
-  "firma text NOT NULL,"+
-  "vorname text NOT NULL,"+
-  "nachname text NOT NULL,"+
-  "straße text NOT NULL,"+
-  "hausnr text NOT NULL,"+
-  "plz integer NOT NULL,"+
-  "postfach text NOT NULL,"+
-  "ort text NOT NULL,"+
-  "land text NOT NULL,"+
-  "telefon text NOT NULL,"+
-  "fax text NOT NULL,"+
-  "email text NOT NULL,"+
-  "active integer NOT NULL,"+
-  "bemerkung_id integer NOT NULL,"+
-  "erstellt_am integer NOT NULL,"+
-  "geändert_am integer NOT NULL,"+
-  "status_id integer NOT NULL"+
+        private void createTBKunde()
+        {
+            DatabaseContext context = new DatabaseContext();
+
+            context.Database.ExecuteSqlCommand("CREATE TABLE IF NOT EXISTS kunden(" +
+                   "id integer NOT NULL PRIMARY KEY AUTOINCREMENT," +
+  "firma text NOT NULL," +
+  "vorname text NOT NULL," +
+  "nachname text NOT NULL," +
+  "straße text NOT NULL," +
+  "hausnr text NOT NULL," +
+  "plz integer NOT NULL," +
+  "postfach text NOT NULL," +
+  "ort text NOT NULL," +
+  "land text NOT NULL," +
+  "telefon text NOT NULL," +
+  "fax text NOT NULL," +
+  "email text NOT NULL," +
+  "active integer NOT NULL," +
+  "bemerkung_id integer NOT NULL," +
+  "erstellt_am integer NOT NULL," +
+  "geändert_am integer NOT NULL," +
+  "status_id integer NOT NULL" +
                 ")");
 
             context.SaveChanges();
+        }
 
-
-            /***
+        /***
              * Tabelle ausgabe
              ****/
-            context.Database.ExecuteSqlCommand("CREATE TABLE IF NOT EXISTS ausgabe("+
-                  "id integer NOT NULL PRIMARY KEY AUTOINCREMENT,"+
-  "ausgabe integer NOT NULL,"+
-  "preis numeric NOT NULL,"+
-  "datum integer NOT NULL"+
+        private void createTBAusgabe()
+        {
+            DatabaseContext context = new DatabaseContext();
+            context.Database.ExecuteSqlCommand("CREATE TABLE IF NOT EXISTS ausgabe(" +
+                  "id integer NOT NULL PRIMARY KEY AUTOINCREMENT," +
+  "ausgabe integer NOT NULL," +
+  "preis numeric NOT NULL," +
+  "datum integer NOT NULL" +
                 ")");
 
-                context.SaveChanges();
+            context.SaveChanges();
+        }
 
-
-            /***
-             * Tabelle rechnung
-             ****/
-            context.Database.ExecuteSqlCommand("CREATE TABLE IF NOT EXISTS rechnung("+
-                  "id integer NOT NULL PRIMARY KEY AUTOINCREMENT,"+
-                    "kunden_id integer NOT NULL,"+
-  "firma text NOT NULL,"+
-  "vorname text NOT NULL,"+
-  "nachname text NOT NULL,"+
-  "straße text NOT NULL,"+
-  "hausnr text NOT NULL,"+
-  "plz integer NOT NULL,"+
-  "postfach text NOT NULL,"+
-  "ort text NOT NULL,"+
-  "land text NOT NULL,"+
-  "telefon text NOT NULL,"+
-  "fax text NOT NULL,"+
-  "email text NOT NULL,"+
-  "bemerkung_id integer NOT NULL,"+
-  "erstellt_am integer NOT NULL,"+
-  "gesendet_am integer NOT NULL"+
+        /***
+ * Tabelle rechnung
+ ****/
+        private void createTBRechnung()
+        {
+            DatabaseContext context = new DatabaseContext();
+            context.Database.ExecuteSqlCommand("CREATE TABLE IF NOT EXISTS rechnung(" +
+                  "id integer NOT NULL PRIMARY KEY AUTOINCREMENT," +
+                    "kunden_id integer NOT NULL," +
+  "firma text NOT NULL," +
+  "vorname text NOT NULL," +
+  "nachname text NOT NULL," +
+  "straße text NOT NULL," +
+  "hausnr text NOT NULL," +
+  "plz integer NOT NULL," +
+  "postfach text NOT NULL," +
+  "ort text NOT NULL," +
+  "land text NOT NULL," +
+  "telefon text NOT NULL," +
+  "fax text NOT NULL," +
+  "email text NOT NULL," +
+  "bemerkung_id integer NOT NULL," +
+  "erstellt_am integer NOT NULL," +
+  "gesendet_am integer NOT NULL" +
             ")");
 
-                context.SaveChanges();
+            context.SaveChanges();
+        }
 
-            /***
-             * Tabelle bemerkung
-             ****/
-            context.Database.ExecuteSqlCommand("CREATE TABLE IF NOT EXISTS bemerkung("+
-                  "id integer NOT NULL PRIMARY KEY AUTOINCREMENT,"+
-                    "text text NOT NULL,"+
-  "datum integer NOT NULL,"+
-  "kunden_id integer NOT NULL,"+
-  "FOREIGN KEY (kunden_id) REFERENCES kunden (id)"+
+        /***
+         * Tabelle bemerkung
+         ****/
+        private void createTBBemerkung()
+        {
+            DatabaseContext context = new DatabaseContext();
+            context.Database.ExecuteSqlCommand("CREATE TABLE IF NOT EXISTS bemerkung(" +
+                  "id integer NOT NULL PRIMARY KEY AUTOINCREMENT," +
+                    "text text NOT NULL," +
+  "datum integer NOT NULL," +
+  "kunden_id integer NOT NULL," +
+  "FOREIGN KEY (kunden_id) REFERENCES kunden (id)" +
                   ")");
 
-                context.SaveChanges();
+            context.SaveChanges();
+        }
 
-                        /***
-             * Tabelle abo
-             ****/
-            context.Database.ExecuteSqlCommand("CREATE TABLE IF NOT EXISTS abo("+
-                  "id integer NOT NULL PRIMARY KEY AUTOINCREMENT,"+
-                    "ausgabe_von integer NOT NULL,"+
-  "ausgabe_bis integer NOT NULL,"+
-  "bezahlt_am integer NOT NULL,"+
-  "bezahlt_von integer NOT NULL,"+
-  "bezahlt_bis integer NOT NULL,"+
-  "bemerkung_id integer NOT NULL,"+
-"  FOREIGN KEY (bemerkung_id) REFERENCES bemerkung (id)"+
+        /***
+* Tabelle abo
+****/
+        private void createTBAbo()
+        {
+            DatabaseContext context = new DatabaseContext();
+            context.Database.ExecuteSqlCommand("CREATE TABLE IF NOT EXISTS abo(" +
+                  "id integer NOT NULL PRIMARY KEY AUTOINCREMENT," +
+                    "ausgabe_von integer NOT NULL," +
+  "ausgabe_bis integer NOT NULL," +
+  "bezahlt_am integer NOT NULL," +
+  "bezahlt_von integer NOT NULL," +
+  "bezahlt_bis integer NOT NULL," +
+  "bemerkung_id integer NOT NULL," +
+"  FOREIGN KEY (bemerkung_id) REFERENCES bemerkung (id)" +
                   ")");
 
-                context.SaveChanges();
+            context.SaveChanges();
+        }
 
-
-            /***
+        /***
              * Tabelle status
              ****/
-            context.Database.ExecuteSqlCommand("CREATE TABLE IF NOT EXISTS status("+
-                  "id integer NOT NULL PRIMARY KEY AUTOINCREMENT,"+
-  "eintritt_am  integer NOT NULL,"+
-  "austritt_am integer NOT NULL,"+
-  "flag integer NOT NULL,"+
-  "kunden_id integer NOT NULL,"+
-  "FOREIGN KEY (kunden_id) REFERENCES kunden (id)"+
-            ")");
+        private void createTBStatus()
+        {
+            DatabaseContext context = new DatabaseContext();
+            context.Database.ExecuteSqlCommand("CREATE TABLE IF NOT EXISTS status(" +
+"id integer NOT NULL PRIMARY KEY AUTOINCREMENT," +
+"eintritt_am  integer NOT NULL," +
+"austritt_am integer NOT NULL," +
+"flag integer NOT NULL," +
+"kunden_id integer NOT NULL," +
+"FOREIGN KEY (kunden_id) REFERENCES kunden (id)" +
+")");
 
-                context.SaveChanges();
-                        
-            /***
-             * Tabelle rechnungsposten
-             ****/
-            context.Database.ExecuteSqlCommand("CREATE TABLE IF NOT EXISTS rechnungsposten("+
-                  "id integer NOT NULL PRIMARY KEY AUTOINCREMENT,"+
-                    "kunden_id integer NOT NULL,"+
-  "rechnung_id integer NOT NULL,"+
-  "anzahl integer NOT NULL,"+
-  "abo_id integer NOT NULL,"+
-  "kontonr integer NOT NULL,"+
-  "blz integer NOT NULL,"+
-  "iban text NOT NULL,"+
-  "institut text NOT NULL,"+
-  "kontoinhaber text NOT NULL,"+
-  "erstellt_am integer NOT NULL,"+
-  "bemerkung_id integer NOT NULL,"+
-  "FOREIGN KEY (abo_id) REFERENCES abo (id) ON DELETE CASCADE ON UPDATE NO ACTION,"+
-  "FOREIGN KEY (rechnung_id) REFERENCES rechnung (id) ON DELETE CASCADE ON UPDATE NO ACTION,"+
-  "FOREIGN KEY (kunden_id) REFERENCES kunden (id) ON DELETE CASCADE ON UPDATE NO ACTION"+
+            context.SaveChanges();
+        }
+
+        /***
+ * Tabelle rechnungsposten
+ ****/
+        private void createTBRechnungsposten()
+        {
+            DatabaseContext context = new DatabaseContext();
+            context.Database.ExecuteSqlCommand("CREATE TABLE IF NOT EXISTS rechnungsposten(" +
+                  "id integer NOT NULL PRIMARY KEY AUTOINCREMENT," +
+                    "kunden_id integer NOT NULL," +
+  "rechnung_id integer NOT NULL," +
+  "anzahl integer NOT NULL," +
+  "abo_id integer NOT NULL," +
+  "kontonr integer NOT NULL," +
+  "blz integer NOT NULL," +
+  "iban text NOT NULL," +
+  "institut text NOT NULL," +
+  "kontoinhaber text NOT NULL," +
+  "erstellt_am integer NOT NULL," +
+  "bemerkung_id integer NOT NULL," +
+  "FOREIGN KEY (abo_id) REFERENCES abo (id) ON DELETE CASCADE ON UPDATE NO ACTION," +
+  "FOREIGN KEY (rechnung_id) REFERENCES rechnung (id) ON DELETE CASCADE ON UPDATE NO ACTION," +
+  "FOREIGN KEY (kunden_id) REFERENCES kunden (id) ON DELETE CASCADE ON UPDATE NO ACTION" +
                   ")");
 
-                  context.SaveChanges();
+            context.SaveChanges();
         }
-
-            protected override void Seed(DatabaseContext context)
-        {
-                        context.SaveChanges();
-        }
-                
     }//end class
 }//end namespace
