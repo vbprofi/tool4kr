@@ -33,7 +33,7 @@ namespace DBTest
             getBINinfo(assemblyDirectory + @"\System.Data.SQLite.dll");
             //Datenbank erzeugen, falls nicht vorhanden
             Database.SetInitializer(new DBContextInitializer());
-                        //Datenbankobjekt erzeugen
+            //Datenbankobjekt erzeugen
             DatabaseContext context = new DatabaseContext();
             context.Configuration.AutoDetectChangesEnabled = false;
             context.Configuration.LazyLoadingEnabled = false;
@@ -41,17 +41,17 @@ namespace DBTest
             context.Configuration.UseDatabaseNullSemantics = false;
             context.Configuration.ProxyCreationEnabled = false;
             context.Configuration.EnsureTransactionsForFunctionsAndCommands = false;
-                        context.SaveChanges();
-                                    Console.WriteLine("Datenbankversion: " + context.Database.Connection.ServerVersion);
-            
+            context.SaveChanges();
+            Console.WriteLine("Datenbankversion: " + context.Database.Connection.ServerVersion);
+
             createSampleDataAllTables(context); //keine Änderung
             createSampleDataAllTables(context); //schneller geworden.
-                                                                                              //merke mit eingebautem Transactions keinen unterschied beim ersten Füllen. Beim zweiten gibts einen kleinen unterschied. kA, woran das liegt. (siehe funktion)
-                                                                                              //performance: https://codingsight.com/entity-framework-improving-performance-when-saving-data-to-database/
-                                                
+                                                //merke mit eingebautem Transactions keinen unterschied beim ersten Füllen. Beim zweiten gibts einen kleinen unterschied. kA, woran das liegt. (siehe funktion)
+                                                //performance: https://codingsight.com/entity-framework-improving-performance-when-saving-data-to-database/
+
             printTableData(context);
 
-                        //Beenden
+            //Beenden
             Console.Write("\nBitte return drücken, um die Anwendung zu beenden."); Console.ReadLine();
             //Signale ausgeben beim beenden
             Console.Beep(500, 200); Console.Beep(900, 200);
@@ -63,99 +63,99 @@ namespace DBTest
         private static void createSampleDataAllTables(DatabaseContext context)
         {
             using (var dbContextTransaction = context.Database.BeginTransaction())
-                {
-            //Stopuhr zur Zeit Messung erzeugen
-            CounterStopWatch watch = new CounterStopWatch();
-            watch.ResetAndStart(); //Stopuhr zurücksetzen auf 0 und starten
+            {
+                //Stopuhr zur Zeit Messung erzeugen
+                CounterStopWatch watch = new CounterStopWatch();
+                watch.ResetAndStart(); //Stopuhr zurücksetzen auf 0 und starten
 
-            Kunden kunde = setKunden("Firma", "Vorname", "Nachname", "Straße", "HausNR", 12345, "Ort", "Postfach", "Land", "Telefon", "Fax", "EMail"); //Tabelle Kunden füllen
-            //context.kunden.Include("b.bemerkung_id"); //Foreign-Key hinzufügen
-            context.kunden.Add(kunde); //Inhalte zur Tabelle hinzufügen
-                            watch++;
+                Kunden kunde = setKunden("Firma", "Vorname", "Nachname", "Straße", "HausNR", 12345, "Ort", "Postfach", "Land", "Telefon", "Fax", "EMail"); //Tabelle Kunden füllen
+                                                                                                                                                           //context.kunden.Include("b.bemerkung_id"); //Foreign-Key hinzufügen
+                context.kunden.Add(kunde); //Inhalte zur Tabelle hinzufügen
+                watch++;
 
-            Ausgabe ag = setAusgabe(199, Convert.ToDecimal("3,00")); //Tabelle ausgabe füllen
-            context.Ausgabe.Add(ag); //Inhalte zur Tabelle hinzufügen
-                            watch++;
-            
-            Rechnung rn = setRechnung("Firma", "Vorname", "Nachname", "Straße", "HausNR", 12345, "Ort", "Postfach", "Land", "Telefon", "Fax", "EMail", 0, 0); //Tabelle rechnung füllen
-            context.Rechnung.Add(rn); //Inhalte zur Tabelle hinzufügen
-                            watch++;
-            
-            Abo ab = setAbo(1, 1, 1, 1, 1, 1); //Tabelle abo füllen
-            context.Abo.Add(ab); //{mit foreign key} Inhalte zur Tabelle hinzufügen
-                            watch++;
-            
-            Bemerkung bm = setBemerkung("Txt", 1); //Tabelle bemerkung füllen
-                                                   //context.Bemerkung.Include("kunden_id"); //Foreign-Key hinzufügen
-            context.Bemerkung.Add(bm); //{mit foreign key} Inhalte zur Tabelle hinzufügen
-                            watch++;
-            
-            Rechnungsposten rp = setRechnungsposten(1, 1, 6, 1, 555555, 888888, "IBAN", "Institut", "KontoInhaber", 1); //Tabelle rechnungsposten füllen
-            context.Rechnungsposten.Add(rp); //{mit foreign key} Inhalte zur Tabelle hinzufügen
-                            watch++;
-            
-            Status state = setStatus(1, 1, 1, 1); //Tabelle status füllen
-            context.Status.Add(state); //{mit foreign key} Inhalte zur Tabelle hinzufügen
-            watch++;
+                Ausgabe ag = setAusgabe(199, Convert.ToDecimal("3,00")); //Tabelle ausgabe füllen
+                context.Ausgabe.Add(ag); //Inhalte zur Tabelle hinzufügen
+                watch++;
 
-                        //SQLite-db füllen
-                //context.SaveChanges(); //alle Änderungen in der DB-Datei speichern
+                Rechnung rn = setRechnung("Firma", "Vorname", "Nachname", "Straße", "HausNR", 12345, "Ort", "Postfach", "Land", "Telefon", "Fax", "EMail", 0, 0); //Tabelle rechnung füllen
+                context.Rechnung.Add(rn); //Inhalte zur Tabelle hinzufügen
+                watch++;
+
+                Abo ab = setAbo(1, 1, 1, 1, 1, 1); //Tabelle abo füllen
+                context.Abo.Add(ab); //{mit foreign key} Inhalte zur Tabelle hinzufügen
+                watch++;
+
+                Bemerkung bm = setBemerkung("Txt", 1); //Tabelle bemerkung füllen
+                                                       //context.Bemerkung.Include("kunden_id"); //Foreign-Key hinzufügen
+                context.Bemerkung.Add(bm); //{mit foreign key} Inhalte zur Tabelle hinzufügen
+                watch++;
+
+                Rechnungsposten rp = setRechnungsposten(1, 1, 6, 1, 555555, 888888, "IBAN", "Institut", "KontoInhaber", 1); //Tabelle rechnungsposten füllen
+                context.Rechnungsposten.Add(rp); //{mit foreign key} Inhalte zur Tabelle hinzufügen
+                watch++;
+
+                Status state = setStatus(1, 1, 1, 1); //Tabelle status füllen
+                context.Status.Add(state); //{mit foreign key} Inhalte zur Tabelle hinzufügen
+                watch++;
+
+                //SQLite-db füllen
+                context.SaveChanges(); //alle Änderungen in der DB-Datei speichern
                 //context.ChangeTracker.DetectChanges(); //Änderungen speichern
-                context.SaveChanges();
-            watch.Stop(); //Zeit anhalten
-	        Console.WriteLine("Schreibzeit: " + watch); //Ausgeben wie lange das Schreiben in die DB gedauert hat        	
+//                context.SaveChanges();
+                watch.Stop(); //Zeit anhalten
+                Console.WriteLine("Schreibzeit: " + watch); //Ausgeben wie lange das Schreiben in die DB gedauert hat        	
                 dbContextTransaction.Commit();
-                            }
+            }
         }
-        
+
         /**
          * Test-Methode: Gibt alle Tabellen aus und misst die Lesezeit.
          */
         private static void printTableData(DatabaseContext context)
         {
             using (var dbContextTransaction = context.Database.BeginTransaction())
-                {
-            //Stopuhr zur Zeit Messung erzeugen
-            CounterStopWatch watch = new CounterStopWatch();
-            watch.ResetAndStart(); //Stopuhr zurücksetzen auf 0 und starten
+            {
+                //Stopuhr zur Zeit Messung erzeugen
+                CounterStopWatch watch = new CounterStopWatch();
+                watch.ResetAndStart(); //Stopuhr zurücksetzen auf 0 und starten
 
-           /*
-            * Ausgabe der DB-Inhalte in der console
-            */
-            Console.WriteLine("\n=< Kunden >============================"); //Überschrift
-            getKunden(context.kunden.ToList()); //Tabelle ausgeben
-            watch++;
+                /*
+                 * Ausgabe der DB-Inhalte in der console
+                 */
+                Console.WriteLine("\n=< Kunden >============================"); //Überschrift
+                getKunden(context.kunden.ToList()); //Tabelle ausgeben
+                watch++;
 
-            Console.WriteLine("=< Rechnung >============================"); //Überschrift
-            getRechnung(context.Rechnung.ToList()); //Tabelle ausgeben
-            watch++;
+                Console.WriteLine("=< Rechnung >============================"); //Überschrift
+                getRechnung(context.Rechnung.ToList()); //Tabelle ausgeben
+                watch++;
 
-            Console.WriteLine("=< Bemerkung >============================"); //Überschrift
-            getBemerkung(context.Bemerkung.ToList()); //Tabelle ausgeben
-            watch++;
+                Console.WriteLine("=< Bemerkung >============================"); //Überschrift
+                getBemerkung(context.Bemerkung.ToList()); //Tabelle ausgeben
+                watch++;
 
-            Console.WriteLine("=< Status >============================"); //Überschrift
-            getStatus(context.Status.ToList()); //Tabelle ausgeben
-            watch++;
+                Console.WriteLine("=< Status >============================"); //Überschrift
+                getStatus(context.Status.ToList()); //Tabelle ausgeben
+                watch++;
 
-            Console.WriteLine("=< Ausgabe >============================"); //Überschrift
-            getAusgabe(context.Ausgabe.ToList()); //Tabelle ausgeben
-            watch++;
+                Console.WriteLine("=< Ausgabe >============================"); //Überschrift
+                getAusgabe(context.Ausgabe.ToList()); //Tabelle ausgeben
+                watch++;
 
-            Console.WriteLine("=< Abo >============================"); //Überschrift
-            getAbo(context.Abo.ToList()); //Tabelle ausgeben
-            watch++;
+                Console.WriteLine("=< Abo >============================"); //Überschrift
+                getAbo(context.Abo.ToList()); //Tabelle ausgeben
+                watch++;
 
-            Console.WriteLine("=< Rechnungsposten >============================"); //Überschrift
-            getRechnungsposten(context.Rechnungsposten.ToList()); //Tabelle ausgeben
-            watch++;
+                Console.WriteLine("=< Rechnungsposten >============================"); //Überschrift
+                getRechnungsposten(context.Rechnungsposten.ToList()); //Tabelle ausgeben
+                watch++;
 
-            watch.Stop(); //Zeit anhalten
-            Console.WriteLine("\nLesezeit: " + watch); //Ausgeben wie lange das Lesen aus der DB gedauert hat
+                watch.Stop(); //Zeit anhalten
+                Console.WriteLine("\nLesezeit: " + watch); //Ausgeben wie lange das Lesen aus der DB gedauert hat
                 dbContextTransaction.Commit();
-                            }
+            }
         }
-        
+
         private static void getAssembly(String info = "")
         {
             Assembly execAssembly = Assembly.GetCallingAssembly();
@@ -184,10 +184,10 @@ namespace DBTest
                 Console.WriteLine("Productname: " + versionInfo.ProductName);
                 Console.WriteLine("ProductVersion: " + versionInfo.ProductVersion);
                 Console.WriteLine("FileVersion: " + versionInfo.FileVersion);
-                            }
+            }
             catch { }
         }
-            
+
         //aktuelle Zeit als Integer berechnen
         private static int current_timestamp()
         {
