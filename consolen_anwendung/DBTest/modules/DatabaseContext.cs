@@ -12,7 +12,7 @@ namespace DBTest
 {
     class DatabaseContext : DbContext
     {
-        private static String dateiname = Program.assemblyDirectory + @"\test.db";
+        private static String dateiname = Program.dbdateiname;
 
         public DatabaseContext() : base(new SQLiteConnection()
         {

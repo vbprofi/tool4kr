@@ -42,9 +42,9 @@ namespace DBTest
              ****/
         private void createTBKunde()
         {
-            DatabaseContext context = new DatabaseContext();
-
-            context.Database.ExecuteSqlCommand("CREATE TABLE IF NOT EXISTS kunden(" +
+            using(DatabaseContext context = new DatabaseContext())
+                {
+                            context.Database.ExecuteSqlCommand("CREATE TABLE IF NOT EXISTS kunden(" +
                    "id integer NOT NULL PRIMARY KEY AUTOINCREMENT," +
   "firma text NOT NULL," +
   "vorname text NOT NULL," +
@@ -66,6 +66,7 @@ namespace DBTest
                 ")");
 
             context.SaveChanges();
+                }
         }
 
         /***
@@ -73,7 +74,8 @@ namespace DBTest
              ****/
         private void createTBAusgabe()
         {
-            DatabaseContext context = new DatabaseContext();
+            using(DatabaseContext context = new DatabaseContext())
+                {
             context.Database.ExecuteSqlCommand("CREATE TABLE IF NOT EXISTS ausgabe(" +
                   "id integer NOT NULL PRIMARY KEY AUTOINCREMENT," +
   "ausgabe integer NOT NULL," +
@@ -82,6 +84,7 @@ namespace DBTest
                 ")");
 
             context.SaveChanges();
+                }
         }
 
         /***
@@ -89,7 +92,8 @@ namespace DBTest
  ****/
         private void createTBRechnung()
         {
-            DatabaseContext context = new DatabaseContext();
+            using(DatabaseContext context = new DatabaseContext())
+                {
             context.Database.ExecuteSqlCommand("CREATE TABLE IF NOT EXISTS rechnung(" +
                   "id integer NOT NULL PRIMARY KEY AUTOINCREMENT," +
                     "kunden_id integer NOT NULL," +
@@ -111,6 +115,7 @@ namespace DBTest
             ")");
 
             context.SaveChanges();
+                }
         }
 
         /***
@@ -118,7 +123,8 @@ namespace DBTest
          ****/
         private void createTBBemerkung()
         {
-            DatabaseContext context = new DatabaseContext();
+            using(DatabaseContext context = new DatabaseContext())
+                {
             context.Database.ExecuteSqlCommand("CREATE TABLE IF NOT EXISTS bemerkung(" +
                   "id integer NOT NULL PRIMARY KEY AUTOINCREMENT," +
                     "text text NOT NULL," +
@@ -128,6 +134,7 @@ namespace DBTest
                   ")");
 
             context.SaveChanges();
+                }
         }
 
         /***
@@ -135,7 +142,8 @@ namespace DBTest
 ****/
         private void createTBAbo()
         {
-            DatabaseContext context = new DatabaseContext();
+            using(DatabaseContext context = new DatabaseContext())
+                {
             context.Database.ExecuteSqlCommand("CREATE TABLE IF NOT EXISTS abo(" +
                   "id integer NOT NULL PRIMARY KEY AUTOINCREMENT," +
                     "ausgabe_von integer NOT NULL," +
@@ -148,6 +156,7 @@ namespace DBTest
                   ")");
 
             context.SaveChanges();
+                }
         }
 
         /***
@@ -155,7 +164,8 @@ namespace DBTest
              ****/
         private void createTBStatus()
         {
-            DatabaseContext context = new DatabaseContext();
+            using(DatabaseContext context = new DatabaseContext())
+                {
             context.Database.ExecuteSqlCommand("CREATE TABLE IF NOT EXISTS status(" +
 "id integer NOT NULL PRIMARY KEY AUTOINCREMENT," +
 "eintritt_am  integer NOT NULL," +
@@ -166,6 +176,7 @@ namespace DBTest
 ")");
 
             context.SaveChanges();
+                }
         }
 
         /***
@@ -173,7 +184,8 @@ namespace DBTest
  ****/
         private void createTBRechnungsposten()
         {
-            DatabaseContext context = new DatabaseContext();
+            using(DatabaseContext context = new DatabaseContext())
+                {
             context.Database.ExecuteSqlCommand("CREATE TABLE IF NOT EXISTS rechnungsposten(" +
                   "id integer NOT NULL PRIMARY KEY AUTOINCREMENT," +
                     "kunden_id integer NOT NULL," +
@@ -193,6 +205,8 @@ namespace DBTest
                   ")");
 
             context.SaveChanges();
+                }
         }
+
     }//end class
 }//end namespace
