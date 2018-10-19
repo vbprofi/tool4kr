@@ -23,7 +23,6 @@ namespace DBTest
 
         public DBContextInitializer()
         {
-
             createTBKunde();
             createTBAusgabe();
             createTBRechnung();
