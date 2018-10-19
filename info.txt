@@ -23,3 +23,8 @@ https://stackoverflow.com/questions/6596327/how-to-check-if-a-file-is-signed-in-
 --------
 tutorial für autoupdater
 https://www.codeproject.com/Articles/731954/Simple-Auto-Update-Let-your-application-update-i
+
+-------
+Excel-Dateien erzeugen
+https://www.codeproject.com/Articles/33850/Generate-Excel-files-without-using-Microsoft-Excel
+https://www.codeproject.com/Articles/692092/A-free-Export-to-Excel-Csharp-class-using-OpenXML
