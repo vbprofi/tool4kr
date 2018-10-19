@@ -10,6 +10,7 @@
             //autocontext.getABOs();
             //Evtl. müssen wir die automatisch generierte Klasse nehmen. Sie regelt den Umgang mit der DB besser.
             //Kapitel dazu: http://openbook.rheinwerk-verlag.de/visual_csharp_2012/1997_37_001.html#dodtp97eab997-f0da-4739-b514-a73fccd2935a
+            //Die Umstellung soll dann erfolgen, wenn wir merken, unsere manuell erzeugtes Modell macht während der Entwicklung nicht das, was es soll.
 /***
  * Der Inhalt der App.Config muss in die App.Config der hauptanwendung im ersten Zweig kopiert werden.
 **/
