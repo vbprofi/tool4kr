@@ -16,7 +16,7 @@ namespace DBTest
 
         public DatabaseContext() : base(new SQLiteConnection()
         {
-            ConnectionString = new SQLiteConnectionStringBuilder() { DataSource = dateiname, ForeignKeys = true }.ConnectionString
+            ConnectionString = new SQLiteConnectionStringBuilder() { DataSource = dateiname, ForeignKeys = true, JournalMode=SQLiteJournalModeEnum.Off }.ConnectionString
         }, true)
         {
                    }

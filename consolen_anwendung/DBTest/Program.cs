@@ -205,6 +205,7 @@ wText += DateTime.Now + ": Programm gestartet." + Environment.NewLine + "Folgend
            wText += getBINinfo(assemblyDirectory + @"\System.Data.SQLite.dll") + Environment.NewLine;
           wText +=  getBINinfo(assemblyDirectory + @"\EntityFramework.dll")+ Environment.NewLine;
                        wText += getBINinfo(assemblyDirectory + @"\System.Data.SQLite.EF6.dll") + Environment.NewLine;
+                
 wFile.WriteFile(dlldateiname, wText);
                 } catch { }
 }
