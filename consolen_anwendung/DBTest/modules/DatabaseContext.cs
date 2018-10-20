@@ -10,10 +10,18 @@ using System.ComponentModel.DataAnnotations;
 
 namespace DBTest
 {
-    class DatabaseContext : DbContext
+    public class DatabaseContext : DbContext
     {
         private static String dateiname = Program.dbdateiname;
 
+        public DbSet<Kunden> kunden { get; set; }
+        public DbSet<Bemerkung> bemerkung { get; set; }
+        public DbSet<Status> status { get; set; }
+        public DbSet<Ausgabe> ausgabe { get; set; }
+        public DbSet<Rechnung> rechnung { get; set; }
+        public DbSet<Rechnungsposten> rechnungsposten { get; set; }
+        public DbSet<Abo> abo { get; set; }
+        
         public DatabaseContext() : base(new SQLiteConnection()
         {
             ConnectionString = new SQLiteConnectionStringBuilder() { DataSource = dateiname, ForeignKeys = true, JournalMode=SQLiteJournalModeEnum.Off }.ConnectionString
@@ -58,13 +66,5 @@ modelBuilder.Entity<kunden>()
 .WithOptional();
 ***********/
         }
-
-        public DbSet<Kunden> kunden { get; set; }
-        public DbSet<Bemerkung> Bemerkung { get; set; }
-        public DbSet<Status> Status { get; set; }
-        public DbSet<Ausgabe> Ausgabe { get; set; }
-        public DbSet<Rechnung> Rechnung { get; set; }
-        public DbSet<Rechnungsposten> Rechnungsposten { get; set; }
-        public DbSet<Abo> Abo { get; set; }
-            }//end class
+    }//end class
 }//end namespace
