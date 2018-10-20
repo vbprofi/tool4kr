@@ -11,11 +11,12 @@ using System.Data.Linq.Mapping;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 using System.Threading.Tasks;
+using DBTest.util;
 
 namespace DBTest
 {
     [Table(Name = "bemerkung")]
-    public class Bemerkung
+    public class Bemerkung : DBRecord
     {
 
         [Column(Name = "id", IsDbGenerated = true, IsPrimaryKey = true, DbType = "INTEGER")]
@@ -28,8 +29,13 @@ namespace DBTest
         [Column(Name = "datum", DbType = "integer")]
         public int datum { get; set; }
                
-                [Column(Name = "kunden_id", DbType = "integer")]
-                        public int kunden_id { get; set; }
+        [Column(Name = "kunden_id", DbType = "integer")]
+        public int kunden_id { get; set; }
         public Kunden kunden { get; set; }
+                        
+        public override string ToString()
+       	{
+       		return id + " " + kunden_id + "#" + " " + text + " " + Utils.TimeStampToDateTime(datum);
+       	}
     }//end class
 } // end namespace

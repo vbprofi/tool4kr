@@ -78,6 +78,7 @@
     <Compile Include="DBTables\Abo.cs" />
     <Compile Include="DBTables\Ausgabe.cs" />
     <Compile Include="DBTables\Bemerkung.cs" />
+    <Compile Include="DBTables\DBRecord.cs" />
     <Compile Include="DBTables\kunden.cs" />
     <Compile Include="DBTables\Rechnung.cs" />
     <Compile Include="DBTables\Rechnungsposten.cs" />

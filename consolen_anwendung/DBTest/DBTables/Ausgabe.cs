@@ -11,11 +11,12 @@ using System.Data.Linq.Mapping;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 using System.Threading.Tasks;
+using DBTest.util;
 
 namespace DBTest
 {
     [Table(Name = "ausgabe")]
-    public class Ausgabe
+    public class Ausgabe : DBRecord
     {
         [Column(Name = "id", IsDbGenerated = true, IsPrimaryKey = true, DbType = "INTEGER")]
         [Key]
@@ -29,5 +30,11 @@ namespace DBTest
 
         [Column(Name = "datum", DbType = "integer")]
         public int datum { get; set; }
+        
+        public override string ToString()
+       	{
+       		return id + " " + ausgabe + " " + preis + "EURO " + Utils.TimeStampToDateTime(datum);
+       	}
+
     }//end class
 } // end namespace

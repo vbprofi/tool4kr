@@ -11,13 +11,13 @@ using System.Data.Linq.Mapping;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 using System.Threading.Tasks;
+using DBTest.util;
 
 namespace DBTest
 {
     [Table(Name = "kunden")]
-    public class Kunden
+    public class Kunden : DBRecord
     {
-
         [Column(Name = "id", IsDbGenerated = true, IsPrimaryKey = true, DbType = "INTEGER")]
         [Key]
         public int id { get; set; }
@@ -73,6 +73,11 @@ namespace DBTest
 
         [Column(Name = "status_id", DbType = "integer")]
         public int status_id { get; set; }
+                        
+        public override string ToString()
+       	{
+       		return id + " " + firma + " " + vorname + " " + nachname + " " + straße + " " + hausnr + " " + plz + " " + postfach + " " + land + " " + telefon + " " + fax + " " + email + " " + bemerkung_id + " " + " " + Utils.TimeStampToDateTime(erstellt_am);
+       	}
 //public Status status { get; set; }
     }//end class
 } // end namespace
