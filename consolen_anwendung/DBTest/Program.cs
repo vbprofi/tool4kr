@@ -70,33 +70,33 @@ namespace DBTest
                 CounterStopWatch watch = new CounterStopWatch();
                 watch.ResetAndStart(); //Stopuhr zurücksetzen auf 0 und starten
 
-                Kunden kunde = setKunden("Firma", "Vorname", "Nachname", "Straße", "HausNR", 12345, "Ort", "Postfach", "Land", "Telefon", "Fax", "EMail"); //Tabelle Kunden füllen
+                Kunden kunde = DBRecordFactory.createKunden("Firma", "Vorname", "Nachname", "Straße", "HausNR", 12345, "Ort", "Postfach", "Land", "Telefon", "Fax", "EMail"); //Tabelle Kunden füllen
                                                                                                                                                            //context.kunden.Include("b.bemerkung_id"); //Foreign-Key hinzufügen
                 context.kunden.Add(kunde); //Inhalte zur Tabelle hinzufügen
                 watch++;
 
-                Ausgabe ag = setAusgabe(199, Convert.ToDecimal("3,00")); //Tabelle ausgabe füllen
+                Ausgabe ag = DBRecordFactory.createAusgabe(199, Convert.ToDecimal("3,00")); //Tabelle ausgabe füllen
                 context.Ausgabe.Add(ag); //Inhalte zur Tabelle hinzufügen
                 watch++;
 
-                Rechnung rn = setRechnung("Firma", "Vorname", "Nachname", "Straße", "HausNR", 12345, "Ort", "Postfach", "Land", "Telefon", "Fax", "EMail", 0, 0); //Tabelle rechnung füllen
+                Rechnung rn = DBRecordFactory.createRechnung("Firma", "Vorname", "Nachname", "Straße", "HausNR", 12345, "Ort", "Postfach", "Land", "Telefon", "Fax", "EMail", 0, 0); //Tabelle rechnung füllen
                 context.Rechnung.Add(rn); //Inhalte zur Tabelle hinzufügen
                 watch++;
 
-                Abo ab = setAbo(1, 1, 1, 1, 1, 1); //Tabelle abo füllen
+                Abo ab = DBRecordFactory.createAbo(1, 1, 1, 1, 1, 1); //Tabelle abo füllen
                 context.Abo.Add(ab); //{mit foreign key} Inhalte zur Tabelle hinzufügen
                 watch++;
 
-                Bemerkung bm = setBemerkung("Txt", 1); //Tabelle bemerkung füllen
+                Bemerkung bm = DBRecordFactory.createBemerkung("Txt", 1); //Tabelle bemerkung füllen
                                                        //context.Bemerkung.Include("kunden_id"); //Foreign-Key hinzufügen
                 context.Bemerkung.Add(bm); //{mit foreign key} Inhalte zur Tabelle hinzufügen
                 watch++;
 
-                Rechnungsposten rp = setRechnungsposten(1, 1, 6, 1, 555555, 888888, "IBAN", "Institut", "KontoInhaber", 1); //Tabelle rechnungsposten füllen
+                Rechnungsposten rp = DBRecordFactory.createRechnungsposten(1, 1, 6, 1, 555555, 888888, "IBAN", "Institut", "KontoInhaber", 1); //Tabelle rechnungsposten füllen
                 context.Rechnungsposten.Add(rp); //{mit foreign key} Inhalte zur Tabelle hinzufügen
                 watch++;
 
-                Status state = setStatus(1, 1, 1, 1); //Tabelle status füllen
+                Status state = DBRecordFactory.createStatus(1, 1, 1, 1); //Tabelle status füllen
                 context.Status.Add(state); //{mit foreign key} Inhalte zur Tabelle hinzufügen
                 watch++;
 
@@ -210,149 +210,6 @@ wFile.WriteFile(dlldateiname, wText);
                 } catch { }
 }
 
-        //aktuelle Zeit als Integer berechnen
-        private static int current_timestamp()
-        {
-            DateTime date1 = new DateTime(1970, 1, 1);  //Refernzdatum (festgelegt)
-                                                        //DateTime date2 = DateTime.Now;              //jetztiges Datum / Uhrzeit
-            DateTime date2 = DateTime.Now.ToUniversalTime();
-            TimeSpan ts = new TimeSpan(date2.Ticks - date1.Ticks);  // das Delta ermitteln
-                                                                    // Das Delta als gesammtzahl der sekunden ist der Timestamp
-            return (Convert.ToInt32(ts.TotalSeconds));
-        }
-
-        //UnixTimestamp aus der Datenbank in datetime umwandeln
-        public static DateTime TimeStampToDateTime(double unixTimeStamp)
-        {
-            // Unix timestamp is seconds past epoch
-            System.DateTime dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);
-            dtDateTime = dtDateTime.AddSeconds(unixTimeStamp).ToLocalTime();
-            return dtDateTime;
-        }
-
-        /***********
-        * Funktionen zum Füllen der DB
-        * Tabellen:
-        *
-        * ***************/
-
-        private static Kunden setKunden(String Firma = "", String Vorname = "", String Nachname = "", String Straße = "", string HausNR = "", int PLZ = 0, String Ort = "", String Postfach = "", String Land = "", String Telefon = "", String Fax = "", String EMail = "")
-        {
-            Kunden kunde = new Kunden()
-            {
-                firma = Firma,
-                vorname = Vorname,
-                nachname = Nachname,
-                straße = Straße,
-                hausnr = HausNR,
-                plz = PLZ,
-                ort = Ort,
-                postfach = Postfach,
-                land = Land,
-                telefon = Telefon,
-                fax = Fax,
-                email = EMail,
-                active = 1,
-                bemerkung_id = 0,
-                status_id = 0,
-                erstellt_am = current_timestamp(),
-                geändert_am = 0,
-            };
-            return kunde;
-        }
-
-        private static Status setStatus(int Eintritt, int Austritt, int Flag, int KundenID)
-        {
-            Status state = new Status()
-            {
-                eintritt_am = Eintritt,
-                austritt_am = Austritt,
-                flag = Flag,
-                kunden_id = KundenID,
-            };
-            return state;
-        }
-
-        private static Bemerkung setBemerkung(String Txt, int KundenID)
-        {
-            Bemerkung bm = new Bemerkung()
-            {
-                text = Txt,
-                datum = current_timestamp(),
-                kunden_id = KundenID,
-            };
-            return bm;
-        }
-
-        private static Ausgabe setAusgabe(int Ausg, decimal Preis)
-        {
-            Ausgabe ag = new Ausgabe()
-            {
-                ausgabe = Ausg,
-                preis = Preis,
-                datum = current_timestamp(),
-            };
-
-            return ag;
-        }
-
-        private static Rechnung setRechnung(String Firma = "", String Vorname = "", String Nachname = "", String Straße = "", string HausNR = "", int PLZ = 0, String Ort = "", String Postfach = "", String Land = "", String Telefon = "", String Fax = "", String EMail = "", int BemerkungID = 0, int Gesendet_am = 0)
-        {
-            Rechnung rn = new Rechnung()
-            {
-                firma = Firma,
-                vorname = Vorname,
-                nachname = Nachname,
-                straße = Straße,
-                hausnr = HausNR,
-                plz = PLZ,
-                ort = Ort,
-                postfach = Postfach,
-                land = Land,
-                telefon = Telefon,
-                fax = Fax,
-                email = EMail,
-                bemerkung_id = BemerkungID,
-                erstellt_am = current_timestamp(),
-                gesendet_am = Gesendet_am,
-            };
-            return rn;
-        }
-
-        private static Rechnungsposten setRechnungsposten(int KundenId = 0, int RechnungID = 0, int Anzahl = 0, int AboID = 0, int Konto_nr = 0, int BLZ = 0, String IBAN = "", String Institut = "", String KontoInhaber = "", int BemerkungID = 0)
-        {
-            Rechnungsposten rp = new Rechnungsposten()
-            {
-                kunden_id = KundenId,
-                rechnung_id = RechnungID,
-                anzahl = Anzahl,
-                abo_id = AboID,
-                kontonr = Konto_nr,
-                blz = BLZ,
-                iban = IBAN,
-                institut = Institut,
-                kontoinhaber = KontoInhaber,
-                erstellt_am = current_timestamp(),
-                bemerkung_id = BemerkungID,
-            };
-            return rp;
-        }
-
-        private static Abo setAbo(int a_von = 0, int a_bis = 0, int b_am = 0, int b_von = 0, int b_bis = 0, int bemerkungID = 0)
-        {
-            Abo ab = new Abo()
-            {
-                ausgabe_von = a_von,
-                ausgabe_bis = a_bis,
-                bezahlt_am = b_am,
-                bezahlt_von = b_von,
-                bezahlt_bis = b_bis,
-                bemerkung_id = bemerkungID,
-            };
-            return ab;
-        }
-
-
         /********
         * Funktion zur Ausgabe
         */
@@ -360,7 +217,7 @@ wFile.WriteFile(dlldateiname, wText);
         {
             foreach (var item in data)
             {
-                Console.Write(item.id + " " + item.firma + " " + item.vorname + " " + item.nachname + " " + item.straße + " " + item.hausnr + " " + item.plz + " " + item.postfach + " " + item.land + " " + item.telefon + " " + item.fax + " " + item.email + " " + item.bemerkung_id + " " + " " + TimeStampToDateTime(item.erstellt_am));
+                Console.Write(item.id + " " + item.firma + " " + item.vorname + " " + item.nachname + " " + item.straße + " " + item.hausnr + " " + item.plz + " " + item.postfach + " " + item.land + " " + item.telefon + " " + item.fax + " " + item.email + " " + item.bemerkung_id + " " + " " + Utils.TimeStampToDateTime(item.erstellt_am));
                 Console.WriteLine();
             }
         }
@@ -369,7 +226,7 @@ wFile.WriteFile(dlldateiname, wText);
         {
             foreach (var item in data)
             {
-                Console.Write(item.id + " " + item.kunden_id + " " + item.firma + " " + item.vorname + " " + item.nachname + " " + item.straße + " " + item.hausnr + " " + item.plz + " " + item.postfach + " " + item.land + " " + item.telefon + " " + item.fax + " " + item.email + " " + TimeStampToDateTime(item.erstellt_am));
+                Console.Write(item.id + " " + item.kunden_id + " " + item.firma + " " + item.vorname + " " + item.nachname + " " + item.straße + " " + item.hausnr + " " + item.plz + " " + item.postfach + " " + item.land + " " + item.telefon + " " + item.fax + " " + item.email + " " + Utils.TimeStampToDateTime(item.erstellt_am));
                 Console.WriteLine();
             }
         }
@@ -378,7 +235,7 @@ wFile.WriteFile(dlldateiname, wText);
         {
             foreach (var item in data)
             {
-                Console.Write(item.id + " " + item.kunden_id + "#" + " " + item.text + " " + TimeStampToDateTime(item.datum));
+                Console.Write(item.id + " " + item.kunden_id + "#" + " " + item.text + " " + Utils.TimeStampToDateTime(item.datum));
                 Console.WriteLine();
             }
         }
@@ -387,7 +244,7 @@ wFile.WriteFile(dlldateiname, wText);
         {
             foreach (var item in data)
             {
-                Console.Write(item.id + " " + item.kunden_id + "#" + item.kunden.status_id + " " + item.flag + " " + TimeStampToDateTime(item.eintritt_am) + " " + TimeStampToDateTime(item.austritt_am));
+                Console.Write(item.id + " " + item.kunden_id + "#" + item.kunden.status_id + " " + item.flag + " " + Utils.TimeStampToDateTime(item.eintritt_am) + " " + Utils.TimeStampToDateTime(item.austritt_am));
                 Console.WriteLine();
             }
         }
@@ -396,7 +253,7 @@ wFile.WriteFile(dlldateiname, wText);
         {
             foreach (var item in data)
             {
-                Console.Write(item.id + " " + item.ausgabe + " " + item.preis + "EURO " + TimeStampToDateTime(item.datum));
+                Console.Write(item.id + " " + item.ausgabe + " " + item.preis + "EURO " + Utils.TimeStampToDateTime(item.datum));
                 Console.WriteLine();
             }
         }
@@ -405,7 +262,7 @@ wFile.WriteFile(dlldateiname, wText);
         {
             foreach (var item in data)
             {
-                Console.Write(item.id + " " + item.ausgabe_bis + " " + item.ausgabe_von + " " + TimeStampToDateTime(item.bezahlt_am) + " " + item.bemerkung_id);
+                Console.Write(item.id + " " + item.ausgabe_bis + " " + item.ausgabe_von + " " + Utils.TimeStampToDateTime(item.bezahlt_am) + " " + item.bemerkung_id);
                 Console.WriteLine();
             }
         }
@@ -414,10 +271,9 @@ wFile.WriteFile(dlldateiname, wText);
         {
             foreach (var item in data)
             {
-                Console.Write(item.id + " " + item.abo_id + " " + item.anzahl + " " + TimeStampToDateTime(item.erstellt_am) + " " + item.bemerkung_id + " " + item.kunden_id + " " + item.kontoinhaber + " " + item.institut + " " + item.kontonr);
+                Console.Write(item.id + " " + item.abo_id + " " + item.anzahl + " " + Utils.TimeStampToDateTime(item.erstellt_am) + " " + item.bemerkung_id + " " + item.kunden_id + " " + item.kontoinhaber + " " + item.institut + " " + item.kontonr);
                 Console.WriteLine();
             }
         }
-
     }//end class
 } //end namespace
