@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 namespace DBTest
 {
     [Table(Name = "rechnungsposten")]
-    class Rechnungsposten
+    public class Rechnungsposten
     {
         [Column(Name = "id", IsDbGenerated = true, IsPrimaryKey = true, DbType = "INTEGER")]
         [Key]

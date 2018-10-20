@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 namespace DBTest
 {
     [Table(Name = "abo")]
-    class Abo
+    public class Abo
     {
         [Column(Name = "id", IsDbGenerated = true, IsPrimaryKey = true, DbType = "INTEGER")]
         [Key]
