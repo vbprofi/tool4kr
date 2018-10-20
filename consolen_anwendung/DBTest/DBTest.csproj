@@ -83,6 +83,8 @@
     <Compile Include="DBTables\Rechnung.cs" />
     <Compile Include="DBTables\Rechnungsposten.cs" />
     <Compile Include="DBTables\Status.cs" />
+    <Compile Include="modules\DBReader.cs" />
+    <Compile Include="modules\DBWriter.cs" />
     <Compile Include="modules\KRDatabase.cs" />
     <Compile Include="modules\DatabaseContext.cs" />
     <Compile Include="modules\DBContextInitializer.cs" />

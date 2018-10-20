@@ -45,6 +45,14 @@ namespace DBTest
 
             printTableData(db);
             
+            Console.WriteLine("--------------------------------------------------------");
+            using (DBReader reader = db.getDBReader())
+            {
+	            Ausgabe letzteAusgabe = reader.getCurrentIssue();
+	            decimal preisLetzteAusgabe = reader.getPriceOfIssue(letzteAusgabe.ausgabe);
+  		        Console.WriteLine("Letzte Ausgabe: "+letzteAusgabe+" (Preis="+preisLetzteAusgabe+" EURO)");
+            }
+            
             //Beenden
             Console.Write("\nBitte return drücken, um die Anwendung zu beenden."); Console.ReadLine();
             //Signale ausgeben beim beenden
@@ -56,48 +64,42 @@ namespace DBTest
          */
         private static void createSampleDataAllTables(KRDatabase db)
         {
-        	using (var dbContextTransaction = db.beginWriteTransaction())
+            //Stopuhr zur Zeit Messung erzeugen
+            CounterStopWatch watch = new CounterStopWatch();
+            watch.ResetAndStart(); //Stopuhr zurücksetzen auf 0 und starten
+        	using (DBWriter writer = db.getDBWriter())
             {
-                //Stopuhr zur Zeit Messung erzeugen
-                CounterStopWatch watch = new CounterStopWatch();
-                watch.ResetAndStart(); //Stopuhr zurücksetzen auf 0 und starten
-
                 Kunden kunde = DBRecordFactory.createKunden("Firma", "Vorname", "Nachname", "Straße", "HausNR", 12345, "Ort", "Postfach", "Land", "Telefon", "Fax", "EMail"); //Tabelle Kunden füllen
-                db.addRecord(kunde); //Inhalte zur Tabelle hinzufügen
+                writer.addRecord(kunde); //Inhalte zur Tabelle hinzufügen
                 watch++;
 
                 Ausgabe ag = DBRecordFactory.createAusgabe(199, Convert.ToDecimal("3,00")); //Tabelle ausgabe füllen
-                db.addRecord(ag); //Inhalte zur Tabelle hinzufügen
+                writer.addRecord(ag); //Inhalte zur Tabelle hinzufügen
                 watch++;
 
                 Rechnung rn = DBRecordFactory.createRechnung("Firma", "Vorname", "Nachname", "Straße", "HausNR", 12345, "Ort", "Postfach", "Land", "Telefon", "Fax", "EMail", 0, 0); //Tabelle rechnung füllen
-                db.addRecord(rn); //Inhalte zur Tabelle hinzufügen
+                writer.addRecord(rn); //Inhalte zur Tabelle hinzufügen
                 watch++;
 
                 Abo ab = DBRecordFactory.createAbo(1, 1, 1, 1, 1, 1); //Tabelle abo füllen
-                db.addRecord(ab); //{mit foreign key} Inhalte zur Tabelle hinzufügen
+                writer.addRecord(ab); //{mit foreign key} Inhalte zur Tabelle hinzufügen
                 watch++;
 
                 Bemerkung bm = DBRecordFactory.createBemerkung("Txt", 1); //Tabelle bemerkung füllen
                                                        //context.Bemerkung.Include("kunden_id"); //Foreign-Key hinzufügen
-                db.addRecord(bm); //{mit foreign key} Inhalte zur Tabelle hinzufügen
+                writer.addRecord(bm); //{mit foreign key} Inhalte zur Tabelle hinzufügen
                 watch++;
 
                 Rechnungsposten rp = DBRecordFactory.createRechnungsposten(1, 1, 6, 1, 555555, 888888, "IBAN", "Institut", "KontoInhaber", 1); //Tabelle rechnungsposten füllen
-                db.addRecord(rp); //{mit foreign key} Inhalte zur Tabelle hinzufügen
+                writer.addRecord(rp); //{mit foreign key} Inhalte zur Tabelle hinzufügen
                 watch++;
 
                 Status state = DBRecordFactory.createStatus(1, 1, 1, 1); //Tabelle status füllen
-                db.addRecord(state); //{mit foreign key} Inhalte zur Tabelle hinzufügen
+                writer.addRecord(state); //{mit foreign key} Inhalte zur Tabelle hinzufügen
                 watch++;
-
-                //SQLite-db füllen
-                db.endWriteTransaction(dbContextTransaction); //alle Änderungen in der DB-Datei speichern
-                //context.ChangeTracker.DetectChanges(); //Änderungen speichern
-//                context.SaveChanges();
-                watch.Stop(); //Zeit anhalten
-                Console.WriteLine("Schreibzeit: " + watch); //Ausgeben wie lange das Schreiben in die DB gedauert hat        	
             }
+            watch.Stop(); //Zeit anhalten
+            Console.WriteLine("Schreibzeit: " + watch); //Ausgeben wie lange das Schreiben in die DB gedauert hat        	
         }
 
         /**
@@ -105,48 +107,44 @@ namespace DBTest
          */
         private static void printTableData(KRDatabase db)
         {
-        	using (var dbContextTransaction = db.beginReadTransaction())
+            //Stopuhr zur Zeit Messung erzeugen
+            CounterStopWatch watch = new CounterStopWatch();
+            watch.ResetAndStart(); //Stopuhr zurücksetzen auf 0 und starten
+        	using (DBReader reader = db.getDBReader())
             {
-                //Stopuhr zur Zeit Messung erzeugen
-                CounterStopWatch watch = new CounterStopWatch();
-                watch.ResetAndStart(); //Stopuhr zurücksetzen auf 0 und starten
-
                 /*
                  * Ausgabe der DB-Inhalte in der console
                  */
                 Console.WriteLine("\n=< Kunden >============================"); //Überschrift
-                printTable(db.getKunden()); //Tabelle ausgeben
+                printTable(reader.getKunden()); //Tabelle ausgeben
                 watch++;
 
                 Console.WriteLine("=< Rechnung >============================"); //Überschrift
-                printTable(db.getRechnung()); //Tabelle ausgeben
+                printTable(reader.getRechnungen()); //Tabelle ausgeben
                 watch++;
 
                 Console.WriteLine("=< Bemerkung >============================"); //Überschrift
-                printTable(db.getBemerkung()); //Tabelle ausgeben
+                printTable(reader.getBemerkungen()); //Tabelle ausgeben
                 watch++;
 
                 Console.WriteLine("=< Status >============================"); //Überschrift
-                printTable(db.getStatus()); //Tabelle ausgeben
+                printTable(reader.getStatus()); //Tabelle ausgeben
                 watch++;
 
                 Console.WriteLine("=< Ausgabe >============================"); //Überschrift
-                printTable(db.getAusgabe()); //Tabelle ausgeben
+                printTable(reader.getAusgaben()); //Tabelle ausgeben
                 watch++;
 
                 Console.WriteLine("=< Abo >============================"); //Überschrift
-                printTable(db.getAbo()); //Tabelle ausgeben
+                printTable(reader.getAbos()); //Tabelle ausgeben
                 watch++;
 
                 Console.WriteLine("=< Rechnungsposten >============================"); //Überschrift
-                printTable(db.getRechnungsposten()); //Tabelle ausgeben
+                printTable(reader.getRechnungsposten()); //Tabelle ausgeben
                 watch++;
-                
-                db.endReadTransaction(dbContextTransaction);
-
-                watch.Stop(); //Zeit anhalten
-                Console.WriteLine("\nLesezeit: " + watch); //Ausgeben wie lange das Lesen aus der DB gedauert hat
             }
+            watch.Stop(); //Zeit anhalten
+            Console.WriteLine("\nLesezeit: " + watch); //Ausgeben wie lange das Lesen aus der DB gedauert hat
         }
 
         private static void printTable(IEnumerable<DBRecord> data)

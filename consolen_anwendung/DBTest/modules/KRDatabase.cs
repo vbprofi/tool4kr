@@ -17,11 +17,10 @@ namespace DBTest.modules
 {
 	/// <summary>
 	/// Zentrale Klasse für Datenbankoperationen. Abstrahiert die Datenbank und stellt Datenbanken-Transaktionen
-	/// zur Verfügung.
+	/// über Objekte der Klassen DBReader und DBWriter zur Verfügung.
 	/// </summary>
 	public class KRDatabase
 	{
-
 		/** The context */
 		private DatabaseContext context = new DatabaseContext();
 		private DBContextInitializer contextInitializer = new DBContextInitializer();
@@ -33,6 +32,16 @@ namespace DBTest.modules
 
 			//Konfigurieren            
 			configure(context);
+		}
+		
+		public DBReader getDBReader()
+		{
+			return new DBReader(context);
+		}
+		
+		public DBWriter getDBWriter()
+		{
+			return new DBWriter(context);
 		}
 		
 		public String getVersionString()
@@ -52,97 +61,6 @@ namespace DBTest.modules
             context.Configuration.ProxyCreationEnabled = false;
             context.Configuration.EnsureTransactionsForFunctionsAndCommands = false;
             context.SaveChanges();
-		}
-		
-		public void addRecord(Abo record)
-		{
-			context.abo.Add(record);
-		}
-		
-		public void addRecord(Ausgabe record)
-		{
-			context.ausgabe.Add(record);
-		}
-		
-		public void addRecord(Bemerkung record)
-		{
-			context.bemerkung.Add(record);
-		}
-		
-		public void addRecord(Kunden record)
-		{
-			context.kunden.Add(record);
-		}
-		
-		public void addRecord(Rechnung record)
-		{
-			context.rechnung.Add(record);
-		}
-		
-		public void addRecord(Rechnungsposten record)
-		{
-			context.rechnungsposten.Add(record);
-		}
-		
-		public void addRecord(Status record)
-		{
-			context.status.Add(record);
-		}
-		
-		public DbSet<Abo> getAbo()
-		{
-			return context.abo;
-		}
-		
-		public DbSet<Ausgabe> getAusgabe()
-		{
-			return context.ausgabe;
-		}
-		
-		public DbSet<Bemerkung> getBemerkung()
-		{
-			return context.bemerkung;
-		}
-		
-		public DbSet<Kunden> getKunden()
-		{
-			return context.kunden;
-		}
-		
-		public DbSet<Rechnung> getRechnung()
-		{
-			return context.rechnung;
-		}
-		
-		public DbSet<Rechnungsposten> getRechnungsposten()
-		{
-			return context.rechnungsposten;
-		}
-		
-		public DbSet<Status> getStatus()
-		{
-			return context.status;
-		}
-		
-		public DbContextTransaction beginWriteTransaction()
-		{
-			return context.Database.BeginTransaction();
-		}
-		
-		public void endWriteTransaction(DbContextTransaction transaction)
-		{
-			context.SaveChanges();
-			transaction.Commit();
-		}
-		
-		public DbContextTransaction beginReadTransaction()
-		{
-			return context.Database.BeginTransaction();
-		}
-		
-		public void endReadTransaction(DbContextTransaction transaction)
-		{
-			transaction.Commit();
 		}
 	}
 }
