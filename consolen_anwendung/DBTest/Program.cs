@@ -115,37 +115,45 @@ namespace DBTest
                  * Ausgabe der DB-Inhalte in der console
                  */
                 Console.WriteLine("\n=< Kunden >============================"); //Überschrift
-                getKunden(db.getKunden().ToList()); //Tabelle ausgeben
+                printTable(db.getKunden()); //Tabelle ausgeben
                 watch++;
 
                 Console.WriteLine("=< Rechnung >============================"); //Überschrift
-                getRechnung(db.getRechnung().ToList()); //Tabelle ausgeben
+                printTable(db.getRechnung()); //Tabelle ausgeben
                 watch++;
 
                 Console.WriteLine("=< Bemerkung >============================"); //Überschrift
-                getBemerkung(db.getBemerkung().ToList()); //Tabelle ausgeben
+                printTable(db.getBemerkung()); //Tabelle ausgeben
                 watch++;
 
                 Console.WriteLine("=< Status >============================"); //Überschrift
-                getStatus(db.getStatus().ToList()); //Tabelle ausgeben
+                printTable(db.getStatus()); //Tabelle ausgeben
                 watch++;
 
                 Console.WriteLine("=< Ausgabe >============================"); //Überschrift
-                getAusgabe(db.getAusgabe().ToList()); //Tabelle ausgeben
+                printTable(db.getAusgabe()); //Tabelle ausgeben
                 watch++;
 
                 Console.WriteLine("=< Abo >============================"); //Überschrift
-                getAbo(db.getAbo().ToList()); //Tabelle ausgeben
+                printTable(db.getAbo()); //Tabelle ausgeben
                 watch++;
 
                 Console.WriteLine("=< Rechnungsposten >============================"); //Überschrift
-                getRechnungsposten(db.getRechnungsposten().ToList()); //Tabelle ausgeben
+                printTable(db.getRechnungsposten()); //Tabelle ausgeben
                 watch++;
                 
                 db.endReadTransaction(dbContextTransaction);
 
                 watch.Stop(); //Zeit anhalten
                 Console.WriteLine("\nLesezeit: " + watch); //Ausgeben wie lange das Lesen aus der DB gedauert hat
+            }
+        }
+
+        private static void printTable(IEnumerable<DBRecord> data)
+        {
+            foreach (var item in data)
+            {
+                Console.WriteLine(item);
             }
         }
 
@@ -200,71 +208,5 @@ wText += DateTime.Now + ": Programm gestartet." + Environment.NewLine + "Folgend
 wFile.WriteFile(dlldateiname, wText);
                 } catch { }
 }
-
-        /********
-        * Funktion zur Ausgabe
-        */
-        private static void getKunden(List<DBTest.Kunden> data)
-        {
-            foreach (var item in data)
-            {
-                Console.Write(item.id + " " + item.firma + " " + item.vorname + " " + item.nachname + " " + item.straße + " " + item.hausnr + " " + item.plz + " " + item.postfach + " " + item.land + " " + item.telefon + " " + item.fax + " " + item.email + " " + item.bemerkung_id + " " + " " + Utils.TimeStampToDateTime(item.erstellt_am));
-                Console.WriteLine();
-            }
-        }
-
-        private static void getRechnung(List<DBTest.Rechnung> data)
-        {
-            foreach (var item in data)
-            {
-                Console.Write(item.id + " " + item.kunden_id + " " + item.firma + " " + item.vorname + " " + item.nachname + " " + item.straße + " " + item.hausnr + " " + item.plz + " " + item.postfach + " " + item.land + " " + item.telefon + " " + item.fax + " " + item.email + " " + Utils.TimeStampToDateTime(item.erstellt_am));
-                Console.WriteLine();
-            }
-        }
-
-        private static void getBemerkung(List<DBTest.Bemerkung> data)
-        {
-            foreach (var item in data)
-            {
-                Console.Write(item.id + " " + item.kunden_id + "#" + " " + item.text + " " + Utils.TimeStampToDateTime(item.datum));
-                Console.WriteLine();
-            }
-        }
-
-        private static void getStatus(List<DBTest.Status> data)
-        {
-            foreach (var item in data)
-            {
-                Console.Write(item.id + " " + item.kunden_id + "#" + item.kunden.status_id + " " + item.flag + " " + Utils.TimeStampToDateTime(item.eintritt_am) + " " + Utils.TimeStampToDateTime(item.austritt_am));
-                Console.WriteLine();
-            }
-        }
-
-        private static void getAusgabe(List<DBTest.Ausgabe> data)
-        {
-            foreach (var item in data)
-            {
-                Console.Write(item.id + " " + item.ausgabe + " " + item.preis + "EURO " + Utils.TimeStampToDateTime(item.datum));
-                Console.WriteLine();
-            }
-        }
-
-        private static void getAbo(List<DBTest.Abo> data)
-        {
-            foreach (var item in data)
-            {
-                Console.Write(item.id + " " + item.ausgabe_bis + " " + item.ausgabe_von + " " + Utils.TimeStampToDateTime(item.bezahlt_am) + " " + item.bemerkung_id);
-                Console.WriteLine();
-            }
-        }
-
-        private static void getRechnungsposten(List<DBTest.Rechnungsposten> data)
-        {
-            foreach (var item in data)
-            {
-                Console.Write(item.id + " " + item.abo_id + " " + item.anzahl + " " + Utils.TimeStampToDateTime(item.erstellt_am) + " " + item.bemerkung_id + " " + item.kunden_id + " " + item.kontoinhaber + " " + item.institut + " " + item.kontonr);
-                Console.WriteLine();
-            }
-        }
     }//end class
 } //end namespace
