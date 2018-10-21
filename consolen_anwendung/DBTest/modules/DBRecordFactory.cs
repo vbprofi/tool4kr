@@ -40,7 +40,7 @@ namespace DBTest
             };
             return kunde;
         }
-
+	    
         public static Status createStatus(int Eintritt, int Austritt, int Flag, int KundenID)
         {
             Status state = new Status()
@@ -52,7 +52,7 @@ namespace DBTest
             };
             return state;
         }
-
+        
         public static Bemerkung createBemerkung(String Txt, int KundenID)
         {
             Bemerkung bm = new Bemerkung()
@@ -61,9 +61,15 @@ namespace DBTest
                 datum = Utils.current_timestamp(),
                 kunden_id = KundenID,
             };
+            Console.WriteLine("Bem="+bm);
             return bm;
         }
-
+        
+        public static Bemerkung createBemerkung(String Txt, Kunden kunde)
+        {
+        	return createBemerkung(Txt, kunde.id);
+        }
+        
         public static Ausgabe createAusgabe(int Ausg, decimal Preis)
         {
             Ausgabe ag = new Ausgabe()
@@ -75,7 +81,7 @@ namespace DBTest
 
             return ag;
         }
-
+        
         public static Rechnung createRechnung(String Firma = "", String Vorname = "", String Nachname = "", String Straße = "", string HausNR = "", int PLZ = 0, String Ort = "", String Postfach = "", String Land = "", String Telefon = "", String Fax = "", String EMail = "", int BemerkungID = 0, int Gesendet_am = 0)
         {
             Rechnung rn = new Rechnung()
@@ -98,7 +104,7 @@ namespace DBTest
             };
             return rn;
         }
-
+        
         public static Rechnungsposten createRechnungsposten(int KundenId = 0, int RechnungID = 0, int Anzahl = 0, int AboID = 0, int Konto_nr = 0, int BLZ = 0, String IBAN = "", String Institut = "", String KontoInhaber = "", int BemerkungID = 0)
         {
             Rechnungsposten rp = new Rechnungsposten()
@@ -117,7 +123,7 @@ namespace DBTest
             };
             return rp;
         }
-
+        
         public static Abo createAbo(int a_von = 0, int a_bis = 0, int b_am = 0, int b_von = 0, int b_bis = 0, int bemerkungID = 0)
         {
             Abo ab = new Abo()
@@ -130,6 +136,11 @@ namespace DBTest
                 bemerkung_id = bemerkungID,
             };
             return ab;
+        }
+        
+        public static Abo createAbo(int a_von, int a_bis, int b_am, int b_von, int b_bis, Bemerkung bemerkung)
+        {
+        	return createAbo(a_von, a_bis, b_am, b_von, b_bis, bemerkung.id);
         }
 	}
 }
