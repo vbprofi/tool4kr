@@ -28,8 +28,8 @@ namespace DBTest.modules
 	/// </summary>
 	public class DBReader : IDisposable
 	{
-		private DatabaseContext context;
-		private DbContextTransaction transaction;
+		protected DatabaseContext context;
+		protected DbContextTransaction transaction;
 		
 		public DBReader(DatabaseContext context)
 		{

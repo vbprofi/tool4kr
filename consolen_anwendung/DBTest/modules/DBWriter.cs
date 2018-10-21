@@ -13,35 +13,35 @@ namespace DBTest.modules
 {
 	/// <summary>
 	/// Diese Klasse entspricht einer schreibenden Transaktion auf die unterliegende Datenbank.
-	/// Die Klasse öffnet bei Instanziierung automatisch eine DbContextTransaction.
-	/// Die Klasse implementiert das Interface IDisposable; die Dispose-Methode schließt die Transaktion ab und schreibt
-	/// Änderungen in die Datenbank. Dabei wird auch die Dispose-Methode der im Konstruktor geöffneten DbContextTransaction
-	/// aufgerufen.
+	/// Es ist eine Ableitung von DBReader, der um Schreibmöglichkeiten erweitert wird.
 	/// 
 	/// Benutzung:
 	/// using (DBWriter writer = db.getDBWriter())
     /// {
     /// 	// etwas schreiben durch Benutzung der Methoden von writer
     /// }
-    /// Schreiboperationen in den using-Block einfügen. Wenn der using-Block verlassen wird wird die Transaktion
-    /// automatisch abgeschlossen.
+    /// (Lese- und) Schreiboperationen in den using-Block einfügen. Wenn der using-Block verlassen
+    /// wird wird die Transaktion automatisch abgeschlossen.
 	/// </summary>
-	public class DBWriter : IDisposable
+	public class DBWriter : DBReader, IDisposable
 	{
-		private DatabaseContext context;
-		private DbContextTransaction transaction;
-		
 		public DBWriter(DatabaseContext context)
+			: base(context)
 		{
-			this.context = context;
-			this.transaction = context.Database.BeginTransaction();
 		}
-		
-		public void Dispose()
+
+		/**
+		 * Speichert Änderungen in der Datenbank ab. Kann mehrmals pro Transaktion aufgerufen werden.
+ 		 */ 		
+		public void SaveChanges()
 		{
 			context.SaveChanges();
-			transaction.Commit();
-			transaction.Dispose();
+		}
+		
+		public new void Dispose()
+		{
+			SaveChanges();
+			base.Dispose();
 		}
 		
 		public void addRecord(Abo record)
@@ -77,6 +77,17 @@ namespace DBTest.modules
 		public void addRecord(Status record)
 		{
 			context.status.Add(record);
+		}
+		
+		/**
+		 * Erzeugt eine neue Ausgabe mit um einer 1 höheren Nummer als die höchste in der Datenbank gespeicherte
+		 * Ausgabennummer.
+		 */
+		public void addNextIssue(decimal price)
+		{
+			Ausgabe current = getCurrentIssue();
+			Ausgabe next = DBRecordFactory.createAusgabe(current.ausgabe+1, price);
+			addRecord(next);
 		}
 	}
 }

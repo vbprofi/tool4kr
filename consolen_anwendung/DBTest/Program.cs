@@ -43,16 +43,27 @@ namespace DBTest
                                                 //merke mit eingebautem Transactions keinen unterschied beim ersten Füllen. Beim zweiten gibts einen kleinen unterschied. kA, woran das liegt. (siehe funktion)
                                                 //performance: https://codingsight.com/entity-framework-improving-performance-when-saving-data-to-database/
 
-            printTableData(db);
             
             Console.WriteLine("--------------------------------------------------------");
-            using (DBReader reader = db.getDBReader())
+            
+            using (DBWriter writer = db.getDBWriter())
+            {
+	            Ausgabe letzteAusgabe = writer.getCurrentIssue();
+	            decimal preisLetzteAusgabe = writer.getPriceOfIssue(letzteAusgabe.ausgabe);
+            	writer.addNextIssue(preisLetzteAusgabe+1);
+            	Console.WriteLine("Neue Ausgabe hinzugefügt: "+letzteAusgabe);
+            }
+
+            //Tabelle ausschreiben
+            printTableData(db);
+                        
+			using (DBReader reader = db.getDBReader())
             {
 	            Ausgabe letzteAusgabe = reader.getCurrentIssue();
 	            decimal preisLetzteAusgabe = reader.getPriceOfIssue(letzteAusgabe.ausgabe);
   		        Console.WriteLine("Letzte Ausgabe: "+letzteAusgabe+" (Preis="+preisLetzteAusgabe+" EURO)");
             }
-            
+                        
             //Beenden
             Console.Write("\nBitte return drücken, um die Anwendung zu beenden."); Console.ReadLine();
             //Signale ausgeben beim beenden
@@ -86,7 +97,7 @@ namespace DBTest
                 watch++;
 
                 Bemerkung bm = DBRecordFactory.createBemerkung("Txt", 1); //Tabelle bemerkung füllen
-                                                       //context.Bemerkung.Include("kunden_id"); //Foreign-Key hinzufügen
+                //context.Bemerkung.Include("kunden_id"); //Foreign-Key hinzufügen
                 writer.addRecord(bm); //{mit foreign key} Inhalte zur Tabelle hinzufügen
                 watch++;
 
