@@ -12,6 +12,7 @@ using System.Data.SQLite;
 using System.Data.SQLite.EF6;
 using System.Linq;
 using System.Text;
+using System.Diagnostics;
 
 namespace DBTest
 {
@@ -44,6 +45,18 @@ namespace DBTest
         public SqLiteDbConfiguration()
         {
             AddDependencyResolver(new SQLiteDbDependencyResolver());
+            /*
+                        SetProviderFactory("System.Data.SQLite", SQLiteFactory.Instance);
+            SetProviderFactory("System.Data.SQLite.EF6", SQLiteProviderFactory.Instance);
+            SetProviderServices("System.Data.SQLite", (DbProviderServices)SQLiteProviderFactory.Instance.GetService(typeof(DbProviderServices)));
+            */
+                    //HACK
+        var EF6ProviderServicesType = typeof(System.Data.SQLite.EF6.SQLiteProviderFactory).Assembly.GetTypes().First(x => x.Name == "SQLiteProviderServices");
+        var EF6ProviderServices = (DbProviderServices)Activator.CreateInstance(EF6ProviderServicesType);
+        SetProviderServices("System.Data.SQLite.EF6", EF6ProviderServices);
+        SetProviderServices("System.Data.SqlClient", System.Data.Entity.SqlServer.SqlProviderServices.Instance);
+        SetProviderFactory("System.Data.SQLite.EF6", System.Data.SQLite.EF6.SQLiteProviderFactory.Instance);
+        SetProviderFactory("System.Data.SQLite", System.Data.SQLite.SQLiteFactory.Instance);
         }
     }
     
