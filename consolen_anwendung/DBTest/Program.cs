@@ -42,7 +42,6 @@ namespace DBTest
             createSampleDataAllTables(db); //schneller geworden.
                                                             
             Console.WriteLine("--------------------------------------------------------");
-Thread.Sleep(500);
             Console.WriteLine("Enter drücken, um fortzusetzen.");
             Console.ReadLine();
             using (DBWriter writer = db.getDBWriter())
