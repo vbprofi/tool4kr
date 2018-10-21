@@ -15,10 +15,11 @@ using System.Data.SQLite.EF6;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
 using System.ComponentModel.DataAnnotations;
+using oldfiles;
 
-namespace DBTest
+namespace oldfiles
 {
-    class DBContextInitializer : CreateDatabaseIfNotExists<DatabaseContext>
+    class DBContextInitializer : CreateDatabaseIfNotExists<DBTest.DatabaseContext>
     {
 
         public DBContextInitializer()
@@ -32,7 +33,7 @@ namespace DBTest
             createTBRechnungsposten();
         }
 
-        protected override void Seed(DatabaseContext context)
+        protected override void Seed(DBTest.DatabaseContext context)
         {
             context.SaveChanges();
         }
@@ -42,7 +43,7 @@ namespace DBTest
              ****/
         private void createTBKunde()
         {
-            using(DatabaseContext context = new DatabaseContext())
+            using(DBTest.DatabaseContext context = new DBTest.DatabaseContext())
                 {
                             context.Database.ExecuteSqlCommand("CREATE TABLE IF NOT EXISTS kunden(" +
                    "id integer NOT NULL PRIMARY KEY AUTOINCREMENT," +
@@ -74,7 +75,7 @@ namespace DBTest
              ****/
         private void createTBAusgabe()
         {
-            using(DatabaseContext context = new DatabaseContext())
+            using(DBTest.DatabaseContext context = new DBTest.DatabaseContext())
                 {
             context.Database.ExecuteSqlCommand("CREATE TABLE IF NOT EXISTS ausgabe(" +
                   "id integer NOT NULL PRIMARY KEY AUTOINCREMENT," +
@@ -92,7 +93,7 @@ namespace DBTest
  ****/
         private void createTBRechnung()
         {
-            using(DatabaseContext context = new DatabaseContext())
+            using(DBTest.DatabaseContext context = new DBTest.DatabaseContext())
                 {
             context.Database.ExecuteSqlCommand("CREATE TABLE IF NOT EXISTS rechnung(" +
                   "id integer NOT NULL PRIMARY KEY AUTOINCREMENT," +
@@ -123,7 +124,7 @@ namespace DBTest
          ****/
         private void createTBBemerkung()
         {
-            using(DatabaseContext context = new DatabaseContext())
+            using(DBTest.DatabaseContext context = new DBTest.DatabaseContext())
                 {
             context.Database.ExecuteSqlCommand("CREATE TABLE IF NOT EXISTS bemerkung(" +
                   "id integer NOT NULL PRIMARY KEY AUTOINCREMENT," +
@@ -142,7 +143,7 @@ namespace DBTest
 ****/
         private void createTBAbo()
         {
-            using(DatabaseContext context = new DatabaseContext())
+            using(DBTest.DatabaseContext context = new DBTest.DatabaseContext())
                 {
             context.Database.ExecuteSqlCommand("CREATE TABLE IF NOT EXISTS abo(" +
                   "id integer NOT NULL PRIMARY KEY AUTOINCREMENT," +
@@ -164,7 +165,7 @@ namespace DBTest
              ****/
         private void createTBStatus()
         {
-            using(DatabaseContext context = new DatabaseContext())
+            using(DBTest.DatabaseContext context = new DBTest.DatabaseContext())
                 {
             context.Database.ExecuteSqlCommand("CREATE TABLE IF NOT EXISTS status(" +
 "id integer NOT NULL PRIMARY KEY AUTOINCREMENT," +
@@ -184,7 +185,7 @@ namespace DBTest
  ****/
         private void createTBRechnungsposten()
         {
-            using(DatabaseContext context = new DatabaseContext())
+            using(DBTest.DatabaseContext context = new DBTest.DatabaseContext())
                 {
             context.Database.ExecuteSqlCommand("CREATE TABLE IF NOT EXISTS rechnungsposten(" +
                   "id integer NOT NULL PRIMARY KEY AUTOINCREMENT," +

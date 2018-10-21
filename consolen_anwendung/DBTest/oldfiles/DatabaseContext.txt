@@ -1,17 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Common;
-using System.Data.Entity;
-using System.Data.SQLite;
 using System.Linq;
 using System.Text;
-using SQLite.CodeFirst;
+using System.Data.SQLite;
+using System.Data.SQLite.EF6;
+using System.Data.Entity;
+using System.Data.Entity.ModelConfiguration.Conventions;
+using System.ComponentModel.DataAnnotations;
+using oldfiles;
 
-namespace DBTest
+namespace oldfiles
 {
-    public class DatabaseContext : DbContext
+        public class DatabaseContext : DbContext
     {
-        
+        private static String dateiname = Program.dbdateiname;
+
         public DbSet<Kunden> kunden { get; set; }
         public DbSet<Bemerkung> bemerkung { get; set; }
         public DbSet<Status> status { get; set; }
@@ -20,10 +23,10 @@ namespace DBTest
         public DbSet<Rechnungsposten> rechnungsposten { get; set; }
         public DbSet<Abo> abo { get; set; }
         
-        /*******
         public DatabaseContext() : base(new SQLiteConnection()
         {
-            ConnectionString = new SQLiteConnectionStringBuilder() { DataSource = dateiname, ForeignKeys = true, JournalMode=SQLiteJournalModeEnum.Off }.ConnectionString
+            ConnectionString = new SQLiteConnectionStringBuilder() { DataSource = dateiname, ForeignKeys = true, JournalMode=SQLiteJournalModeEnum.Off
+}.ConnectionString
         }, true)
         {
                    }
@@ -34,7 +37,7 @@ namespace DBTest
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
             base.OnModelCreating(modelBuilder);
 
-            // Relation ***
+            /*** Relation ***/
             modelBuilder.Entity<Rechnungsposten>()
 .HasRequired(rp => rp.kunden)
 .WithOptional();
@@ -58,32 +61,12 @@ namespace DBTest
                                .HasRequired(b => b.kunden)
                 .WithOptional();
 
-            /
+            /****
              * wird nicht benötigt
 modelBuilder.Entity<kunden>()
 .HasRequired(k => k.bemerkung)
 .WithOptional();
-*********
+***********/
         }
-        ***/
-
-                public DatabaseContext(DbConnection connection) 
-            : base(connection, contextOwnsConnection: true)
-        { }
-
-        public DatabaseContext(string connectionString)           
-        :   base(connectionString)
-        {
-            
-        }
-
-        
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {            
-            var initializer = new SqliteCreateDatabaseIfNotExists<DatabaseContext>(modelBuilder);
-            Database.SetInitializer(initializer);
-        }
-
-
     }//end class
 }//end namespace

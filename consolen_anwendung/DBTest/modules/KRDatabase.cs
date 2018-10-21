@@ -22,15 +22,23 @@ namespace DBTest.modules
 	public class KRDatabase
 	{
 		/** The context */
-		private DatabaseContext context = new DatabaseContext();
-		private DBContextInitializer contextInitializer = new DBContextInitializer();
+		private DatabaseContext context = new DatabaseContext("Data Source =" + Environment.CurrentDirectory + @"\test.db; Version = 3;Cache Size=2048;Journal Mode=Off;Synchronous=Full;Compress=True;UTF8Encoding=True;");
+		//private DBContextInitializer contextInitializer = new DBContextInitializer();
 		
 		public KRDatabase()
 		{
 		    //Datenbank erzeugen, falls nicht vorhanden
-            Database.SetInitializer(contextInitializer);
-
-			//Konfigurieren            
+            //Database.SetInitializer(contextInitializer);
+            /*
+            var abo = context.abo.ToList();
+            var ausgabe = context.ausgabe.ToList();
+            var bm = context.bemerkung.ToList();
+            var kunden = context.kunden.ToList();
+            var rechnung = context.rechnung.ToList();
+            var rechnungsposten = context.rechnungsposten.ToList();
+            var status = context.status.ToList();
+            */
+			//Konfigurieren           
 			configure(context);
 		}
 		
