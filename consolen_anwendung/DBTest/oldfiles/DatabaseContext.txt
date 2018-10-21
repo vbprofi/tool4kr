@@ -1,4 +1,10 @@
-﻿using System;
+﻿/******
+* Diese Klasse wird nicht mehr verwendet.
+* um diese Klasse zu verwenden, schreibt man im hauptprogramm
+//private DBContextInitializer contextInitializer = new DBContextInitializer();
+//Database.SetInitializer(contextInitializer);
+*****/
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
