@@ -49,7 +49,7 @@
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
     <Reference Include="nunit.framework">
-      <HintPath>lib\NUnit-3.11\net40\nunit.framework.dll</HintPath>
+      <HintPath>..\packages\NUnit.Framework-3.11.0\bin\net40\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
