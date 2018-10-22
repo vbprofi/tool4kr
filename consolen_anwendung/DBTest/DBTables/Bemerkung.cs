@@ -8,20 +8,20 @@ using DBTest.util;
 
 namespace DBTest
 {
-        public class Bemerkung : DBRecord
+    public class Bemerkung : DBRecord
     {
-                                public int id { get; set; }
+        public int id { get; set; }
 
-                public string text { get; set; }
+        public string text { get; set; }
 
-                public int datum { get; set; }
-               
-                public int kunden_id { get; set; }
+        public int datum { get; set; }
+
+        public int kunden_id { get; set; }
         public Kunden kunden { get; set; }
-                        
+
         public override string ToString()
-       	{
-       		return id + " " + kunden_id + "#" + " " + text + " " + Utils.TimeStampToDateTime(datum);
-       	}
+        {
+            return id + " " + kunden_id + "#" + " " + text + " " + Utils.TimeStampToDateTime(datum);
+        }
     }//end class
 } // end namespace

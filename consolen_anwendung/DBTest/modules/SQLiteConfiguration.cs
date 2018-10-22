@@ -1,4 +1,9 @@
-﻿using System;
+﻿/*******
+ * Diese Datei wurde manuell erstellt und beinhaltet drei Klassen:
+ * SQLiteProviderInvariantName, SQLiteDbDependencyResolver und SqLiteDbConfiguration 
+ * Alle drei Klassen konfigurieren den SQLite-Adapter für das Entity Framework (EF6) mit der CodeFirst-Lib
+ *******/
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -50,8 +55,8 @@ namespace DBTest
             SetProviderFactory("System.Data.SQLite.EF6", SQLiteProviderFactory.Instance);
             SetProviderServices("System.Data.SQLite", (DbProviderServices)SQLiteProviderFactory.Instance.GetService(typeof(DbProviderServices)));
             */
-                    //HACK
-        var EF6ProviderServicesType = typeof(System.Data.SQLite.EF6.SQLiteProviderFactory).Assembly.GetTypes().First(x => x.Name == "SQLiteProviderServices");
+//HACK
+var EF6ProviderServicesType = typeof(System.Data.SQLite.EF6.SQLiteProviderFactory).Assembly.GetTypes().First(x => x.Name == "SQLiteProviderServices");
         var EF6ProviderServices = (DbProviderServices)Activator.CreateInstance(EF6ProviderServicesType);
         SetProviderServices("System.Data.SQLite.EF6", EF6ProviderServices);
         SetProviderServices("System.Data.SqlClient", System.Data.Entity.SqlServer.SqlProviderServices.Instance);

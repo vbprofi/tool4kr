@@ -8,22 +8,22 @@ using DBTest.util;
 
 namespace DBTest
 {
-        public class Status : DBRecord
+    public class Status : DBRecord
     {
-                                public int id { get; set; }
+        public int id { get; set; }
 
-                public int eintritt_am { get; set; }
+        public int eintritt_am { get; set; }
 
-                public int austritt_am { get; set; }
+        public int austritt_am { get; set; }
 
-                public int flag { get; set; }
+        public int flag { get; set; }
 
-                public int kunden_id { get; set; }
+        public int kunden_id { get; set; }
         public Kunden kunden { get; set; }
-        
+
         public override string ToString()
-       	{
-       		return id + " " + kunden_id + " " + flag + " " + Utils.TimeStampToDateTime(eintritt_am) + " " + Utils.TimeStampToDateTime(austritt_am);
-       	}
+        {
+            return id + " " + kunden_id + " " + flag + " " + Utils.TimeStampToDateTime(eintritt_am) + " " + Utils.TimeStampToDateTime(austritt_am);
+        }
     }//end class
 } // end namespace
