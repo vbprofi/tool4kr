@@ -1,4 +1,5 @@
-﻿/*
+﻿#region Überschrift
+/*
  * Created by SharpDevelop.
  * User: user
  * Date: 20.10.2018
@@ -6,6 +7,7 @@
  * 
  * To change this template use Tools | Options | Coding | Edit Standard Headers.
  */
+#endregion Überschrift
 #region Using
 using System;
 #endregion Using

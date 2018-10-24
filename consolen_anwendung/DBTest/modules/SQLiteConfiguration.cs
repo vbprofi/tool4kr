@@ -1,8 +1,10 @@
-﻿/*******
+﻿#region Überschrift
+/*******
  * Diese Datei wurde manuell erstellt und beinhaltet drei Klassen:
  * SQLiteProviderInvariantName, SQLiteDbDependencyResolver und SqLiteDbConfiguration 
  * Alle drei Klassen konfigurieren den SQLite-Adapter für das Entity Framework (EF6) mit der CodeFirst-Lib
  *******/
+#endregion Überschrift
 #region Using
 using System;
 using System.Collections.Generic;

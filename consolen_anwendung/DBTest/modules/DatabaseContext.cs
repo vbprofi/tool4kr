@@ -1,9 +1,11 @@
-﻿/***
+﻿#region Überschrift
+/***
  * Diese Klasse wurde manuell erstellt.
  * Die Klasse enthält die Datasets, welches einer Datenbank entspricht (ein Dataset entspricht einer Datenbanktabelle).
  * Das Entity Framework (EF6) erstellt selbständig die entsprechende Datenbank, sollte sie nicht vorhanden sein, und Datenbanktabellen automatisch.
  * Dem Konstruktor muss eine Zeichenfolge (Connectionstring) übergeben werden, um eiine Datenbank verwenden oder erstellen zu können.
  ****/
+#endregion Überschrift
 #region Using
 using System;
 using System.Collections.Generic;
