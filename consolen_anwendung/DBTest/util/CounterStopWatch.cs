@@ -6,9 +6,11 @@
  * 
  * To change this template use Tools | Options | Coding | Edit Standard Headers.
  */
+#region Using
 using System.Diagnostics;
 
 using System;
+#endregion Using
 
 namespace DBTest
 {

@@ -6,8 +6,10 @@
  * 
  * To change this template use Tools | Options | Coding | Edit Standard Headers.
  */
+#region Using
 using System;
 using DBTest.util;
+#endregion Using
 
 namespace DBTest
 {

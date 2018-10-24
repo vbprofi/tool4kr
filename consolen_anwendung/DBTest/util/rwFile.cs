@@ -1,5 +1,7 @@
-﻿using System;
+﻿#region Using
+using System;
 using System.IO;
+#endregion Using
 
 namespace DBTest.util
 {

@@ -1,10 +1,12 @@
-﻿using System;
+﻿#region Using
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using DBTest.util;
+#endregion Using
 
 namespace DBTest
 {

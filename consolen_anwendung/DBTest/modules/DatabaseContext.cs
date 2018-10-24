@@ -4,6 +4,7 @@
  * Das Entity Framework (EF6) erstellt selbständig die entsprechende Datenbank, sollte sie nicht vorhanden sein, und Datenbanktabellen automatisch.
  * Dem Konstruktor muss eine Zeichenfolge (Connectionstring) übergeben werden, um eiine Datenbank verwenden oder erstellen zu können.
  ****/
+#region Using
 using System;
 using System.Collections.Generic;
 using System.Data.Common;
@@ -14,6 +15,7 @@ using System.Text;
 using SQLite.CodeFirst;
 using System.Data.Entity.ModelConfiguration.Conventions;
 using System.ComponentModel.DataAnnotations;
+#endregion Using
 
 namespace DBTest
 {

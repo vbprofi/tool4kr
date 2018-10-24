@@ -3,6 +3,7 @@
  * SQLiteProviderInvariantName, SQLiteDbDependencyResolver und SqLiteDbConfiguration 
  * Alle drei Klassen konfigurieren den SQLite-Adapter für das Entity Framework (EF6) mit der CodeFirst-Lib
  *******/
+#region Using
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -18,6 +19,7 @@ using System.Data.SQLite.EF6;
 using System.Linq;
 using System.Text;
 using System.Diagnostics;
+#endregion Using
 
 namespace DBTest
 {
