@@ -9,8 +9,8 @@ using System.IO;
 using System.Reflection;
 using System.Diagnostics;
 using System.Threading;
-//using System.Data.SQLite;
-//using System.Data.Entity;
+using System.Data.SQLite;
+using System.Data.Entity;
 using DBTest.modules;
 using DBTest.util;
 //using System.Transactions;
@@ -41,7 +41,7 @@ namespace DBTest
             Console.WriteLine("Datenbankversion: " + db.getVersionString());
 
             createSampleDataAllTables(db); //keine Änderung
-            createSampleDataAllTables(db); //schneller geworden.
+            //createSampleDataAllTables(db); //schneller geworden.
 
             Console.WriteLine("--------------------------------------------------------");
 
@@ -61,6 +61,8 @@ namespace DBTest
                 Ausgabe letzteAusgabe = reader.getCurrentIssue();
                 decimal preisLetzteAusgabe = reader.getPriceOfIssue(letzteAusgabe.ausgabe);
                 Console.WriteLine("Letzte Ausgabe: " + letzteAusgabe + " (Preis=" + preisLetzteAusgabe + " EURO)");
+                var abk = reader.getAboByKunde();
+                                Console.WriteLine(abk);
             }
 
             //Beenden
@@ -91,7 +93,7 @@ namespace DBTest
                 writer.addRecord(rn); //Inhalte zur Tabelle hinzufügen
                 watch++;
 
-                Abo ab = DBRecordFactory.createAbo(1, 1, 1, 1, 1, 1); //Tabelle abo füllen
+                Abo ab = DBRecordFactory.createAbo(1, 1, 1, 1, 1, 1, 1); //Tabelle abo füllen
                 writer.addRecord(ab); //{mit foreign key} Inhalte zur Tabelle hinzufügen
                 watch++;
 
@@ -196,7 +198,7 @@ namespace DBTest
                 return wText;
             }
             catch { return wText; }
-            return wText;
+            //return wText;
         }
 
         //geladene DLL-Infos in Textdatei schreiben

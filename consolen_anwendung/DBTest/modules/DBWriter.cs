@@ -39,14 +39,28 @@ namespace DBTest.modules
  		 */ 		
 		public void SaveChanges()
 		{
+            try
+            { 
 			context.SaveChanges();
-		}
+            }
+            catch(Exception ex)
+            {
+                Console.Write(ex.Message);
+            }
+                    }
 		
 		public new void Dispose()
 		{
+            try
+            {
 			SaveChanges();
 			base.Dispose();
-		}
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
 		
 		public void addRecord(Abo record)
 		{

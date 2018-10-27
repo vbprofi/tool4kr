@@ -25,7 +25,10 @@ namespace DBTest
         public int bezahlt_bis { get; set; }
 
         public int bemerkung_id { get; set; }
-        public Bemerkung bemerkung { get; set; }
+        //public Bemerkung bemerkung { get; set; }
+
+        public int kunden_id { get; set; }
+        public Kunden kunden { get; set; }
 
         public override string ToString()
         {

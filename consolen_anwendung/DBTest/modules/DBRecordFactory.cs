@@ -128,7 +128,7 @@ namespace DBTest
             return rp;
         }
         
-        public static Abo createAbo(int a_von = 0, int a_bis = 0, int b_am = 0, int b_von = 0, int b_bis = 0, int bemerkungID = 0)
+        public static Abo createAbo(int a_von = 0, int a_bis = 0, int b_am = 0, int b_von = 0, int b_bis = 0, int bemerkungID = 0, int kundenid = 0)
         {
             Abo ab = new Abo()
             {
@@ -138,13 +138,14 @@ namespace DBTest
                 bezahlt_von = b_von,
                 bezahlt_bis = b_bis,
                 bemerkung_id = bemerkungID,
+                kunden_id = kundenid,
             };
             return ab;
         }
         
-        public static Abo createAbo(int a_von, int a_bis, int b_am, int b_von, int b_bis, Bemerkung bemerkung)
+        public static Abo createAbo(int a_von, int a_bis, int b_am, int b_von, int b_bis, Bemerkung bemerkung, Kunden kunde)
         {
-        	return createAbo(a_von, a_bis, b_am, b_von, b_bis, bemerkung.id);
+        	return createAbo(a_von, a_bis, b_am, b_von, b_bis, bemerkung.id, kunde.id);
         }
 	}
 }

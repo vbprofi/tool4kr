@@ -12,6 +12,7 @@
 using System;
 using System.Linq;
 using System.Data.Entity;
+using DBTest.util;
 #endregion Using
 
 namespace DBTest.modules
@@ -115,5 +116,49 @@ namespace DBTest.modules
 			price = issue.preis;
 			return price;
 		}
-	}
-}
+
+        public string getAboByKunde()
+        {
+            
+            var query = from a in getAbos()
+                         join k in getKunden()
+                         on a.kunden_id equals k.id
+                         //into abobykunde
+                                                  where a.kunden_id == k.id
+                                                                           select new {
+                             id = a.id,
+                             ausgabe_von = a.ausgabe_von,
+                             ausgabe_bis = a.ausgabe_bis,
+                             bezahlt_am = a.bezahlt_am,
+                             bezahlt_von = a.bezahlt_von,
+                             bezahlt_bis = a.bezahlt_bis,
+                                                          vorname = k.vorname,
+                             nachname = k.nachname,
+                             plz = k.plz,
+                             ort = k.ort,
+                             kundenID = k.id,
+                             bemerkung = a.bemerkung_id
+                         };
+            
+            var abks = query.ToArray(); //.FirstOrDefault<Abo>();
+
+            var abk = "";
+            foreach (var item in abks)
+            {
+                abk +=
+                    item.id + " " +
+                    item.ausgabe_von + " " +
+                    item.ausgabe_bis + " " +
+                    Utils.TimeStampToDateTime(item.bezahlt_am) + " " +
+                    Utils.TimeStampToDateTime(item.bezahlt_von) + " " +
+                    Utils.TimeStampToDateTime(item.bezahlt_bis) + " " +
+                    item.kundenID + " " +
+                    item.vorname + " " +
+                    item.nachname + " " +
+                    item.plz + " " +
+                    item.ort + Environment.NewLine;
+            }
+            return abk;
+        }
+	}//end class
+}//end namespace
