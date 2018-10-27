@@ -41,7 +41,7 @@ namespace DBTest
             Console.WriteLine("Datenbankversion: " + db.getVersionString());
 
             createSampleDataAllTables(db); //keine Änderung
-            //createSampleDataAllTables(db); //schneller geworden.
+            createSampleDataAllTables(db); //schneller geworden.
 
             Console.WriteLine("--------------------------------------------------------");
 

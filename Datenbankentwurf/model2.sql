@@ -8,8 +8,9 @@ CREATE TABLE "abo" (
   "bezahlt_am" integer NOT NULL,
   "bezahlt_von" integer NOT NULL,
   "bezahlt_bis" integer NOT NULL,
+  "kunden_id" integer NOT NULL,
   "bemerkung_id" integer NOT NULL,
-  FOREIGN KEY ("bemerkung_id") REFERENCES "bemerkung" ("id") ON DELETE NO ACTION ON UPDATE NO ACTION
+  FOREIGN KEY ("kunden_id") REFERENCES "kunden" ("id") ON DELETE NO ACTION ON UPDATE NO ACTION
 );
 
 
