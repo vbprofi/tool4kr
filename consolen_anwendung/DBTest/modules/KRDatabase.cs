@@ -30,7 +30,7 @@ namespace DBTest.modules
 
         public KRDatabase()
         {
-            /*
+                        /*
              * folgende Zeilen könnten die datensätze einlesen
             var abo = context.abo.ToList();
             var ausgabe = context.ausgabe.ToList();
@@ -56,7 +56,7 @@ namespace DBTest.modules
 
         public String getVersionString()
         {
-            return context.Database.Connection.ServerVersion;
+            return "v " + context.Database.Connection.ServerVersion + " | Modell " + context.Version.ToString();
         }
 
         /**

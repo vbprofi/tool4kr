@@ -17,6 +17,7 @@ using System.Text;
 using SQLite.CodeFirst;
 using System.Data.Entity.ModelConfiguration.Conventions;
 using System.ComponentModel.DataAnnotations;
+using DBTest.modules.migration;
 #endregion Using
 
 namespace DBTest
@@ -33,6 +34,28 @@ namespace DBTest
         public DbSet<Abo> abo { get; set; }
 
 
+        #region migration
+        private const String _DB_VERSION = "PRAGMA user_version";
+
+        private int? _databaseVersion = null;
+        public int Version
+        {
+            get
+            {
+                if (!_databaseVersion.HasValue)
+                {
+                    _databaseVersion = Database.SqlQuery<int>(_DB_VERSION).Single();
+                }
+                return _databaseVersion.Value;
+            }
+            set
+            {
+                Database.ExecuteSqlCommand(_DB_VERSION + "=" + value);
+                _databaseVersion = null;
+            }
+        }
+        #endregion migration
+
         public DatabaseContext(DbConnection connection)
     : base(connection, contextOwnsConnection: true)
         {
@@ -41,12 +64,15 @@ namespace DBTest
         public DatabaseContext(string connectionString)
         : base(connectionString)
         {
-        }
+                    }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             var initializer = new SqliteCreateDatabaseIfNotExists<DatabaseContext>(modelBuilder);
             Database.SetInitializer(initializer);
+            //Migration laden
+            //Achtung: Nur dann verwenden, wenn eine bestehende DB existiert!!!
+            //Database.SetInitializer<DatabaseContext>(new MigrationInitializer());
             //Voreinstellung
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
             base.OnModelCreating(modelBuilder);

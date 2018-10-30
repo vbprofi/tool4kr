@@ -1,0 +1,65 @@
+﻿Wichtig:
+Wenn die Software im produktiven Einsatz ist und auf Wunsch die Datenbank in der Software geändert / modifiziert/erweitert werden muss, muss die bereits existierende/vorhandene Datenbank beim User lokal angepasst werden, ohne Datenverlusst zu verursachen. Hierfür ist eine Migration implementiert, die eine interne Versionierung der Datenbank vornimmt. Bei jeder Änderung wird die Datenbank-User-Version um 1 hochgezählt.
+
+A erste Änderung an der Datenbank
+B Nächste Version
+C Ausgabe der Version
+D Quelle des Tutorials
+
+--------------------------
+A erste Änderung an der Datenbank
+
+1. Im DatabaseContext diese Zeile einkommentieren:
+//Database.SetInitializer<DatabaseContext>(new MigrationInitializer());
+
+Neue Zeile lautet dann:
+Database.SetInitializer<DatabaseContext>(new MigrationInitializer());
+
+2. Im MigrationInitializer im Ordner modules/migration/ folgende Zeile Einstellen:
+_REQUIRED_VERSION = 1; //Für Version 1 der Datenbank
+
+Folgende Zeile einkommentieren:
+//new migrationStep1(), //version 1
+
+Neue Zeile
+new migrationStep1(), //version 1
+
+3. In der Klasse migrationStep1 werden die notwendigen Änderungen an der Datenbankstruktur mit nativem SQL-Code vorgenommen.
+
+--------------------------------
+B Nächste Version
+
+Bei einer weiteren Änderungen an der Datenbank geht man folgender Maßen vor:
+
+1. Die Klasse migrationStep1 wird in eine neue Datei kopiert und die Zahl im Klassennamen hochgezählt.
+Neuer Name: migrationStep2 für Version 2
+migrationStep3 für Version 3
+migrationStep4 für Version 4
+...
+
+2. Im MigrationInitializer im Ordner modules/migration/ folgende Zeile Einstellen:
+_REQUIRED_VERSION = 2; //Für Version 2 der Datenbank
+
+Folgende Zeile einkommentieren:
+//new migrationStep2(), //version 1
+
+Neue Zeile
+new migrationStep2(), //version 2
+
+Oder neue Zeile bei weiteren Versionen hinzufügen:
+new migrationStep3(), //version 3
+new migrationStep4(), //version 4
+...
+
+3. In der Klasse migrationStep[Version] werden die notwendigen Änderungen an der Datenbankstruktur mit nativem SQL-Code vorgenommen.
+
+------------
+C Ausgabe der Version
+Die aktuelle Datenbankversion kann mit context.version abgerufen werden.
+Im Hauptprogramm in der Zeile Datenbankversion als Modell [Version] bereits implementiert.
+
+------
+D Quelle des Tutorials
+
+Folgendes Tutorial wurde für die Integrierung der Migrationsfunktionen verwendet.
+https://webducer.de/de/tutorials/net/ef6-sqlite-migration.html
