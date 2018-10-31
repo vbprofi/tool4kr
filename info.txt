@@ -12,6 +12,8 @@ https://stackoverflow.com/questions/47598127/entityframeworkcore-and-code-first-
 SQLite with C#.Net and Entity Framework
 https://www.codeproject.com/Articles/1158937/SQLite-with-Csharp-Net-and-Entity-Framework
 
+eigenen Initializer schreiben: könnte nützlich für migration etc sein
+https://www.codeguru.com/csharp/article.php/c19999/Understanding-Database-Initializers-in-Entity-Framework-Code-First.htm
 ------
 signatur und signierung überprüfen
 http://pinvoke.net/default.aspx/wintrust/WinVerifyTrust.html
