@@ -19,6 +19,7 @@ namespace KRTool
         public static String assemblyDirectory = Environment.CurrentDirectory.ToString(); //ermittelt den aktuellen pfad der Anwendung
         //public static String dbdateiname = assemblyDirectory + @"\test.db"; //Dateiname der SQLite-Datenbank
         private static String dlldateiname = assemblyDirectory + @"\dlls.txt"; //Datei für schreiben der DLL-Infos
+      static  bool createdNew; //Variable zum Prüfen des eigenen Prozesses
 
         /// <summary>
         /// The main entry point for the application.
@@ -26,19 +27,28 @@ namespace KRTool
         [STAThread]
         static void Main()
         {
-            String txt = "";
-            txt+= getAssembly();
-            //DLL-Dateiinfos in Datei schreiben
-            writeLoadDLL();
-                        
-            Form1 view = new Form1();
-            view.Visible = false;
-                        
-            AusgabeController controller = new AusgabeController(view, txt);
-            controller.LoadView();
-            view.Text = getAssembly("title");
-            view.ShowDialog();
-        }
+            System.Threading.Mutex mutex = new System.Threading.Mutex(true, Application.ProductName, out createdNew);
+            if (createdNew)
+            {
+                String txt = "";
+                txt += getAssembly();
+                //DLL-Dateiinfos in Datei schreiben
+                writeLoadDLL();
+
+                Form1 view = new Form1();
+                view.Visible = false;
+
+                AusgabeController controller = new AusgabeController(view, txt);
+                controller.LoadView();
+                view.Text = getAssembly("title");
+                view.ShowDialog();
+                mutex.ReleaseMutex();
+            }
+            else
+            {
+                MessageBox.Show("Programm wurde bereits gestartet!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            }
 
         private static String getBINinfo(string AppDirectory)
         {
