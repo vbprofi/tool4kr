@@ -30,3 +30,7 @@ https://www.codeproject.com/Articles/731954/Simple-Auto-Update-Let-your-applicat
 Excel-Dateien erzeugen
 https://www.codeproject.com/Articles/33850/Generate-Excel-files-without-using-Microsoft-Excel
 https://www.codeproject.com/Articles/692092/A-free-Export-to-Excel-Csharp-class-using-OpenXML
+
+----
+Asynchrone Programmierung – Asynchron von Anfang an
+https://msdn.microsoft.com/de-de/magazine/mt620013.aspx
