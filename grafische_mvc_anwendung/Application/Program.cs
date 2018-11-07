@@ -47,7 +47,8 @@ namespace KRTool
                 view.Text = getAssembly("title");
                 //view.ShowDialog();
                 Thread t2 = new Thread(new ThreadStart(mainwindow));
-
+                t0.IsBackground = true;
+                t1.IsBackground = true;
                 t0.Start();
                 t1.Start();
                 t2.Start();
