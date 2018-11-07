@@ -26,14 +26,16 @@ namespace KRTool.View
             _controller = controller;
         }
 
-        public void AddToAusgabe(string usr)
+        public void AddToAusgabe(string txt)
         {
-            txtAusgabe.Text = usr;
+            txtAusgabe.Text = txt;
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
             
         }
+
+
     }
 }

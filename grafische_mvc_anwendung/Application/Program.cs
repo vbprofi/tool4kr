@@ -7,6 +7,7 @@ using System.Collections;
 using System.IO;
 using System.Reflection;
 using System.Diagnostics;
+using System.Threading;
 using KRTool.Model;
 using KRTool.View;
 using KRTool.Controller;
@@ -20,6 +21,7 @@ namespace KRTool
         //public static String dbdateiname = assemblyDirectory + @"\test.db"; //Dateiname der SQLite-Datenbank
         private static String dlldateiname = assemblyDirectory + @"\dlls.txt"; //Datei für schreiben der DLL-Infos
         static bool createdNew; //Variable zum Prüfen des eigenen Prozesses
+       static Form1 view = new Form1();
 
         /// <summary>
         /// The main entry point for the application.
@@ -35,19 +37,30 @@ namespace KRTool
                 //DLL-Dateiinfos in Datei schreiben
                 writeLoadDLL();
 
-                Form1 view = new Form1();
+                //Form1 view = new Form1();
                 view.Visible = false;
 
                 AusgabeController controller = new AusgabeController(view, txt);
-                controller.LoadView();
+                //controller.LoadView();
+                Thread t1 = new Thread(new ThreadStart(controller.LoadView));
                 view.Text = getAssembly("title");
-                view.ShowDialog();
+                //view.ShowDialog();
+                Thread t2 = new Thread(new ThreadStart(mainwindow));
+                t1.Start();
+                t2.Start();
                 mutex.ReleaseMutex(); //Speicher freigeben
+                mutex.Close(); //beenden
+                mutex.Dispose(); //speicher aufräumen
             }
             else
             {
                 MessageBox.Show("Programm wurde bereits gestartet!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private static void mainwindow()
+        {
+            view.ShowDialog();
         }
 
         private static String getBINinfo(string AppDirectory)
