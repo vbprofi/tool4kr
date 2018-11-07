@@ -3,8 +3,7 @@
 In Phase 1 werden das Datenbankmodell entworfen und Klassenobjekte für Datasets  (insert into, update und delete from) erstellt und in der Consolen Anwendung anhand von Geschäftsabläufen mit fiktiven Datensätzen getestet. Die Klassen sollten dabei modular entwickelt werden, damit sie später ohne größeren Aufwand für eine grafische Oberfläche genutzt werden können. Phase 1 ist dann abgeschlossen, wenn diese Todoliste abgearbeitet wurde. Nach jedem fertigen Punkt in dieser Liste den Punkt mit runden Klammern () als fertig deklarieren. Kommentar können nach der geschlossenen Klammer ergänzt werden.
 
 1. Datenbankmodell entwerfen
-(- Vorschlag Model2 liegt vor) - wartet auf Rückmeldung
-- 
+- Vorschlag Model2 liegt vor - wird genutzt und im Verlauf geändert
 
 2. Datenbank füllen und bestimmte Datensätze zeigen
 - Die Consolen Anwendung soll folgendes können: Der User soll
@@ -26,3 +25,13 @@ b)	Wenn Abonnementen das Abo verlängern, es aufnehmen / ändern können
 c)	beendete/gekündigte/gesperrten Abonnementen wieder zulassen
 d)	Statistik pro Zeitschriftsausgabe zeigen
 e) weitere Statistiken können ergänzt werden (Auflage einr Ausgabe mitspeichern?)
+
+
+=======================================================
+todo liste - Phase 2
+
+In Phase 2 wird eine grafische Anwendung erzeugt und die in Phase 1 erstellten Funktionen eingebaut und das UI intuitiv gehalten. Dabei sollte zu beachten sein, dass das UI Modular aufgebaut wird.
+
+1. Modulare Anwendung
+- MVC, MVP, MMP etc Modelle: Gewählt wurde MVC
+- MVC Modell liegt vor.
