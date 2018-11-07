@@ -35,7 +35,8 @@ namespace KRTool
                 String txt = "";
                 txt += getAssembly();
                 //DLL-Dateiinfos in Datei schreiben
-                writeLoadDLL();
+                Thread t0 = new Thread(new ThreadStart(writeLoadDLL));
+                //writeLoadDLL();
 
                 //Form1 view = new Form1();
                 view.Visible = false;
@@ -46,6 +47,8 @@ namespace KRTool
                 view.Text = getAssembly("title");
                 //view.ShowDialog();
                 Thread t2 = new Thread(new ThreadStart(mainwindow));
+
+                t0.Start();
                 t1.Start();
                 t2.Start();
                 mutex.ReleaseMutex(); //Speicher freigeben
