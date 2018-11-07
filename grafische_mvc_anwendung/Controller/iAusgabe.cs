@@ -6,6 +6,6 @@ namespace KRTool.Controller
   public  interface iAusgabe
     {
         void SetController(AusgabeController controller);
-                void AddToAusgabe(String user);
+                void AddToAusgabe(String txt);
     }
 }
