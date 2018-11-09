@@ -89,7 +89,6 @@
     <Compile Include="SQLiteConfiguration.cs" />
     <Compile Include="User.cs" />
     <Compile Include="util\CounterStopWatch.cs" />
-    <Compile Include="util\RWFile.cs" />
     <Compile Include="util\Utils.cs" />
   </ItemGroup>
   <ItemGroup>

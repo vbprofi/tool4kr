@@ -11,15 +11,18 @@ using KRTool.Controller;
 
 namespace KRTool
 {
-    static class UserProgram
+    class UserProgram
     {
+        UsersView view;
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
-        [STAThread]
-        static void _Main()
+        //[STAThread]
+        //static void _Main()
+        public UserProgram()
         {
-            UsersView view = new UsersView();
+            //UsersView view = new UsersView();
+            view = new UsersView();
             view.Visible = false;
 
             // Add some dummy data
@@ -36,6 +39,11 @@ namespace KRTool
 
             UsersController controller = new UsersController(view, users);
             controller.LoadView();
+            //view.ShowDialog();
+        }
+
+        public void start()
+        {
             view.ShowDialog();
         }
     }

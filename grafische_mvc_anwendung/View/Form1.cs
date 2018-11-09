@@ -18,7 +18,7 @@ namespace KRTool.View
         {
             InitializeComponent();
         }
-
+                
         AusgabeController _controller;
 
         public void SetController(AusgabeController controller)

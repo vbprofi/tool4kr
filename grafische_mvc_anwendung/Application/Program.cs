@@ -2,128 +2,78 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
-
-using System.Collections;
-using System.IO;
-using System.Reflection;
-using System.Diagnostics;
 using System.Threading;
-using KRTool.Model;
-using KRTool.View;
-using KRTool.Controller;
-using DBTest.util;
+using System.Threading.Tasks;
+using System.Net;
 
 namespace KRTool
 {
     static class Program
     {
-        public static String assemblyDirectory = Environment.CurrentDirectory.ToString(); //ermittelt den aktuellen pfad der Anwendung
-        //public static String dbdateiname = assemblyDirectory + @"\test.db"; //Dateiname der SQLite-Datenbank
-        private static String dlldateiname = assemblyDirectory + @"\dlls.txt"; //Datei für schreiben der DLL-Infos
         static bool createdNew; //Variable zum Prüfen des eigenen Prozesses
-       static Form1 view = new Form1();
 
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
-        static void Main()
+        static void Main(string[] args)
         {
             System.Threading.Mutex mutex = new System.Threading.Mutex(true, Application.ProductName, out createdNew);
             if (createdNew)
             {
-                String txt = "";
-                txt += getAssembly();
-                //DLL-Dateiinfos in Datei schreiben
-                Thread t0 = new Thread(new ThreadStart(writeLoadDLL));
-                //writeLoadDLL();
+                Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(false);
 
-                //Form1 view = new Form1();
-                view.Visible = false;
+                WindowsFormsSynchronizationContext.SetSynchronizationContext(new WindowsFormsSynchronizationContext());
 
-                AusgabeController controller = new AusgabeController(view, txt);
-                //controller.LoadView();
-                Thread t1 = new Thread(new ThreadStart(controller.LoadView));
-                view.Text = getAssembly("title");
-                //view.ShowDialog();
-                Thread t2 = new Thread(new ThreadStart(mainwindow));
-                t0.IsBackground = true;
-                t1.IsBackground = true;
-                t0.Start();
+                //MVC Testbeispiel: UserProgram
+                UserProgram u = new UserProgram();
+                Thread t1 = new Thread(new ThreadStart(u.start));
                 t1.Start();
-                t2.Start();
+
+                KRTool p = new KRTool();
+                p.ExitRequested += p_ExitRequested;
+
+                //while (true)
+                //{
+                //if (!t1.IsAlive)
+                    //{
+                        Task programStart = p.Start();
+                        HandleExceptions(programStart);
+                    //t1.Abort();
+                    //Thread.Sleep(1000);
+                    //break;
+                //}
+                //}
+
+                Application.Run();
                 mutex.ReleaseMutex(); //Speicher freigeben
                 mutex.Close(); //beenden
                 mutex.Dispose(); //speicher aufräumen
             }
             else
             {
-                MessageBox.Show("Programm wurde bereits gestartet!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Eine Instanz dieser Anwendung läuft bereits." + Environment.NewLine + "Bitte schließen Sie die Anwendung, um das Programm neu zu starten.", "Fehler beim Starten der Anwendung", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
-        private static void mainwindow()
+        static void p_ExitRequested(object sender, EventArgs e)
         {
-            view.ShowDialog();
+            Application.ExitThread();
         }
 
-        private static String getBINinfo(string AppDirectory)
+        private static async void HandleExceptions(Task task)
         {
-            String wText = "";
             try
             {
-                var versionInfo = FileVersionInfo.GetVersionInfo(AppDirectory);
-
-                wText += "Productname: " + versionInfo.ProductName + Environment.NewLine;
-                wText += "ProductVersion: " + versionInfo.ProductVersion + Environment.NewLine;
-                wText += "FileVersion: " + versionInfo.FileVersion + Environment.NewLine;
-                return wText;
+                await Task.Yield();
+                await task;
             }
-            catch { return wText; }
-            //return wText;
-        }
-
-        //geladene DLL-Infos in Textdatei schreiben
-        private static void writeLoadDLL()
-        {
-            String wText = "";
-            try
+            catch (Exception ex)
             {
-                RWFile wFile = new RWFile();
-                wText += DateTime.Now + ": Programm gestartet." + Environment.NewLine + "Folgende DLL-Dateien geladen..." + Environment.NewLine + "----------------------" + Environment.NewLine;
-                //dateien info
-                wText += getBINinfo(assemblyDirectory + @"\autogeneratedDB.dll") + Environment.NewLine;
-                wText += getBINinfo(assemblyDirectory + @"\System.Data.SQLite.dll") + Environment.NewLine;
-                wText += getBINinfo(assemblyDirectory + @"\EntityFramework.dll") + Environment.NewLine;
-                wText += getBINinfo(assemblyDirectory + @"\System.Data.SQLite.EF6.dll") + Environment.NewLine;
-                wText += getBINinfo(assemblyDirectory + @"\SQLite.CodeFirst.dll") + Environment.NewLine;
-                wText += getBINinfo(assemblyDirectory + @"\Controller.dll") + Environment.NewLine;
-                wText += getBINinfo(assemblyDirectory + @"\Model.dll") + Environment.NewLine;
-                wText += getBINinfo(assemblyDirectory + @"\View.dll") + Environment.NewLine;
-
-                wFile.WriteFile(dlldateiname, wText);
+                MessageBox.Show(ex.Message);
+                Application.Exit();
             }
-            catch { }
-        }
-
-        private static string getAssembly(String info = "")
-        {
-            Assembly execAssembly = Assembly.GetCallingAssembly();
-            AssemblyName name = execAssembly.GetName();
-
-            if (info.Length <= 0 || info == "")
-            {
-                return string.Format("{0} v{1:0} for .Net ({2}){3}",
-                                name.Name,
-                name.Version.ToString(),
-                execAssembly.ImageRuntimeVersion,
-                Environment.NewLine
-                );
-            }
-            else
-            if (info == "title") return name.Name + " v" + name.Version.ToString();
-
-            return "";
         }
 
     }//end class

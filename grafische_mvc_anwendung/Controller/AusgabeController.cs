@@ -3,17 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-
 using KRTool.Model;
 using DBTest.modules;
 using DBTest.util;
 using DBTest;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Net;
 
 namespace KRTool.Controller
 {
    public class AusgabeController
     {
-        iAusgabe _view;
+   iAusgabe _view;
         String _dbText;
 
         public AusgabeController(iAusgabe view, String txtForm)
@@ -158,10 +160,10 @@ namespace KRTool.Controller
             }
             return txt;
         }
-
+        
         public void LoadView()
         {
-            _view.AddToAusgabe(_dbText);
+          _view.AddToAusgabe(_dbText);
         }
  }
 }
