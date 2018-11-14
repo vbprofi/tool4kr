@@ -1,5 +1,3 @@
-SQLite DatabaseBrowser 3.10.1 Portable, DatabaseNet4, DatabaseNet5Pro und sqliteadmin   sind grafische Datenbankanwendung für SQLite3. Sie gehört aber nicht zu den hauseigenen Werkzeugen.
-
 Hauseigene Werkzeuge: sqlite-tools-win32-x86-3250100
 - Die SQLite Console wird mit sqlite3.exe aufgerufen.
 .open <dateiname> eingeben. Die SQLite3-Datenbankdatei wird im selben Verzeichnis geöffnet oder wenn nicht vorhanden erstellt.
