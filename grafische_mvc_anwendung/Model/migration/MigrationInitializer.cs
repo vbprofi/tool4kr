@@ -7,7 +7,7 @@ using System.Data.Entity;
 using System.Data.SQLite;
 #endregion using
 
-namespace DBTest.modules.migration
+namespace KRTool.Model.migration
 {
     public class MigrationInitializer : IDatabaseInitializer<DatabaseContext>
     {

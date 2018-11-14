@@ -17,10 +17,10 @@ using System.Text;
 using SQLite.CodeFirst;
 using System.Data.Entity.ModelConfiguration.Conventions;
 using System.ComponentModel.DataAnnotations;
-using DBTest.modules.migration;
+using KRTool.Model.migration;
 #endregion Using
 
-namespace DBTest
+namespace KRTool.Model
 {
     public class DatabaseContext : DbContext
     {

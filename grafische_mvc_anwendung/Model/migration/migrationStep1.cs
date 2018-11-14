@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 #endregion using
 
-namespace DBTest.modules.migration
+namespace KRTool.Model.migration
 {
     public class migrationStep1 : IMigrationStep<DatabaseContext>
     {

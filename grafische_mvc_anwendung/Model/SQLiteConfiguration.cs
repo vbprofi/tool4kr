@@ -23,7 +23,7 @@ using System.Text;
 using System.Diagnostics;
 #endregion Using
 
-namespace DBTest
+namespace KRTool.Model
 {
         public class SQLiteProviderInvariantName : IProviderInvariantName
     {

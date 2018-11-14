@@ -14,10 +14,8 @@ using System.Diagnostics;
 using System;
 #endregion Using
 
-namespace DBTest
+	namespace KRTool.Model.util
 {
-	namespace util
-	{
 		/// <summary>
 		/// Eine Stopwatch die auch zählen kann und eine vereinfachte Ausgabemethode hat.
 		/// (zwb: Kleine c# Übung)
@@ -67,4 +65,3 @@ namespace DBTest
 			}
 		}
 	}
-}

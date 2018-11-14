@@ -50,6 +50,7 @@ namespace KRTool
                 mutex.ReleaseMutex(); //Speicher freigeben
                 mutex.Close(); //beenden
                 mutex.Dispose(); //speicher aufräumen
+                MessageBox.Show("Programm wird nun beendet." + Environment.NewLine + "Auf wiedersehen!", "Programm wird beendet!", MessageBoxButtons.OK, MessageBoxIcon.Stop, MessageBoxDefaultButton.Button1, MessageBoxOptions.ServiceNotification);
             }
             else
             {

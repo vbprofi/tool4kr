@@ -12,7 +12,7 @@
 using System;
 #endregion Using
 
-namespace DBTest
+namespace KRTool.Model
 {
 	/// <summary>
 	/// Abstrakte Oberklasse für einen Datensatz in einer Tabelle der DB.

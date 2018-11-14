@@ -6,7 +6,7 @@ using System.Text;
 using System.Data.Entity;
 #endregion using
 
-namespace DBTest.modules.migration
+namespace KRTool.Model.migration
 {
     public class NullMigrationStep<T> : IMigrationStep<T> where T : DbContext
     {

@@ -5,10 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Diagnostics;
 using System.Threading.Tasks;
-using DBTest.util;
+using KRTool.Model.util;
 #endregion Using
 
-namespace DBTest
+namespace KRTool.Model
 {
     public class Rechnungsposten : DBRecord
     {

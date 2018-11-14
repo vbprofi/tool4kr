@@ -10,10 +10,10 @@
 #endregion Überschrift
 #region Using
 using System;
-using DBTest.util;
+using KRTool.Model.util;
 #endregion Using
 
-namespace DBTest
+namespace KRTool.Model
 {
 	/// <summary>
 	/// Factory-Klasse, um neue Datensätze zu erzeugen.

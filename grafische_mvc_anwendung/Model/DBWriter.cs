@@ -13,7 +13,7 @@ using System;
 using System.Data.Entity;
 #endregion Using
 
-namespace DBTest.modules
+namespace KRTool.Model
 {
 	/// <summary>
 	/// Diese Klasse entspricht einer schreibenden Transaktion auf die unterliegende Datenbank.

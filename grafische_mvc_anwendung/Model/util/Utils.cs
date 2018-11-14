@@ -12,7 +12,7 @@
 using System;
 #endregion Using
 
-namespace DBTest.util
+namespace KRTool.Model.util
 {
 	/// <summary>
 	/// Klasse mit allgemeinen Utility-Funktionen, die nirgendwo sonst reinpassen.

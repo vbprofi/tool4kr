@@ -12,10 +12,10 @@
 using System;
 using System.Linq;
 using System.Data.Entity;
-using DBTest.util;
+using KRTool.Model.util;
 #endregion Using
 
-namespace DBTest
+namespace KRTool.Model
 {
 	/// <summary>
 	/// Diese Klasse entspricht einer lesenden Transaktion auf die unterliegende Datenbank.

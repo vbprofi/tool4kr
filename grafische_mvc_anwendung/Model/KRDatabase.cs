@@ -16,7 +16,7 @@ using System.Linq;
 using System.Collections.Generic;
 #endregion Using
 
-namespace DBTest.modules
+namespace KRTool.Model
 {
     /// <summary>
     /// Zentrale Klasse für Datenbankoperationen. Abstrahiert die Datenbank und stellt Datenbanken-Transaktionen
