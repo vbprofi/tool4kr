@@ -1,0 +1,14 @@
+Changelog
+-----------------------
+15.11.2018
+Hauptprogramm:
+- Uttility zum Benchmarking (Lesen und Schreiben der Datenbank)
+- Ausgabe aller Tabellen der Datenbank
+- Funktionen zum Füllen der Datenbank
+- erstellt die Datei dlls.txt beim Starten der Anwendung mit den genutzten Librarys und Versionsinformationen.
+
+Datenbank:
+- Datenbankmigration und Versionierung zum updaten der im Produktion eingesetzten Datenbank
+- Context-initializer  zur Erstellung einer leeren Datenbanksdatei
+- Schreiben und Lesen zum Befüllen der Tabellen
+- Datenbank Konfiguration und Design (Tabellen, Spalten und ihre Beziehungen zueinander)
