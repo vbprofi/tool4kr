@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "Application\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "View", "View\View.csproj", "{D141C46E-B8EA-4ED6-A9BD-B14585744DA0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "internetmarke", "internetmarke\internetmarke.csproj", "{1B499B32-575F-471B-815D-C7245C3CB2AA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -61,6 +63,18 @@ Global
 		{D141C46E-B8EA-4ED6-A9BD-B14585744DA0}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{D141C46E-B8EA-4ED6-A9BD-B14585744DA0}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{D141C46E-B8EA-4ED6-A9BD-B14585744DA0}.Release|x86.ActiveCfg = Release|Any CPU
+		{1B499B32-575F-471B-815D-C7245C3CB2AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B499B32-575F-471B-815D-C7245C3CB2AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B499B32-575F-471B-815D-C7245C3CB2AA}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{1B499B32-575F-471B-815D-C7245C3CB2AA}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{1B499B32-575F-471B-815D-C7245C3CB2AA}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{1B499B32-575F-471B-815D-C7245C3CB2AA}.Debug|x86.Build.0 = Debug|Any CPU
+		{1B499B32-575F-471B-815D-C7245C3CB2AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B499B32-575F-471B-815D-C7245C3CB2AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1B499B32-575F-471B-815D-C7245C3CB2AA}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{1B499B32-575F-471B-815D-C7245C3CB2AA}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{1B499B32-575F-471B-815D-C7245C3CB2AA}.Release|x86.ActiveCfg = Release|Any CPU
+		{1B499B32-575F-471B-815D-C7245C3CB2AA}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -10,6 +10,9 @@ consolen_anwendung/DBTestUnitTests/obj/*
 
 #MVC-Anwendungsmodell
 #gui_anwendung
+gui_anwendung/bin/*
+gui_anwendung/internetmarke/bin/*
+gui_anwendung/internetmarke/obj/*
 gui_anwendung/Application/bin/*
 gui_anwendung/Application/obj/*
 gui_anwendung/Controller/bin/*
