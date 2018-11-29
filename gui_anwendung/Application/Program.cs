@@ -30,7 +30,7 @@ namespace KRTool
                 UserProgram u = new UserProgram();
                 Thread t1 = new Thread(new ThreadStart(u.start));
                 t1.Start();
-
+                Application.DoEvents();
                 KRTool p = new KRTool();
                 p.ExitRequested += p_ExitRequested;
 
@@ -40,12 +40,12 @@ namespace KRTool
                     //{
                         Task programStart = p.Start();
                         HandleExceptions(programStart);
-                    //t1.Abort();
-                    //Thread.Sleep(1000);
-                    //break;
+                //t1.Abort();
+                //Thread.Sleep(1000);
+                //break;
                 //}
                 //}
-
+                
                 Application.Run();
                 mutex.ReleaseMutex(); //Speicher freigeben
                 mutex.Close(); //beenden

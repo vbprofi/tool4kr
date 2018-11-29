@@ -38,6 +38,9 @@ namespace KRTool
 
             controller = new AusgabeController(view, txt);
             view.Text = getAssembly("title");
+            
+                Form2 f2 = new Form2();
+            f2.Show();
         }
 
         public async Task Start()
