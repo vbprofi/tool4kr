@@ -67,6 +67,39 @@ namespace KRTool.View
             }
             catch { }
             */
+
+            // iterate through parent nodes in the collection
+            foreach (TreeNode node in this.treeView1.Nodes)
+            {
+                if (node.IsSelected)
+                {
+                    //MessageBox.Show(node.Text + "is selected");
+                }
+                CheckForChildren(node);
+            }
         }
-    }
-}
+
+        private void CheckForChildren(TreeNode node)
+        {
+
+            // check whether each parent node has child nodes
+            if (node.IsExpanded && node.Nodes.Count > 0)
+            {
+
+                // iterate through child nodes in the collection
+                foreach (TreeNode nd in node.Nodes)
+                {
+                    if (nd.IsSelected)
+                    {
+                        MessageBox.Show(nd.Text + "is selected");
+                    }
+
+                    // Do recursive call
+                    CheckForChildren(nd);
+                }
+
+            }
+        }
+
+    }//end class
+}//end namespace
