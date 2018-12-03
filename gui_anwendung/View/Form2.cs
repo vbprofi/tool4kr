@@ -14,7 +14,7 @@ namespace KRTool.View
         public Form2()
         {
             InitializeComponent();
-
+            
             //TreeView
             this.treeView1.LabelEdit = true;
             TreeNode mainNode = new TreeNode();
@@ -81,7 +81,6 @@ namespace KRTool.View
 
         private void CheckForChildren(TreeNode node)
         {
-
             // check whether each parent node has child nodes
             if (node.IsExpanded && node.Nodes.Count > 0)
             {
@@ -91,7 +90,7 @@ namespace KRTool.View
                 {
                     if (nd.IsSelected)
                     {
-                        MessageBox.Show(nd.Text + "is selected");
+                        //MessageBox.Show(nd.Text + "is selected");
                     }
 
                     // Do recursive call
@@ -100,6 +99,30 @@ namespace KRTool.View
 
             }
         }
+
+        private void tsBearbeiten_Click(object sender, EventArgs e)
+        {
+            this.treeView1.SelectedNode.BeginEdit();
+        }
+
+        private void tsLoeschen_Click(object sender, EventArgs e)
+        {
+            foreach (TreeNode node in this.treeView1.Nodes)
+            {
+                // check whether each parent node has child nodes
+                if (node.IsExpanded && node.Nodes.Count >= 0)
+                {
+
+                    // iterate through child nodes in the collection
+                    foreach (TreeNode nd in node.Nodes)
+                    {
+                        if (nd.IsSelected)
+                            this.treeView1.SelectedNode.Remove();
+                    }
+                }
+            }
+        }
+
 
     }//end class
 }//end namespace

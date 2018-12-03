@@ -35,7 +35,11 @@
             this.MenuItemHP = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuItemInfo = new System.Windows.Forms.ToolStripMenuItem();
             this.treeView1 = new KRTool.View.LoadOnDemandTreeView();
+            this.contextMenu1 = new System.Windows.Forms.ContextMenuStrip();
+            this.tsBearbeiten = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsLoeschen = new System.Windows.Forms.ToolStripMenuItem();
             this.menuMain.SuspendLayout();
+            //this.contextMenu1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuMain
@@ -76,17 +80,18 @@
             // MenuItemHP
             // 
             this.MenuItemHP.Name = "MenuItemHP";
-            this.MenuItemHP.Size = new System.Drawing.Size(252, 30);
+            this.MenuItemHP.Size = new System.Drawing.Size(185, 30);
             this.MenuItemHP.Text = "&Homepage";
             // 
             // MenuItemInfo
             // 
             this.MenuItemInfo.Name = "MenuItemInfo";
-            this.MenuItemInfo.Size = new System.Drawing.Size(252, 30);
+            this.MenuItemInfo.Size = new System.Drawing.Size(185, 30);
             this.MenuItemInfo.Text = "&Info";
             // 
             // treeView1
             // 
+            this.treeView1.ContextMenuStrip = this.contextMenu1;
             this.treeView1.FakeNodes = true;
             this.treeView1.Location = new System.Drawing.Point(0, -1);
             this.treeView1.Name = "treeView1";
@@ -95,6 +100,29 @@
             this.treeView1.TabIndex = 1;
             this.treeView1.LoadData += new System.Windows.Forms.TreeViewCancelEventHandler(this.treeView1_LoadData);
             this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
+            // 
+            // contextMenu1
+            // 
+            this.contextMenu1.ImageScalingSize = new System.Drawing.Size(24, 24);
+            this.contextMenu1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsBearbeiten,
+            this.tsLoeschen});
+            this.contextMenu1.Name = "contextMenu1";
+            this.contextMenu1.Size = new System.Drawing.Size(241, 97);
+            // 
+            // tsBearbeiten
+            // 
+            this.tsBearbeiten.Name = "tsBearbeiten";
+            this.tsBearbeiten.Size = new System.Drawing.Size(243, 30);
+            this.tsBearbeiten.Text = "&Bearbeiten";
+            this.tsBearbeiten.Click += new System.EventHandler(this.tsBearbeiten_Click);
+            // 
+            // tsLoeschen
+            // 
+            this.tsLoeschen.Name = "tsLoeschen";
+            this.tsLoeschen.Size = new System.Drawing.Size(240, 30);
+            this.tsLoeschen.Text = "&Löschen";
+            this.tsLoeschen.Click += new System.EventHandler(this.tsLoeschen_Click);
             // 
             // Form2
             // 
@@ -109,6 +137,7 @@
             this.Load += new System.EventHandler(this.Form2_Load);
             this.menuMain.ResumeLayout(false);
             this.menuMain.PerformLayout();
+            this.contextMenu1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -123,5 +152,8 @@
         private System.Windows.Forms.ToolStripMenuItem MenuItemHP;
         private System.Windows.Forms.ToolStripMenuItem MenuItemInfo;
         private LoadOnDemandTreeView treeView1;
+        private System.Windows.Forms.ContextMenuStrip contextMenu1;
+        private System.Windows.Forms.ToolStripMenuItem tsBearbeiten;
+        private System.Windows.Forms.ToolStripMenuItem tsLoeschen;
     }
 }
