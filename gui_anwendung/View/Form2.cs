@@ -110,7 +110,7 @@ namespace KRTool.View
             foreach (TreeNode node in this.treeView1.Nodes)
             {
                 // check whether each parent node has child nodes
-                if (node.IsExpanded && node.Nodes.Count >= 0)
+                if (node.IsExpanded && node.Nodes.Count > 0)
                 {
 
                     // iterate through child nodes in the collection

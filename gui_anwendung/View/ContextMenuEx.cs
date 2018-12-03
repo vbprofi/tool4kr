@@ -1,4 +1,9 @@
-﻿using System;
+﻿/*
+ * Diese Klasse ermöglicht in Datagridview und co den Zugriff auf das Contextmenu-Item
+ * Quelle:
+ * https://www.mycsharp.de/wbb2/thread.php?postid=3615148
+ */
+using System;
 using System.Drawing;
 using System.ComponentModel;
 
