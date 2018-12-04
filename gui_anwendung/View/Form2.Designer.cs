@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.menuMain = new System.Windows.Forms.MenuStrip();
             this.MenuItemDatei = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuItemBeenden = new System.Windows.Forms.ToolStripMenuItem();
@@ -35,11 +36,13 @@
             this.MenuItemHP = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuItemInfo = new System.Windows.Forms.ToolStripMenuItem();
             this.treeView1 = new KRTool.View.LoadOnDemandTreeView();
-            this.contextMenu1 = new System.Windows.Forms.ContextMenuStrip();
+            this.contextMenu1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsBearbeiten = new System.Windows.Forms.ToolStripMenuItem();
             this.tsLoeschen = new System.Windows.Forms.ToolStripMenuItem();
+            this.listView1 = new System.Windows.Forms.ListView();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.menuMain.SuspendLayout();
-            //this.contextMenu1.SuspendLayout();
+            this.contextMenu1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuMain
@@ -65,7 +68,7 @@
             // MenuItemBeenden
             // 
             this.MenuItemBeenden.Name = "MenuItemBeenden";
-            this.MenuItemBeenden.Size = new System.Drawing.Size(252, 30);
+            this.MenuItemBeenden.Size = new System.Drawing.Size(164, 30);
             this.MenuItemBeenden.Text = "&Beenden";
             // 
             // MenuItemFragezeichen
@@ -80,23 +83,24 @@
             // MenuItemHP
             // 
             this.MenuItemHP.Name = "MenuItemHP";
-            this.MenuItemHP.Size = new System.Drawing.Size(185, 30);
+            this.MenuItemHP.Size = new System.Drawing.Size(252, 30);
             this.MenuItemHP.Text = "&Homepage";
             // 
             // MenuItemInfo
             // 
             this.MenuItemInfo.Name = "MenuItemInfo";
-            this.MenuItemInfo.Size = new System.Drawing.Size(185, 30);
+            this.MenuItemInfo.Size = new System.Drawing.Size(252, 30);
             this.MenuItemInfo.Text = "&Info";
             // 
             // treeView1
             // 
             this.treeView1.ContextMenuStrip = this.contextMenu1;
+            this.treeView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeView1.FakeNodes = true;
-            this.treeView1.Location = new System.Drawing.Point(0, -1);
+            this.treeView1.Location = new System.Drawing.Point(0, 33);
             this.treeView1.Name = "treeView1";
             this.treeView1.ShowNodeToolTips = true;
-            this.treeView1.Size = new System.Drawing.Size(121, 97);
+            this.treeView1.Size = new System.Drawing.Size(800, 417);
             this.treeView1.TabIndex = 1;
             this.treeView1.LoadData += new System.Windows.Forms.TreeViewCancelEventHandler(this.treeView1_LoadData);
             this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
@@ -108,27 +112,50 @@
             this.tsBearbeiten,
             this.tsLoeschen});
             this.contextMenu1.Name = "contextMenu1";
-            this.contextMenu1.Size = new System.Drawing.Size(241, 97);
+            this.contextMenu1.Size = new System.Drawing.Size(168, 64);
             // 
             // tsBearbeiten
             // 
             this.tsBearbeiten.Name = "tsBearbeiten";
-            this.tsBearbeiten.Size = new System.Drawing.Size(243, 30);
+            this.tsBearbeiten.Size = new System.Drawing.Size(167, 30);
             this.tsBearbeiten.Text = "&Bearbeiten";
             this.tsBearbeiten.Click += new System.EventHandler(this.tsBearbeiten_Click);
             // 
             // tsLoeschen
             // 
             this.tsLoeschen.Name = "tsLoeschen";
-            this.tsLoeschen.Size = new System.Drawing.Size(240, 30);
+            this.tsLoeschen.Size = new System.Drawing.Size(167, 30);
             this.tsLoeschen.Text = "&Löschen";
             this.tsLoeschen.Click += new System.EventHandler(this.tsLoeschen_Click);
+            // 
+            // listView1
+            // 
+            this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listView1.LabelEdit = true;
+            this.listView1.Location = new System.Drawing.Point(0, 33);
+            this.listView1.Name = "listView1";
+            this.listView1.ShowItemToolTips = true;
+            this.listView1.Size = new System.Drawing.Size(800, 417);
+            this.listView1.Sorting = System.Windows.Forms.SortOrder.Ascending;
+            this.listView1.TabIndex = 2;
+            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.listView1.View = System.Windows.Forms.View.List;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(8, 41);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(100, 26);
+            this.textBox1.TabIndex = 3;
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.listView1);
             this.Controls.Add(this.treeView1);
             this.Controls.Add(this.menuMain);
             this.MainMenuStrip = this.menuMain;
@@ -155,5 +182,7 @@
         private System.Windows.Forms.ContextMenuStrip contextMenu1;
         private System.Windows.Forms.ToolStripMenuItem tsBearbeiten;
         private System.Windows.Forms.ToolStripMenuItem tsLoeschen;
+        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }

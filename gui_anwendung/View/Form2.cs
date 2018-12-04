@@ -74,7 +74,8 @@ namespace KRTool.View
                 if (node.IsSelected)
                 {
                     //MessageBox.Show(node.Text + "is selected");
-                }
+                    listView1.Items.Clear();
+                                    }
                 CheckForChildren(node);
             }
         }
@@ -91,6 +92,7 @@ namespace KRTool.View
                     if (nd.IsSelected)
                     {
                         //MessageBox.Show(nd.Text + "is selected");
+                        loadListViewContent(nd.Name, nd.Text);
                     }
 
                     // Do recursive call
@@ -123,6 +125,40 @@ namespace KRTool.View
             }
         }
 
+        private void loadListViewContent(String name, String text)
+        {
+            listView1.Items.Clear();
+            ListViewItem.ListViewSubItem[] subItems;
+            ListViewItem item = null;
 
+            item = new ListViewItem(text + " " + name, 0);
+            subItems = new ListViewItem.ListViewSubItem[]
+                {new ListViewItem.ListViewSubItem(item, "Directory"),
+                        new ListViewItem.ListViewSubItem(item,
+DateTime.Now.ToString())};
+            item.SubItems.AddRange(subItems);
+            listView1.Items.Add(item);
+
+            //testdata
+            listView1.Items.AddRange(new ListViewItem[]{
+new ListViewItem("Amy Alberts"),
+new ListViewItem("Amy Recker"),
+new ListViewItem("Daniel Weisman")
+});
+
+            listView1.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            ListViewItem foundItem = listView1.FindItemWithText(textBox1.Text, false, 0, true);
+            if (foundItem != null)
+           {
+                listView1.TopItem = foundItem;
+                listView1.Refresh();
+            listView1.Select();
+                listView1.Focus();
+            }
+        }
     }//end class
 }//end namespace
