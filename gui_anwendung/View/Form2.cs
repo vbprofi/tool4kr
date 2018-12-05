@@ -108,21 +108,8 @@ namespace KRTool.View
         }
 
         private void tsLoeschen_Click(object sender, EventArgs e)
-        {
-            foreach (TreeNode node in this.treeView1.Nodes)
-            {
-                // check whether each parent node has child nodes
-                if (node.IsExpanded && node.Nodes.Count > 0)
-                {
-
-                    // iterate through child nodes in the collection
-                    foreach (TreeNode nd in node.Nodes)
-                    {
-                        if (nd.IsSelected)
-                            this.treeView1.SelectedNode.Remove();
-                    }
-                }
-            }
+        {            
+            treeView1.Nodes.Remove(treeView1.SelectedNode);
         }
 
         private void loadListViewContent(String name, String text)
@@ -145,6 +132,8 @@ new ListViewItem("Amy Alberts"),
 new ListViewItem("Amy Recker"),
 new ListViewItem("Daniel Weisman")
 });
+
+            listView1.Columns.Add("Datum", 20, HorizontalAlignment.Left);
 
             listView1.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
         }
