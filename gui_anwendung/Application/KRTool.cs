@@ -47,7 +47,6 @@ controller.LoadView();
             f2.Show();
 }
 
-
         public async Task Start()
         {
 /*

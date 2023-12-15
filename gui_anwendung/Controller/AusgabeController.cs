@@ -21,18 +21,17 @@ namespace KRTool.Controller
             _dbText = txtForm + Environment.NewLine + "Datenbankversion: " + db.getVersionString();
             _dbText += Environment.NewLine;
             _dbText += Environment.NewLine;
+            //_dbText += createSampleDataAllTables(db); //keine Änderung
             _dbText += Environment.NewLine;
-            _dbText += createSampleDataAllTables(db); //keine Änderung
-            _dbText += Environment.NewLine;
-            _dbText += createSampleDataAllTables(db); //schneller geworden.
+            //_dbText += createSampleDataAllTables(db); //schneller geworden.
 
-            using (DBWriter writer = db.getDBWriter())
+            /*using (DBWriter writer = db.getDBWriter())
             {
                 Ausgabe letzteAusgabe = writer.getCurrentIssue();
                 decimal preisLetzteAusgabe = writer.getPriceOfIssue(letzteAusgabe.ausgabe);
                 writer.addNextIssue(preisLetzteAusgabe + 1);
                 _dbText+="Neue Ausgabe hinzugefügt: " + letzteAusgabe;
-            }
+            }*/
 
                         _dbText += Environment.NewLine;
             _dbText += printTableData(db);
@@ -44,8 +43,10 @@ namespace KRTool.Controller
                 decimal preisLetzteAusgabe = reader.getPriceOfIssue(letzteAusgabe.ausgabe);
                 _dbText+="Letzte Ausgabe: " + letzteAusgabe + " (Preis=" + preisLetzteAusgabe + " EURO)";
                 _dbText += Environment.NewLine;
+            _dbText += Environment.NewLine;
                 var abk = reader.getAboByKunde();
                 _dbText+= abk;
+            _dbText += Environment.NewLine;
             }
 
             view.SetController(this);
