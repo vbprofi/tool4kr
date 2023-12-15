@@ -38,16 +38,27 @@ namespace KRTool
 
             controller = new AusgabeController(view, txt);
             view.Text = getAssembly("title");
-            
+controller.LoadView();
+            view.Show();
+        }
+
+        public void StartAPP() {
                 Form2 f2 = new Form2();
             f2.Show();
-        }
+}
+
 
         public async Task Start()
         {
+/*
           Action a = () => controller.LoadView();
             await Task.Run(a);
             view.Show();
+*/
+/*
+          Action a = () => StartAPP();
+            await Task.Run(a);
+*/
         }
 
         public event EventHandler<EventArgs> ExitRequested;

@@ -26,31 +26,38 @@ namespace KRTool
 
                 WindowsFormsSynchronizationContext.SetSynchronizationContext(new WindowsFormsSynchronizationContext());
 
+                /*
                 //MVC Testbeispiel: UserProgram
                 UserProgram u = new UserProgram();
                 Thread t1 = new Thread(new ThreadStart(u.start));
                 t1.Start();
-                Application.DoEvents();
+                */
+                
                 KRTool p = new KRTool();
                 p.ExitRequested += p_ExitRequested;
+                p.StartAPP();
+                //Thread t1 = new Thread(new ThreadStart(p.Start));
+                //t1.Start();
+
+                Application.DoEvents();
 
                 //while (true)
                 //{
                 //if (!t1.IsAlive)
-                    //{
-                        Task programStart = p.Start();
-                        HandleExceptions(programStart);
+                //{
+                Task programStart = p.Start();
+                HandleExceptions(programStart);
                 //t1.Abort();
                 //Thread.Sleep(1000);
                 //break;
                 //}
                 //}
-                
+
                 Application.Run();
                 mutex.ReleaseMutex(); //Speicher freigeben
                 mutex.Close(); //beenden
                 mutex.Dispose(); //speicher aufräumen
-                MessageBox.Show("Programm wird nun beendet." + Environment.NewLine + "Auf wiedersehen!", "Programm wird beendet!", MessageBoxButtons.OK, MessageBoxIcon.Stop, MessageBoxDefaultButton.Button1, MessageBoxOptions.ServiceNotification);
+                //MessageBox.Show("Programm wird nun beendet." + Environment.NewLine + "Auf wiedersehen!", "Programm wird beendet!", MessageBoxButtons.OK, MessageBoxIcon.Stop, MessageBoxDefaultButton.Button1, MessageBoxOptions.ServiceNotification);
             }
             else
             {

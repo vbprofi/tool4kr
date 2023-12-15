@@ -21,7 +21,6 @@ namespace KRTool
         //static void _Main()
         public UserProgram()
         {
-            //UsersView view = new UsersView();
             view = new UsersView();
             view.Visible = false;
 
@@ -39,7 +38,7 @@ namespace KRTool
             
             UsersController controller = new UsersController(view, users);
             controller.LoadView();
-            //view.ShowDialog();
+            view.ShowDialog();
         }
 
         public void start()

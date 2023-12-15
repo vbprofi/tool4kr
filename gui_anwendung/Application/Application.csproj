@@ -36,7 +36,7 @@
     <BootstrapperEnabled>false</BootstrapperEnabled>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
-    <AssemblyVersion>2023.12.15.29</AssemblyVersion>
+    <AssemblyVersion>2023.12.15.53</AssemblyVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
