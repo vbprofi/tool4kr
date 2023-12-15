@@ -13,7 +13,7 @@ namespace KRTool
 {
     class UserProgram
     {
-        UsersView view;
+       public UsersView view;
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -27,7 +27,7 @@ namespace KRTool
 
             // Add some dummy data
             IList users = new ArrayList();
-            users.Add(new User("Vladimir",   "Putin",         "122",    "Government of Russia",          User.SexOfPerson.Male));
+                        users.Add(new User("Vladimir",   "Putin",         "122",    "Government of Russia",          User.SexOfPerson.Male));
             users.Add(new User("Barack",     "Obama",         "123",    "Government of USA",             User.SexOfPerson.Male));
             users.Add(new User("Stephen",    "Harper",        "124",    "Government of Canada",          User.SexOfPerson.Male));
             users.Add(new User("Jean",       "Charest",       "125",    "Government of Quebec",          User.SexOfPerson.Male));
@@ -36,7 +36,7 @@ namespace KRTool
             users.Add(new User("Nikolas",    "Sarkozy",       "128",    "Government of France",          User.SexOfPerson.Male));
             users.Add(new User("Silvio",     "Berlusconi",    "129",    "Government of Italy",           User.SexOfPerson.Male));
             users.Add(new User("Yoshihiko",  "Noda",          "130",    "Government of Japan",           User.SexOfPerson.Male));
-
+            
             UsersController controller = new UsersController(view, users);
             controller.LoadView();
             //view.ShowDialog();
@@ -44,7 +44,7 @@ namespace KRTool
 
         public void start()
         {
-            view.ShowDialog();
+                        //view.ShowDialog();
         }
     }
 }

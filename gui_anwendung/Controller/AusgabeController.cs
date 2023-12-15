@@ -64,6 +64,7 @@ namespace KRTool.Controller
             //Stopuhr zur Zeit Messung erzeugen
             CounterStopWatch watch = new CounterStopWatch();
             watch.ResetAndStart(); //Stopuhr zurücksetzen auf 0 und starten
+            
             using (DBWriter writer = db.getDBWriter())
             {
                 Kunden kunde = DBRecordFactory.createKunden("Firma", "Vorname", "Nachname", "Straße", "HausNR", 12345, "Ort", "Postfach", "Land", "Telefon", "Fax", "EMail"); //Tabelle Kunden füllen

@@ -61,7 +61,7 @@ namespace KRTool.Model
             */
 //HACK
 var EF6ProviderServicesType = typeof(System.Data.SQLite.EF6.SQLiteProviderFactory).Assembly.GetTypes().First(x => x.Name == "SQLiteProviderServices");
-        var EF6ProviderServices = (DbProviderServices)Activator.CreateInstance(EF6ProviderServicesType);
+        var EF6ProviderServices = (System.Data.Entity.Core.Common.DbProviderServices)Activator.CreateInstance(EF6ProviderServicesType);
         SetProviderServices("System.Data.SQLite.EF6", EF6ProviderServices);
         SetProviderServices("System.Data.SqlClient", System.Data.Entity.SqlServer.SqlProviderServices.Instance);
         SetProviderFactory("System.Data.SQLite.EF6", System.Data.SQLite.EF6.SQLiteProviderFactory.Instance);
